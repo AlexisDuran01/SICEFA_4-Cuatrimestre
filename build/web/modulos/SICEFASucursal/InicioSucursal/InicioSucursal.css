@@ -1,0 +1,6 @@
+.fondo{
+    background-image: url('../../../Imagenes/MedicamosTuVida.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 80em;
+}

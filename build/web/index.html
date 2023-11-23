@@ -1,11 +1,84 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>SICEFA</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>APLICACION SICEFA</div>
-    </body>
+
+<head>
+    <title>SICEFA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="Imagenes/LogoFarmacia.png" rel="shorcut icon">
+    <link href="Index/IndexStyle.css" rel="stylesheet" type="text/css" id="style" />
+    <link href="" rel="" id="style1" />
+    <link href="bootstrap-5.3.0-dist/bootstrap-5.3.0-dist/css/bootstrap.rtl.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Inicio Barra de Navegación -->
+    <div class="" id='barraNavegacion'>
+        <nav class="d-md-flex col-md-12 barra">
+            <div class="col-md-2 d-flex align-items-md-start">
+                <img src="Imagenes/LogoFarmacia.png" alt="Logo Farmacia" class="ms-md-4"
+                    style="width: 90px; height: 100%;" />
+            </div>
+            <div class="col-md-8 d-flex align-content-md-center justify-content-md-center pt-md-3">
+                <p class="mx-md-1 text-center" onclick="cargarLoginCentral();"><a href="#"
+                        class="p-md-2 alterarTexto">SICEFA Central</a></p>
+                <p class="mx-md-1 text-center" onclick="cargarLoginSucursal();"><a href="#"
+                        class="p-md-2 alterarTexto">SICEFA Sucursal</a></p>
+            </div>
+            <div class="col-md-2 d-flex align-items-md-end align-content-end justify-content-end mb-md-3">
+                <div class="lista" id="lista">
+                    <p><a href="#" class="alterarTexto">Información</a></p>
+                    <p><a href="#" class="alterarTexto">Misión, visión y valores</a></p>
+                </div>
+                <img src="Imagenes/MasOpciones.png" class="p-2 alterarTexto" alt="Opciones"
+                    style="width: 35px; height: 35px;" onclick="mostrarOpciones();">
+            </div>
+        </nav>
+    </div>
+    <!-- Fin Barra de Navegación -->
+
+    <!-- Inicio contenedor principal -->
+    <div id='contenedorPrincipal'>
+        <div class="d-flex contenedorInicio" onclick="ocultarOpciones()">
+            <div class="inicioSesion d-block">
+                <P class="titulo">SICEFA CENTRAL</P>
+                <p class="subtitulo">Sistema para la gestión y organización de la matríz.</p>
+                <div class="d-flex align-content-center align-items-center justify-content-center">
+                    <button id="central" class="botonInicio" onclick="cargarLoginCentral();">Iniciar sesión</button>
+                </div>
+            </div>
+            <div class="inicioSesion d-block">
+                <P class="titulo">SICEFA SUCURSAL</P>
+                <p class="subtitulo">Sistema para la gestión y organización de la(s) sucursales.</p>
+                <div class="d-flex align-content-center align-items-center justify-content-center">
+                    <button class="botonInicio" onclick="cargarLoginSucursal();">Iniciar sesión</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin contenedor principal -->
+
+    <!-- Inicio de seccion para cargar el footer -->
+    <div id='footer'>
+
+    </div>
+    <!-- Inicio de seccion para cargar el footer -->
+
+    <!-- Inicio de seccion de scripts -->
+    <script src="Index/IndexScript.js"></script>
+    <script src="FooterYBarraNav/BarraNavegacion.js"></script>
+    <script src="modulos/Login/IniciarSesionScript.js"></script>
+    <script src="modulos/SICEFACentral/AdmSucursales/AdmSucursalesScript.js"></script>
+    <script src="modulos/SICEFACentral/AdmProductos/AdmProductos.js"></script>
+    <script src="modulos/SICEFACentral/AdmPedidos/AdmPedidos.js"></script>
+    <script src="modulos/SICEFASucursal/AdmClientes/AdmClientesScript.js"></script>
+    <script src="modulos/SICEFASucursal/AdmEmpleados/AdmEmpleados.js"></script>
+    <script src="modulos/SICEFASucursal/AdmPedidos/AdmPedidos.js"></script>
+    <script src="modulos/SICEFASucursal/AdmVentas/AdmVentas.js"></script>
+    <script src="modulos/SICEFASucursal/ConsultaProductos/ConsultaProductos..js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
+    <!-- Fin de seccion de scripts -->
+</body>
+
 </html>

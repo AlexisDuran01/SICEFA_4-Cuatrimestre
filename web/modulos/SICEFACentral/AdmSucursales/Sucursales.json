@@ -1,0 +1,51 @@
+[
+    {
+        "idSucursal": 1,
+        "nombreSucursal": "Sucursal Centro",
+        "nombreTitular":"Luis Antonio Padilla García",
+        "longitud": -101.688,
+        "latitud": 21.123,
+        "telefono": "55-1234-5678",
+        "idDireccion": 1,
+        "estatus":"Activo",
+        "colonia": "Bellavista",
+        "codigo_postal":"37360",
+        "ciudad":"León",
+        "estado":"Guanajuato",
+        "domicilio":"Coahuila #241",
+        "rfcTitular":"GARL030210LIY"
+        
+    },
+    {
+        "idSucursal": 2,
+        "nombreSucursal": "Sucursal Centro Max",
+        "nombreTitular":"Alexis Raúl Flores Duran",
+        "longitud": -103.3496,
+        "latitud": 20.6597,
+        "telefono": "33-8765-4321",
+        "idDireccion": 2,
+        "estatus":"Activo",
+        "colonia": "Jardines de Jerez",
+        "codigo_postal":"37530",
+        "ciudad":"León",
+        "estado":"Guanajuato",
+        "domicilio":"Blvd. Adolfo López Mateos #2518",
+        "rfcTitular":"MEGG020508POS"
+    },
+    {
+        "idSucursal": 3,
+        "nombreSucursal": "Sucursal Plaza mayor",
+        "nombreTitular":"Roberto Carlos Ramirez Torres",
+        "longitud": -100.3161,
+        "latitud": 25.6866,
+        "telefono": "81-9876-5432",
+        "idDireccion": 3,
+        "estatus":"Activo",
+        "colonia": "Valle del Campestre",
+        "codigo_postal":"37150",
+        "ciudad":"León",
+        "estado":"Guanajuato",
+        "domicilio":"Blvd. Juan Alonso de Torres pte #2002",
+        "rfcTitular":"PATC061216JUS"
+    }
+]

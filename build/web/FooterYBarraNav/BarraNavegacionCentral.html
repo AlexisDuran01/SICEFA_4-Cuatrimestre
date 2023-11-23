@@ -1,0 +1,49 @@
+<div>
+    <section class="titulo">
+        <img src="Imagenes/LogoFarmacia.png" alt=""/>
+        <h1>SICEFA Central</h1>
+    </section>
+    <nav class="barra">
+        <ul class="menu">
+            <li class="item1" onclick="DirigirInicioCentral();">
+                <a href="#">
+                    <img src="Imagenes/Home.png" alt="imagen de inicio" class="imagenBarra"/>
+                    <span class="textoBarra">Inicio</span>
+                    <span class="BarraBaja"></span>
+                </a>
+            </li> 
+            <li onclick="DirigirSucursalesCentral();">
+                <a href="#">
+                    <img src="Imagenes/Sucursales.png" alt="imagen de Sucursales" class="imagenBarra"/>
+                    <span class="textoBarra">Sucursales</span>
+                    <span class="BarraBaja"></span>
+                </a>
+            </li>
+            <li id="productos" onclick="DirigirProductosCentral();">
+                <a href="#">
+                    <img src="Imagenes/Productos.png" alt="imagen de productos" class="imagenBarra"/>
+                    <span class="textoBarra">Productos</span>
+                    <span class="BarraBaja"></span>
+                </a>
+            </li>
+            <li onclick="DirigirPedidosCentral();">
+                <a href="#">
+                    <img src="Imagenes/Pedidos.png" alt="imagen de pedidos" class="imagenBarra"/>
+                    <span class="textoBarra">Pedidos</span>
+                    <span class="BarraBaja"></span>
+                </a>
+            </li>
+            <li>
+                <div>
+                    <img src="Imagenes/Opciones.png" alt="imagen de opciones" class="imagenBarra"/>
+                    <span class="textoBarra">Opciones</span>
+                    <span class="BarraBaja"></span>
+                </div>
+                <div class="BarraBaja1">
+                    <button class="boton" onclick="CambiarContrasena();">Cambiar contraseña</button>
+                    <button class="boton" onclick="location.reload()">Cerrar sesión</button>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</div>

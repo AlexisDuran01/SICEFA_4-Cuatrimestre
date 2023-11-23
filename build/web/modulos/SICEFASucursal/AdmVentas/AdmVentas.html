@@ -1,0 +1,159 @@
+<div>
+    <div class="container-fluid col-lg-12 row d-flex justify-content-center m-2">
+        <div class="card col-lg-6 m-1 p-2">
+            
+            <div class="formulario row g-3">
+                <h2 class="text-center">Gestión de Ventas</h2>
+                
+                <!-- Empleado -->
+                <div class="container-fluid p-2" style="height: 10em; margin-bottom: 4em">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <label class="d-flex">Empleado </label>
+                            <div class="d-flex w-100" id="buscadorEmpleado">
+                                <input type='text' id='txtEmpleado' placeholder="Empleado que realiza la venta...">
+                                <button onclick="realizarBusquedaEmpleado()">Buscar</button><br><br>
+                            </div>
+                        </div>
+
+                        <div class="tabla col-lg-12 ">
+                            <div class="container-fluid" id="resultadosEmpleado">
+
+                                <table class="w-100">
+                                    <tr class="encabezado" style="height: 1em;  background-color: #032830">
+                                        <th>Nombre</th>
+                                        <th>RFC</th>
+                                        <th>Puesto</th>
+                                    </tr>
+                                </table>
+                                <div class="scroll-container">
+                                    <table class="w-100">
+                                        <tbody id="txtEmpleadoResultado"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cliente -->
+                <div class="container-fluid p-2" style="height: 12em; margin-top: 2em">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <label class="d-flex">Cliente </label>
+                            <div class="d-flex w-100" id="buscadorCliente">
+                                <input type='text' id='txtCliente' placeholder="Cliente que realiza la compra...">
+                                <button onclick="realizarBusquedaCliente()">Buscar</button><br><br>
+                            </div>
+                        </div><br>
+
+                        <div class="tabla col-lg-12">
+                            <div class=" container-fluid" id="resultadosCliente">
+                                <table class="w-100">
+                                    <tr class="encabezado" style="height: 1em;  background-color: #032830">
+                                        <th>Nombre</th>
+                                        <th>Código Postal</th>
+                                        <th>RFC</th>
+                                    </tr>
+                                </table>
+                                <div class="scroll-container">
+                                    <table class="w-100">
+                                        <tbody id="txtClienteResultado"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+
+                <!-- Producto -->
+                <div class="  m-2">
+                    <div class="d-flex container-fluid">
+                        <div class="row">
+
+                            <div class="col-lg-6" id="searchDropdownP">
+                                <label class="d-flex" style="margin-top: 5em;">Producto </label>
+                                <div class="d-flex w-100">
+                                    <input type="text" id="txtProducto" placeholder="Producto a comprar..." style="width: 50em">
+                                    <button style="height: 45px;" onclick="realizarBusquedaProducto()">Buscar</button><br>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-9 ">
+                                <table class=" table-dark">
+                                    <tr style="height: 2em" class="encabezado">
+                                        <th style="width: 7em;">estatus</th>
+                                        <th>Nombre</th>
+                                        <th>Nombre Genérico</th>
+                                        <th>Concentración</th>
+                                        <th>Unidad  Envase</th>
+                                        <th>Precio</th>
+                                        <th style="width: 8em;">Cantidad</th>
+                                    </tr>
+                                </table>
+                                <div id="resultados-containerP">
+                                    <table>
+                                        <tbody id="txtProductoResultado"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table>
+                        <tbody class="text-black justify-content-center" id="productosCompra"></tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-around mt-2">
+                    <button class="mt-2 btn btn-success btn-lg" onclick="guardarVenta()" id="btnAdd">Guardar Venta</button>
+                    <button class="mt-2 btn btn-info btn-lg" onclick="limpiarCampos();" id="btnClean">Limpiar</button>
+                    <button class="mt-2 btn btn-danger btn-lg disabled" onclick="eliminarVenta();" id="btnDelete">Eliminar</button>
+                </div>
+            </div>
+
+            
+        </div>
+
+        <div class="card col-lg-5  p-4 m-2" style="background-color: #CAF0F8">
+            <div class="d-flex m-2">
+                <label for="txtBusquedaVenta" class="form-label mx-3">Buscar Venta </label>
+                <div id="inputBuscarVenta">   
+                    <input type="text" id="txtBusquedaVenta">
+                </div>
+
+                <button class="btn btn-primary mx-2" onclick="realizarBusquedaVenta();">Buscar</button>
+
+            </div>
+            <div class="d-flex container-fluid align-content-center justify-content-center">
+                <div>
+                    Filtrar por id de:
+                    <select name="filtroBusquedaV" id="txtFiltroBusquedaV" class=" w-50">
+                        <option value=1>Venta</option>
+                        <option value=2>Empleado</option>
+                        <option value=3>Cliente</option>
+                    </select>
+                </div>
+                <div>
+                    Ventas a mostrar:
+                    <select name="filtroBusquedaV" id="ventasMostradas" class=" w-50">
+                        <option value=1>Activas</option>
+                        <option value=2>Todas</option>
+                    </select>
+                </div>
+            </div>
+            <table class="table table-hover m-2">
+                <thead class="table-dark">
+                    <tr class="encabezado">
+                        <th>id</th>
+                        <th>Cliente</th>
+                        <th>Empleado</th>
+                        <th>Fecha</th>
+                        <th>Estatus</th>
+                    </tr>
+                </thead>
+                <tbody id="tblVentaResultado">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

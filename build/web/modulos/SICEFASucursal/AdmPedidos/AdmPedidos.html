@@ -1,0 +1,84 @@
+<div>
+    <div class="container">
+        <div class="left-side" >
+            <div class="left-column">
+                <!-- Contenido de la primera columna izquierda -->
+                <div style="background-color: #CAF0F8" class="text-xl-center p-4 m-1 rounded-2 botones-fijos">
+                    <div class="justify-content-center align-content-center row g-3">
+                        <div class="text-xl-center p-3">
+                            <h2>Gestion de pedidos de compra</h2>
+                        </div>
+                        <div class="col-lg-6">
+                            <h5><label for="txtIdCompra" class="mt-2 col-12">Id compra</label><br></h5>
+                            <input id="txtIdCompra" type="text" readonly class="mt-2"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <h5><label for="txtIdSucursal" class="mt-2 rounded-1">Id sucursal</label></h5>
+                            <input id="txtIdSucursal" type="text" class="mt-2"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <h5><label for="txtIdEmpleado" class="mt-2">Id empleado</label></h5>
+                            <input id="txtIdEmpleado" type="text"  class="mt-2">
+                        </div>
+                        <div class="col-lg-6">
+                            <h5><label for="txtFechaRegistro" class="mt-2">Fecha de registro:</label></h5>
+                            <input id="txtFechaRegistro" type="date"  class="mt-2"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <h5><label for="txtHoraRegistro" class="mt-2">Hora de registro:</label></h5>
+                            <input id="txtHoraRegistro" type="time"  class="mt-2"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <h5><label for="txtPrecio" class="mt-2 col-12">Precio</label><br></h5>
+                            $<input id="txtPrecio" type="text"  class="mt-2"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <h5><label for="txtProductos" class="mt-2 col-12">Productos</label><br></h5>
+                            <input id="txtProductos" type="text"  class="mt-2"/>
+                        </div>
+                        <div class="col-lg-6">
+                            <h5><label for="txtCantidad" class="mt-2 col-12">Cantidad</label><br></h5>
+                            <input id="txtCantidad" type="number"  class="mt-2"/>
+                        </div>
+
+
+                        <div class="botones-fijos text-xl-center" style="background-color: #CAF0F8">
+                            <button id="btnAdd" onclick="addCompra();">Registrar</button>
+                            <button id="btnDelete" onclick="deleteCompra();">Eliminar</button>
+                            <button id="btnUpdate" onclick="updateCompra();">Modificar</button>
+                            <button id="btnClean" onclick="cleanPedidos();">Limpiar</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <div class="botones-fijos p-1 m-1 rounded-2 text-xl-center" style="background-color: #CAF0F8">
+                    <label for="txtBusquedaCompra" class="form-label mx-3 h4 p-3 rounded-3">Buscar compra:</label>
+                    <input type="text" id="txtBusquedaCompra" oninput="function filtrarCompras()">
+                    <button class="btn mx-2" style="color: white;" onclick="cargarTablaPedidos();">Buscar</button>
+                </div>
+
+                <div class="right-side d-flex p-4">
+
+                    <table class="table table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Id compra</th>
+                                <th>Fecha registro</th>
+                                <th>Precio</th>
+                                <th>Productos</th>
+                                <th>Cantidad</th>
+                                <th>Estatus</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblCompras">
+                            <tr></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

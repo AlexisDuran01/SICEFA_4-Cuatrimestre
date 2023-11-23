@@ -1,0 +1,39 @@
+<div>
+    <div class="container">
+        <div class="top-center-container">
+            
+            <div>
+                <div class="botones-fijos p-1 m-1 rounded-2 text-xl-center" style="background-color: #CAF0F8">
+                    <label for="txtBusquedaProducto" class="form-label mx-3 h4 p-3 rounded-3">Buscar Producto:</label>
+                    <input type="text" id="txtBusquedaProducto" oninput="filtrarProductosConsulta()">
+                    <!-- La accíon on input hace que los escrito sobre la barra de búsqueda se vaya filtrando conforme 
+                    el usurio tecleé-->
+                </div>
+
+                <div class="d-flex">
+                    <table class="table table-hover text-xl-center">
+                        <!--Esta es la tabla correspondiente a la búsqueda de productos 
+                        serán cargados con la ayuda de un formato JSON-->
+                        <thead class="table-dark">
+                            <tr class="">
+                                <th class="">Nombre Producto</th>
+                                <th class="">Nombre Génerico</th>
+                                <th class="">Forma</th>
+                                <th class="">Unidad/Medida</th>
+                                <th class="">Presentación</th>
+                                <th class="">Unidades/Envase</th>
+                                <th class="">Precio Unitario</th>
+                                <th class="">Estatus</th>
+                                <th class="">Código Barras</th>
+                                <th class="">Stock</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblProductos">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

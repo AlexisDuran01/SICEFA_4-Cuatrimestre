@@ -1,0 +1,111 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    border: 1px solid #ccc; /* Borde para la barra de navegación */
+    padding: 10px; /* Espacio interno para el contenido de la barra de navegación */
+}
+
+.container {
+    display: grid;
+    height: calc(100% - 50px); /* El 50px representa la altura de la barra de navegación */
+    margin-top: 10px; /* Ajusta el margen superior para crear espacio entre la barra de navegación y el contenido */
+}
+
+.left-side {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Divide el lado izquierdo en dos columnas iguales */
+    gap: 10px; /* Agrega un espacio entre las columnas izquierdas */
+}
+
+.left-column {
+    padding: 10px; /* Espacio interno para el contenido del formulario */
+}
+
+.right-column {
+    padding: 10px; /* Espacio interno para el contenido */
+}
+
+.right-side {
+    padding: 10px; /* Espacio interno para el contenido */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos del contenedor de botones fijos */
+.botones-fijos {
+    bottom: 20px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* Estilos de los botones */
+.botones-fijos button {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color:#1c1c1c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    align-content: center;
+    border: solid black 2px; 
+
+}
+
+.botones-fijos button:hover {
+    background-color: #343a40;
+}
+
+/* Estilos para los botones de resultados */
+.resultado-producto {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 5px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.resultado-producto:hover {
+    background-color: #f9f9f9;
+}
+
+/* Estilos para el contenedor de resultados productos */
+#resultados-containerP {
+    display: none;
+    position: absolute;
+    width: 100%;
+    border: 1px solid #ccc;
+    background-color: white;
+    z-index: 1;
+}
+
+/* Estilos para el contenedor de resultados clientes */
+#resultados-containerC {
+    display: none;
+    position: absolute;
+    width: 100%;
+    border: 1px solid #ccc;
+    background-color: white;
+    z-index: 1;
+}
+
+
+
+.top-center-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px; /* Añade un espacio superior para separarla del borde superior */
+}

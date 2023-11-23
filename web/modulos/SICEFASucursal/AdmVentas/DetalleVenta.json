@@ -1,0 +1,9 @@
+[
+    {
+        "idDetalleVenta": "0001",
+        "cantidadProducto": 2,
+        "precioVigente": 350,
+        "idVenta": "0001",
+        "idProducto": "0001"
+    }
+]

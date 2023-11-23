@@ -1,0 +1,121 @@
+[
+    {
+        "cantidadCompra": "100",
+        "precioUnitario": "120.000",
+        "idCompra": 1,
+        "nombreProducto": "Lorazepam",
+        "empleado": "1",
+        "sucursal": "Sucursal centro",
+        "fechaCompra":"2023-08-08",
+        "horaCompra":"22:28:52",
+        "estatus":"Activo"
+    },
+    {
+        "cantidadCompra": "50",
+        "precioUnitario": "80.000",
+        "idCompra": 1,
+        "nombreProducto": "Omeprazol",
+        "empleado": "1",
+        "sucursal": "Sucursal centro",
+        
+        "fechaCompra":"2023-08-08",
+        "horaCompra":"22:28:52",
+        "estatus":"Activo"
+    },
+    {
+        "cantidadCompra": "30",
+        "precioUnitario": "200.000",
+        "idCompra": 4,
+        "nombreProducto": "Sertralina",
+        "empleado": "2",
+        "sucursal": "Sucursal centro",
+        
+        "fechaCompra":"2023-08-08",
+        "horaCompra":"22:28:52",
+        "estatus":"Activo"
+    },
+    {
+        "cantidadCompra": "50",
+        "precioUnitario": "150.000",
+        "idCompra": 7,
+        "nombreProducto": "Atorvastarina",
+        "empleado": "3",
+        "sucursal": "Sucursal centro",
+        
+        "fechaCompra":"2023-08-08",
+        "horaCompra":"22:28:52",
+        "estatus":"Activo"
+    },
+    {
+        "cantidadCompra": "50",
+        "precioUnitario": "60.000",
+        "idCompra": 10,
+        "nombreProducto": "Amoxicilina",
+        "empleado": "4",
+        "sucursal": "Sucursal centro",
+        
+        "fechaCompra":"2023-08-08",
+        "horaCompra":"22:28:52",
+        "estatus":"Activo"
+    },
+    {
+        "cantidadCompra": "50",
+        "precioUnitario": "30.000",
+        "idCompra": 5,
+        "nombreProducto": "Paracetamol",
+        "empleado": "5",
+        "sucursal": "Sucursal Centro Max",
+        
+        "fechaCompra":"2023-08-08",
+        "horaCompra":"22:28:52",
+        "estatus":"Activo"
+    },
+    {
+        "cantidadCompra": "50",
+        "precioUnitario": "100.000",
+        "idCompra": 8,
+        "nombreProducto": "Metformina",
+        "empleado": "6",
+        "sucursal": "Sucursal Centro Max",
+        
+        "fechaCompra":"2023-08-08",
+        "horaCompra":"22:28:52",
+        "estatus":"Activo"
+    },
+    {
+        "cantidadCompra": "80",
+        "precioUnitario": "90.000",
+        "idCompra": 3,
+        "nombreProducto": "Metoprolol",
+        "empleado": "7",
+        "sucursal": "Sucursal Plaza Mayor",
+        
+        "fechaCompra":"2023-08-08",
+        "horaCompra":"22:28:52",
+        "estatus":"Activo"
+    },
+    {
+        "cantidadCompra": "50",
+        "precioUnitario": "100.000",
+        "idCompra": 6,
+        "nombreProducto": "Metformina",
+        "empleado": "8",
+        "sucursal": "Sucursal Plaza Mayor",
+        
+        "fechaCompra":"2023-08-08",
+        "horaCompra":"22:28:52",
+        "estatus":"Activo"
+    },
+    {
+        "cantidadCompra": "50",
+        "precioUnitario": "25.000",
+        "idCompra": 9,
+        "nombreProducto": "Cetirizina",
+        "empleado": "9",
+        "sucursal": "Sucursal Plaza Mayor",
+        
+        "fechaCompra":"2023-08-08",
+        "horaCompra":"22:28:52",
+        "estatus":"Activo"
+    }
+]

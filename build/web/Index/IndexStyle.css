@@ -1,0 +1,79 @@
+a{
+    text-decoration: none;
+    color: black;
+}
+.barra{
+    width: 100%;
+    background: #CAF0F8;
+}
+.alterarTexto{
+    text-decoration: none;
+    color: black;
+    font-family: "Bodoni MT";
+    font-size: 20px;
+}
+.alterarTexto:hover {
+    background: #90E0EF;
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+}
+.lista{
+    position: absolute;
+    top: 2%;
+    right: 3%;
+    background: #CAF0F8;
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+    text-align: center;
+    padding: 1em;
+    color: black;
+    display: none;
+}
+.contenedorInicio{
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    height: 50em;
+    width: 100%;
+}
+.inicioSesion{
+    width: 20em;
+    height: 24em;
+    background: #CAF0F8;
+    border-color: black;
+    border: solid;
+    border-width: 0.1em;
+    margin-left: 5em;
+    margin-right: 5em;
+}
+.titulo{
+    font-family: 'Century Gothic';
+    font-size: 3.5em;
+    text-align: center;
+}
+.subtitulo{
+    font-family: 'serif';
+    font-size: 1em;
+    text-align: justify;
+    padding: 1em;
+}
+.botonInicio {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #90E0EF;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    outline: none;
+    
+}
+.botonInicio:hover {
+    background-color: #BFE9FF;
+}
+.botonInicio:active {
+    background-color: #8CC1E8;
+}
