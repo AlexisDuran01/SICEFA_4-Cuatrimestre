@@ -1,0 +1,63 @@
+
+
+.alinearTexto{
+
+    text-align: center;
+}
+
+th{
+  text-align: center;  
+}
+
+
+
+.estiloBotones{
+    border-radius: 5px;
+    border: 1.4px solid #000;
+    background: rgba(244, 238, 251, 0.00);
+    padding: 4px 5px 8px 5px;
+
+}
+
+.estiloBotones:not(#buscadorProductos):hover{  /*Para evitar el efecto hover sobre el buscador*/
+    background-color: #e2e2e2;
+    border: 1.4px solid #e2e2e2;
+}
+
+.contenedorBusqueda {
+    position: relative;
+    width: 240px;
+ }
+
+ .buscador{
+    width: 100%;
+    padding-left: 35px;
+ } 
+
+
+ .inputIcon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+ }
+
+ .quitarCursiva { 
+    font-style: normal;
+ }
+
+ .tablaRegistros {
+    display: table;
+  }
+  
+  .registro {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .fondoModal{
+    background-color: E6E6E6;
+    
+  }

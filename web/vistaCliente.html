@@ -1,0 +1,169 @@
+<html>
+
+    <head>
+        <title>Gestión Clientes</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="bootstrap-5.3.0-dist/bootstrap-5.3.0-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="icons-1.11.1/icons-1.11.1/font/bootstrap-icons.css">
+        <link href="CSS/myStyle.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body onload="mostrarRegistrosCliente()">
+
+        <div class="container">
+
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-12">
+                    <p class="h2 fw-bold text-center">Gestión de Clientes</p>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+
+                <div class="col-12 d-flex justify-content-between">
+
+                    <div>
+                        <!-- Button trigger modal -->
+                        <button class="estiloBotones" data-bs-toggle="modal" data-bs-target="#registroPersonas">
+                            <i class="bi bi-plus-lg quitarCursiva" onclick="agregarPersonaFocus()"> Agregar Cliente</i>
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="registroPersonas" tabindex="-1" aria-labelledby="tituloAgregarPersona"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5 fw-bold" id="tituloAgregarPersona">Registro Clientes</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body fondoModal p-lg-4">
+                                        <div class="mb-3">
+                                            <label for="txtAgregarNombrePersona" class="form-label">Nombre</label>
+                                            <input type="text" class="form-control" id="txtAgregarNombrePersona">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="agregarApellidoPaternoPersona" class="form-label">Apellido Paterno:</label>
+                                            <input type="text" class="form-control" id="agregarApellidoPaternoPersona">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="agregarApellidoMaternoPersona" class="form-label">Apellido Materno:</label>
+                                            <input type="text" class="form-control" id="agregarApellidoMaternoPersona">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="txtAgregarGeneroPersona" class="form-label">Genero:</label>
+                                            <input type="text" class="form-control" id="txtAgregarGeneroPersona">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="txtAgregarFechaNacimientoPersona" class="form-label">Fecha de Nacimiento:</label>
+                                            <input type="date" class="form-control" id="txtAgregarFechaNacimientoPersona">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtAgregarRFCPersona" class="form-label">RFC</label>
+                                            <input type="text" class="form-control" id="txtAgregarRFCPersona">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtAgregarCURPPersona" class="form-label">CURP</label>
+                                            <input type="text" class="form-control" id="txtAgregarCURPPersona">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtAgregarDomicilioPersona" class="form-label">Domicilio</label>
+                                            <input type="text" class="form-control" id="txtAgregarDomicilioPersona">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtAgregarCodigoPostalPersona" class="form-label">Código Postal</label>
+                                            <input type="text" class="form-control" id="txtAgregarCodigoPostalPersona">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtAgregarCiudadPersona" class="form-label">Ciudad</label>
+                                            <input type="text" class="form-control" id="txtAgregarCiudadPersona">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtAgregarEstadoPersona" class="form-label">Estado</label>
+                                            <input type="text" class="form-control" id="txtAgregarEstadoPersona">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtAgregarTelefonoPersona" class="form-label">Teléfono</label>
+                                            <input type="text" class="form-control" id="txtAgregarTelefonoPersona">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtAgregarFotoPersona" class="form-label">Foto</label>
+                                            <input class="form-control" id="txtAgregarFotoPersona" type="file">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="txtAgregarEmailPersona" class="form-label">Email</label>
+                                            <input type="text" class="form-control" id="txtAgregarEmailPersona">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="txtAgregarFechaRegistroPersona" class="form-label">Fecha de Registro</label>
+                                            <input type="date" class="form-control" id="txtAgregarFechaRegistroPersona">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cerrar</button>
+                                        <button id="botonGuardarPersona" type="submit" class="btn btn-primary" onclick="agregarCliente()" data-bs-dismiss="modal">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex g-1 gap-md-4 gap-2 ">
+                        <div class="contenedorBusqueda">
+                            <input id="buscadorProductos" class="estiloBotones buscador" type="search" placeholder="Buscar Registro">
+                            <i class="bi bi-search inputIcon ms-1"></i>
+                        </div>
+                        
+                        <button class="estiloBotones ">
+                            <i class="bi bi-funnel quitarCursiva"> Filtros</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-12  table-responsive-SM  table-responsive-lg table-responsive-md mt-4">
+                    <table class="table table-hover tablaRegistros">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido Paterno</th>
+                                <th scope="col">Apellido Materno</th>
+                                <th scope="col">Estatus</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="registrosCliente">
+                            <!-- Se insertan los datos automaticamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+
+        </div>
+
+
+        <script src="JS/myScript.js" type="text/javascript"></script>
+        <script src="bootstrap-5.3.0-dist/bootstrap-5.3.0-dist/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.min.css" rel="stylesheet">
+    </body>
+
+</html>

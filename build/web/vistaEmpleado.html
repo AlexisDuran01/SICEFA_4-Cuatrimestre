@@ -1,0 +1,198 @@
+<html>
+    <head>
+        <title>Gestion Empleados</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="Autor" content="">
+        <meta name="date" content="">
+        <link href="bootstrap-5.3.0-dist/bootstrap-5.3.0-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="icons-1.11.1/icons-1.11.1/font/bootstrap-icons.css">
+        <link href="CSS/myStyle.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body onload="mostrarRegistrosEmpleado()">
+
+        <div class="container">
+
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-12">
+                    <p class="h2 fw-bold text-center">Gestión de Empleados</p>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+
+                <div class="col-12 d-flex justify-content-between">
+
+                    <div>
+                        <!-- Button trigger modal -->
+                        <button class="estiloBotones" data-bs-toggle="modal"
+                                data-bs-target="#registroProductos">
+                            <i class="bi bi-plus-lg quitarCursiva" onclick="agregarProductoFocus()"> Agregar</i>
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="registroProductos" tabindex="-1" aria-labelledby="tituloAgregarProducto"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5 fw-bold" id="tituloAgregarProducto">Registro Empleados</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body fondoModal p-lg-4">
+                                        <div class="mb-3">
+                                            <label for="txtNombre" class="form-label">Nombre</label>
+                                            <input type="text" class="form-control" id="txtNombre">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtApellidoPaterno" class="form-label">Apellido Paterno</label>
+                                            <input type="text" class="form-control" id="txtApellidoPaterno">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtApellidoMaterno" class="form-label">Apellido Materno</label>
+                                            <input type="text" class="form-control" id="txtApellidoMaterno">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="mt-2">Género:</label>
+                                            <select class="form-select form-select-sm col-md-6 p-2" id="txtGenero" name="txtGenero">
+                                                <option value="H">Masculino</option>
+                                                <option value="M">Femenino</option>
+                                                <option value="O">Otro</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtRfc" class="form-label">RFC</label>
+                                            <input type="text" class="form-control" id="txtRfc">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtFechaNacimiento" class="form-label">Fecha de nacimiento</label>
+                                            <input type="date" class="form-control" id="txtFechaNacimiento">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtCurp" class="form-label">CURP</label>
+                                            <input type="text" class="form-control" id="txtCurp">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="flFoto" class="form-label">Foto</label>
+                                            <input class="form-control" id="flFoto" type="file">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtDomicilio" class="form-label">Domicilio</label>
+                                            <input type="text" class="form-control" id="txtDomicilio">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtCodigoPostal" class="form-label">C.P</label>
+                                            <input type="number" class="form-control" id="txtCodigoPostal">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtCiudad" class="form-label">Ciudad</label>
+                                            <input type="text" class="form-control" id="txtCiudad">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtEstado" class="form-label">Estado</label>
+                                            <input type="text" class="form-control" id="txtEstado">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtTelefono" class="form-label">Telefono</label>
+                                            <input type="text" class="form-control" id="txtTelefono">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtFechaIngreso" class="form-label">Fecha de ingreso</label>
+                                            <input type="date" class="form-control" id="txtFechaIngreso">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtPuesto" class="form-label">Puesto</label>
+                                            <input type="text" class="form-control" id="txtPuesto">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtSalarioBruto" class="form-label">Salario bruto mensual</label>
+                                            <input type="number" class="form-control" id="txtSalarioBruto">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="txtEmail" class="form-label">Email</label>
+                                            <input type="text" class="form-control" id="txtEmail">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="txtRol" class="form-label">Rol del empleado</label>
+                                            <input type="text" class="form-control" id="txtRol">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="txtSucursal" class="form-label">id Sucursal</label>
+                                            <input type="text" class="form-control" id="txtSucursal">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cerrar</button>
+                                        <button id="botonGuardarModal" type="submit" class="btn btn-primary" onclick="agregarEmpleado()" data-bs-dismiss="modal">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex g-1 gap-md-4 gap-2 ">
+                        <div class="contenedorBusqueda">
+                            <input id="buscadorProductos" class="estiloBotones buscador" type="search" placeholder="Buscar Registro">
+                            <i class="bi bi-search inputIcon ms-1"></i>
+                        </div>
+
+                        <button class="estiloBotones ">
+                            <i class="bi bi-funnel quitarCursiva"> Filtros</i>
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-12  table-responsive-SM  table-responsive-lg table-responsive-md mt-4">
+                    <table class="table table-hover tablaRegistros">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido Paterno</th>
+                                <th scope="col">Apellido Materno</th>
+                                <th scope="col">Estatus</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="registrosEmpleado">
+                            <!-- Se insertan los datos automaticamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="JS/myScript.js" type="text/javascript"></script>
+        <script src="bootstrap-5.3.0-dist/bootstrap-5.3.0-dist/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.min.css" rel="stylesheet">
+    </body>
+
+</html>
