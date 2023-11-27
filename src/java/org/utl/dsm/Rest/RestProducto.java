@@ -18,6 +18,7 @@ import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.Application;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 import org.utl.dsm.Controller.ControllerProducto;
 import org.utl.dsm.Model.Producto;
@@ -26,28 +27,105 @@ import org.utl.dsm.Model.Producto;
 @Path("producto")
 public class RestProducto extends Application
 {
-    @Path("insertProducto")
-    @POST
+    
+    @Path("saludar")
+    @Produces(MediaType.APPLICATION_JSON)   // Para definir el tipo de dato que va a regresar
+    @GET
+    public Response Saludar() {
+
+        String mensaje = """
+		{"result":"Hola desde el servicio de gestión de productos - Medicamos tu Vida"}
+		""";
+
+        return Response.status(Response.Status.OK).entity(mensaje).build();
+
+    }
+    
+    @Path("insertarProducto")
+    @POST         //Para metodos POST usar "FormParam"
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insert(@FormParam("datosProducto") @DefaultValue("{}") String datosProducto)
-    {
-        String out;
-        ControllerProducto ce = new ControllerProducto();
-        Gson gson = new Gson();
+    public Response insertEmpleado(
+            @FormParam("Producto") @DefaultValue("") String p) {
+        System.out.println("Producto:" +p );
+
+        String out = null;
+        ControllerProducto controlador = new ControllerProducto();
+        Gson gson = new Gson(); // Para convertir de objetos a Json
+        
         try {
-            Producto producto = gson.fromJson(datosProducto, Producto.class);
-            ce.insertProducto(producto);
+             Producto prod=gson.fromJson(p,   Producto.class);  //Transformamos en Json en un objeto de  java de tipo Producto
+            controlador.insertProducto(prod);
             out = """
-                    {"result":"Producto insertado exitosamente"}
-                  """;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            out = """
+                                    {"result":"Objeto insertado"}
+                        """;
+           return Response.status(Response.Status.CREATED).entity(out).build();   //CREATED: Es el estatus de la peticion (codigo: 201), para insercion en base de datos     
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+         out = """
                     {"result":"Error en el servidor, favor de intentarlo de nuevo mas tarde"}
                   """;
+         
+                    return Response.status(Response.Status.BAD_REQUEST).entity(out).build();  
         }
-        return Response.ok(out).build();
+        
     }
+    
+    @Path("registros")
+    @Produces(MediaType.APPLICATION_JSON)   // Para definir el tipo de dato que va a regresar
+    @GET
+    public Response obtenerTodo() {
+
+        ControllerProducto controlador = new ControllerProducto();
+         ArrayList<Producto> registros= new ArrayList<>();
+         
+          registros= controlador.obtenerRegistros();
+              
+        Gson gson = new Gson();
+        String salida = gson.toJson(registros);
+
+        return Response.status(Response.Status.OK).entity(salida).build();
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     @Path("updateProducto")
     @POST
@@ -136,24 +214,3 @@ public class RestProducto extends Application
     }
 }
 
-/*
-    ~~~~~~~~~~~~ JSON para un producto ~~~~~~~~~~~~
-{
-    "idProducto" : "0",
-    "nombreProducto" : "Lenalidomida",
-    "nombreGenericoProducto" : "Lenalidomida",
-    "formaFarmaceuticaProducto" : "cápsula",
-    "unidadMedidaProducto" : "Cápsula",
-    "presentacionProducto" : "Envase con 21 cápsulas.",
-    "principalIndicacionProducto" : "1. Mieloma múltiple refractario.",
-    "contraindicacionesProducto" : "Hipersensibilidad al fármaco. Embarazo, mujeres con capacidad de gestación que no cumplan con métodos anticonceptivos de un programa para prevención del embarazo, lactación.",
-    "concentracionProducto" : "20 mg",
-    "unidadEnvaseProducto" : "21",
-    "precioCompraProducto" : "635.81",
-    "precioVentaProducto" : "1057",
-    "fotoProducto" : " ",
-    "rutaFotoProducto" : " ",
-    "codigoBarrasProducto" : " ",
-    "estatusProducto" : "1"
-}
-*/

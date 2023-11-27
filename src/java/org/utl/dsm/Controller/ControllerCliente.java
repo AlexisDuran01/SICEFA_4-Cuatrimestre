@@ -80,7 +80,7 @@ public class ControllerCliente {
                 c.setPersonaCliente(p);
                 c.setEmailCliente(rs.getString("email"));
                 c.setFechaRegistroCliente(rs.getString("fechaRegistro"));
-                c.setEstatusCliente(rs.getBoolean("estatus"));
+                c.setEstatusCliente(rs.getInt("estatus"));
             }
             pstm.close();
             conn.close();
@@ -138,7 +138,7 @@ public class ControllerCliente {
         c.setPersonaCliente(p);
         c.setEmailCliente(rs.getString("email"));
         c.setFechaRegistroCliente(rs.getString("fechaRegistro"));
-        c.setEstatusCliente(rs.getBoolean("estatus"));
+        c.setEstatusCliente(rs.getInt("estatus"));
         return c;
     }
     

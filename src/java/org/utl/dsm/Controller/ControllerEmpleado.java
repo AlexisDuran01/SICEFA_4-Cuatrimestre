@@ -108,7 +108,7 @@ public class ControllerEmpleado
         e.setFechaIngresoEmpleado(rs.getString("fechaIngreso"));
         e.setPuestoEmpleado(rs.getString("puesto"));
         e.setSalarioBrutoEmpleado(rs.getFloat("salarioBruto"));
-        e.setActivoEmpleado(rs.getBoolean("activo"));
+        e.setActivoEmpleado(rs.getInt("activo"));
         e.setPersonaEmpleado(p);
         e.setUsuarioEmpleado(u);
         return e;

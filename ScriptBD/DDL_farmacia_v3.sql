@@ -12,6 +12,7 @@
 DROP DATABASE IF EXISTS sicefa;
 CREATE DATABASE sicefa;
 USE sicefa ;
+SELECT*FROM (SELECT *FROM producto ORDER BY idProducto DESC LIMIT 7) AS subConsulta ORDER BY idProducto  ;
 
 -- -----------------------------------------------------
 -- Table persona
@@ -40,9 +41,9 @@ CREATE TABLE persona
 CREATE TABLE usuario 
 (
   idUsuario         INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  nombreUsuario     VARCHAR(33) UNIQUE NOT NULL,
-  contrasenia       VARCHAR(16) NOT NULL,
-  rol               VARCHAR(10) NOT NULL    -- ADMC: Administrador del Sistema Central
+  nombreUsuario     VARCHAR(33),
+  contrasenia       VARCHAR(16) ,
+  rol               VARCHAR(10)    -- ADMC: Administrador del Sistema Central
                                             -- ADMS: Administrador de Sucursal
                                             -- EMPS: Empleado de Sucursal
 );
@@ -73,7 +74,7 @@ CREATE TABLE sucursal
 CREATE TABLE empleado 
 (
   idEmpleado    INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  codigo        VARCHAR(10) UNIQUE NOT NULL,
+  codigo        VARCHAR(10) ,
   fechaIngreso  DATE NOT NULL,
   puesto        VARCHAR(45) NOT NULL,
   salarioBruto  FLOAT NOT NULL,
@@ -246,3 +247,4 @@ CREATE TABLE detalleCompra
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
+

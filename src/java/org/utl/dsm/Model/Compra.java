@@ -10,13 +10,13 @@ public class Compra
 {
     private Integer idCompra;
     private String horaYFechaPedidoCompra;
-    private Boolean estatusCompra;
-    private Boolean activoCompra;
+    private int estatusCompra;
+    private int  activoCompra;
     private Empleado empleadoCompra;
 
     public Compra(){}
 
-    public Compra(Integer idCompra, String horaYFechaPedidoCompra, Boolean estatusCompra, Boolean activoCompra, Empleado empleadoCompra) {
+    public Compra(Integer idCompra, String horaYFechaPedidoCompra, int estatusCompra, int activoCompra, Empleado empleadoCompra) {
         this.idCompra = idCompra;
         this.horaYFechaPedidoCompra = horaYFechaPedidoCompra;
         this.estatusCompra = estatusCompra;
@@ -48,19 +48,19 @@ public class Compra
         this.horaYFechaPedidoCompra = horaYFechaPedidoCompra;
     }
 
-    public Boolean getEstatusCompra() {
+    public int getEstatusCompra() {
         return estatusCompra;
     }
 
-    public void setEstatusCompra(Boolean estatusCompra) {
+    public void setEstatusCompra(int estatusCompra) {
         this.estatusCompra = estatusCompra;
     }
 
-    public Boolean getActivoCompra() {
+    public int getActivoCompra() {
         return activoCompra;
     }
 
-    public void setActivoCompra(Boolean activoCompra) {
+    public void setActivoCompra(int activoCompra) {
         this.activoCompra = activoCompra;
     }
     

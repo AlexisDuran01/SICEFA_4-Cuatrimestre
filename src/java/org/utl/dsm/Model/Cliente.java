@@ -11,12 +11,12 @@ public class Cliente
     private Integer idCliente;
     private String emailCliente;
     private String fechaRegistroCliente;
-    private Boolean estatusCliente;
+    private int estatusCliente;
     private Persona personaCliente;
 
     public Cliente() {}
 
-    public Cliente(Integer idCliente, String emailCliente, String fechaRegistroCliente, Boolean estatusCliente, Persona personaCliente) {
+    public Cliente(Integer idCliente, String emailCliente, String fechaRegistroCliente, int estatusCliente, Persona personaCliente) {
         this.idCliente = idCliente;
         this.emailCliente = emailCliente;
         this.fechaRegistroCliente = fechaRegistroCliente;
@@ -56,11 +56,11 @@ public class Cliente
         this.fechaRegistroCliente = fechaRegistroCliente;
     }
 
-    public Boolean getEstatusCliente() {
+    public int getEstatusCliente() {
         return estatusCliente;
     }
 
-    public void setEstatusCliente(Boolean estatusCliente) {
+    public void setEstatusCliente(int estatusCliente) {
         this.estatusCliente = estatusCliente;
     }
     

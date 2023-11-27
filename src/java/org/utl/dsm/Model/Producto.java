@@ -8,170 +8,210 @@
 package org.utl.dsm.Model;
 public class Producto 
 {
-    private Integer idProducto;
-    private String nombreProducto;
-    private String nombreGenericoProducto;
-    private String formaFarmaceuticaProducto;
-    private String unidadMedidaProducto;
-    private String presentacionProducto;
-    private String principalIndicacionProducto;
-    private String contraindicacionesProducto;
-    private String concentracionProducto;
-    private Integer unidadEnvaseProducto;
-    private Float precioCompraProducto;
-    private Float precioVentaProducto;
-    private String fotoProducto;
-    private String rutaFotoProducto;
-    private String codigoBarrasProducto;
-    private Boolean estatusProducto;
+   private int idProducto;
+    private String nombre;
+    private String nombreGenerico;
+    private String formaFarmaceutica;
+    private String unidadMedida;
+    private String presentacion;
+    private String principalIndicacion;
+    private String contraindicaciones;
+    private String concentracion;
+    private int unidadesEnvase;
+    private float precioCompra;
+    private float precioVenta;
+    private String foto;
+    private String rutaFoto;
+    private String codigoBarras;
+    private int estatus;
 
-    public Producto() {}
+    public Producto() {
+    }
 
-    public Producto(Integer idProducto, String nombreProducto, String nombreGenericoProducto, String formaFarmaceuticaProducto, String unidadMedidaProducto, String presentacionProducto, String principalIndicacionProducto, String contraindicacionesProducto, String concentracionProducto, Integer unidadEnvaseProducto, Float precioCompraProducto, Float precioVentaProducto, String fotoProducto, String rutaFotoProducto, String codigoBarrasProducto, Boolean estatusProducto) {
+    
+    public Producto(int idProducto, String nombre, String nombreGenerico, String formaFarmaceutica, String unidadMedida, String presentacion, String principalIndicacion, String contraindicaciones, String concentracion, int unidadesEnvase, float precioCompra, float precioVenta, String foto, String rutaFoto, String codigoBarras, int estatus) {
         this.idProducto = idProducto;
-        this.nombreProducto = nombreProducto;
-        this.nombreGenericoProducto = nombreGenericoProducto;
-        this.formaFarmaceuticaProducto = formaFarmaceuticaProducto;
-        this.unidadMedidaProducto = unidadMedidaProducto;
-        this.presentacionProducto = presentacionProducto;
-        this.principalIndicacionProducto = principalIndicacionProducto;
-        this.contraindicacionesProducto = contraindicacionesProducto;
-        this.concentracionProducto = concentracionProducto;
-        this.unidadEnvaseProducto = unidadEnvaseProducto;
-        this.precioCompraProducto = precioCompraProducto;
-        this.precioVentaProducto = precioVentaProducto;
-        this.fotoProducto = fotoProducto;
-        this.rutaFotoProducto = rutaFotoProducto;
-        this.codigoBarrasProducto = codigoBarrasProducto;
-        this.estatusProducto = estatusProducto;
+        this.nombre = nombre;
+        this.nombreGenerico = nombreGenerico;
+        this.formaFarmaceutica = formaFarmaceutica;
+        this.unidadMedida = unidadMedida;
+        this.presentacion = presentacion;
+        this.principalIndicacion = principalIndicacion;
+        this.contraindicaciones = contraindicaciones;
+        this.concentracion = concentracion;
+        this.unidadesEnvase = unidadesEnvase;
+        this.precioCompra = precioCompra;
+        this.precioVenta = precioVenta;
+        this.foto = foto;
+        this.rutaFoto = rutaFoto;
+        this.codigoBarras = codigoBarras;
+        this.estatus = estatus;
     }
 
-    public Boolean getEstatusProducto() {
-        return estatusProducto;
+    public Producto(String nombre, String nombreGenerico, String formaFarmaceutica, String unidadMedida, String presentacion, String principalIndicacion, String contraindicaciones, String concentracion, int unidadesEnvase, float precioCompra, float precioVenta, String foto, String rutaFoto, String codigoBarras, int estatus) {
+        this.nombre = nombre;
+        this.nombreGenerico = nombreGenerico;
+        this.formaFarmaceutica = formaFarmaceutica;
+        this.unidadMedida = unidadMedida;
+        this.presentacion = presentacion;
+        this.principalIndicacion = principalIndicacion;
+        this.contraindicaciones = contraindicaciones;
+        this.concentracion = concentracion;
+        this.unidadesEnvase = unidadesEnvase;
+        this.precioCompra = precioCompra;
+        this.precioVenta = precioVenta;
+        this.foto = foto;
+        this.rutaFoto = rutaFoto;
+        this.codigoBarras = codigoBarras;
+        this.estatus = estatus;
     }
 
-    public void setEstatusProducto(Boolean estatusProducto) {
-        this.estatusProducto = estatusProducto;
+    public Producto(String nombre, String nombreGenerico, String formaFarmaceutica, String unidadMedida, String presentacion, String principalIndicacion, String contraindicaciones, String concentracion, int unidadesEnvase, float precioCompra, float precioVenta, String codigoBarras, int estatus) {
+        this.nombre = nombre;
+        this.nombreGenerico = nombreGenerico;
+        this.formaFarmaceutica = formaFarmaceutica;
+        this.unidadMedida = unidadMedida;
+        this.presentacion = presentacion;
+        this.principalIndicacion = principalIndicacion;
+        this.contraindicaciones = contraindicaciones;
+        this.concentracion = concentracion;
+        this.unidadesEnvase = unidadesEnvase;
+        this.precioCompra = precioCompra;
+        this.precioVenta = precioVenta;
+        this.codigoBarras = codigoBarras;
+        this.estatus = estatus;
     }
 
-    public Integer getIdProducto() {
+    public int getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(Integer idProducto) {
+    public void setIdProducto(int idProducto) {
         this.idProducto = idProducto;
     }
 
-    public String getNombreProducto() {
-        return nombreProducto;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getNombreGenericoProducto() {
-        return nombreGenericoProducto;
+    public String getNombreGenerico() {
+        return nombreGenerico;
     }
 
-    public void setNombreGenericoProducto(String nombreGenericoProducto) {
-        this.nombreGenericoProducto = nombreGenericoProducto;
+    public void setNombreGenerico(String nombreGenerico) {
+        this.nombreGenerico = nombreGenerico;
     }
 
-    public String getFormaFarmaceuticaProducto() {
-        return formaFarmaceuticaProducto;
+    public String getFormaFarmaceutica() {
+        return formaFarmaceutica;
     }
 
-    public void setFormaFarmaceuticaProducto(String formaFarmaceuticaProducto) {
-        this.formaFarmaceuticaProducto = formaFarmaceuticaProducto;
+    public void setFormaFarmaceutica(String formaFarmaceutica) {
+        this.formaFarmaceutica = formaFarmaceutica;
     }
 
-    public String getUnidadMedidaProducto() {
-        return unidadMedidaProducto;
+    public String getUnidadMedida() {
+        return unidadMedida;
     }
 
-    public void setUnidadMedidaProducto(String unidadMedidaProducto) {
-        this.unidadMedidaProducto = unidadMedidaProducto;
+    public void setUnidadMedida(String unidadMedida) {
+        this.unidadMedida = unidadMedida;
     }
 
-    public String getPresentacionProducto() {
-        return presentacionProducto;
+    public String getPresentacion() {
+        return presentacion;
     }
 
-    public void setPresentacionProducto(String presentacionProducto) {
-        this.presentacionProducto = presentacionProducto;
+    public void setPresentacion(String presentacion) {
+        this.presentacion = presentacion;
     }
 
-    public String getPrincipalIndicacionProducto() {
-        return principalIndicacionProducto;
+    public String getPrincipalIndicacion() {
+        return principalIndicacion;
     }
 
-    public void setPrincipalIndicacionProducto(String principalIndicacionProducto) {
-        this.principalIndicacionProducto = principalIndicacionProducto;
+    public void setPrincipalIndicacion(String principalIndicacion) {
+        this.principalIndicacion = principalIndicacion;
     }
 
-    public String getContraindicacionesProducto() {
-        return contraindicacionesProducto;
+    public String getContraindicaciones() {
+        return contraindicaciones;
     }
 
-    public void setContraindicacionesProducto(String contraindicacionesProducto) {
-        this.contraindicacionesProducto = contraindicacionesProducto;
+    public void setContraindicaciones(String contraindicaciones) {
+        this.contraindicaciones = contraindicaciones;
     }
 
-    public String getConcentracionProducto() {
-        return concentracionProducto;
+    public String getConcentracion() {
+        return concentracion;
     }
 
-    public void setConcentracionProducto(String concentracionProducto) {
-        this.concentracionProducto = concentracionProducto;
+    public void setConcentracion(String concentracion) {
+        this.concentracion = concentracion;
     }
 
-    public Integer getUnidadEnvaseProducto() {
-        return unidadEnvaseProducto;
+    public int getUnidadesEnvase() {
+        return unidadesEnvase;
     }
 
-    public void setUnidadEnvaseProducto(Integer unidadEnvaseProducto) {
-        this.unidadEnvaseProducto = unidadEnvaseProducto;
+    public void setUnidadesEnvase(int unidadesEnvase) {
+        this.unidadesEnvase = unidadesEnvase;
     }
 
-    public Float getPrecioCompraProducto() {
-        return precioCompraProducto;
+    public float getPrecioCompra() {
+        return precioCompra;
     }
 
-    public void setPrecioCompraProducto(Float precioCompraProducto) {
-        this.precioCompraProducto = precioCompraProducto;
+    public void setPrecioCompra(float precioCompra) {
+        this.precioCompra = precioCompra;
     }
 
-    public Float getPrecioVentaProducto() {
-        return precioVentaProducto;
+    public float getPrecioVenta() {
+        return precioVenta;
     }
 
-    public void setPrecioVentaProducto(Float precioVentaProducto) {
-        this.precioVentaProducto = precioVentaProducto;
+    public void setPrecioVenta(float precioVenta) {
+        this.precioVenta = precioVenta;
     }
 
-    public String getFotoProducto() {
-        return fotoProducto;
+    public String getFoto() {
+        return foto;
     }
 
-    public void setFotoProducto(String fotoProducto) {
-        this.fotoProducto = fotoProducto;
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
-    public String getRutaFotoProducto() {
-        return rutaFotoProducto;
+    public String getRutaFoto() {
+        return rutaFoto;
     }
 
-    public void setRutaFotoProducto(String rutaFotoProducto) {
-        this.rutaFotoProducto = rutaFotoProducto;
+    public void setRutaFoto(String rutaFoto) {
+        this.rutaFoto = rutaFoto;
     }
 
-    public String getCodigoBarrasProducto() {
-        return codigoBarrasProducto;
+    public String getCodigoBarras() {
+        return codigoBarras;
     }
 
-    public void setCodigoBarrasProducto(String codigoBarrasProducto) {
-        this.codigoBarrasProducto = codigoBarrasProducto;
+    public void setCodigoBarras(String codigoBarras) {
+        this.codigoBarras = codigoBarras;
     }
-    
-}
+
+    public int getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(int estatus) {
+        this.estatus = estatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", nombreGenerico=" + nombreGenerico + ", formaFarmaceutica=" + formaFarmaceutica + ", unidadMedida=" + unidadMedida + ", presentacion=" + presentacion + ", principalIndicacion=" + principalIndicacion + ", contraindicaciones=" + contraindicaciones + ", concentracion=" + concentracion + ", unidadesEnvase=" + unidadesEnvase + ", precioCompra=" + precioCompra + ", precioVenta=" + precioVenta + ", foto=" + foto + ", rutaFoto=" + rutaFoto + ", codigoBarras=" + codigoBarras + ", estatus=" + estatus + '}';
+    }
+        }

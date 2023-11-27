@@ -6,6 +6,8 @@
 */
 
 package org.utl.dsm.Model;
+
+
 public class DetalleVenta
 {
     private Integer cantidadDetalleVenta;

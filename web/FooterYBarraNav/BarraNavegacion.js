@@ -1,40 +1,39 @@
+
 function DirigirInicioCentral(){
-    fetch("modulos/SICEFACentral/InicioCentral/InicioCentral.html").then(
+    fetch("../Dashboard/vistaDashboard.html").then(
         function (data) {
             return data.text();
         }
     ).then(
         function (html) {
-            document.getElementById("contenedorPrincipal").innerHTML = html;
-            document.getElementById("style1").innerHTML = "<link href='modulos/SICEFACentral/InicioCentral/InicioCentral.css' rel='stylesheet' type='text/css' id='style1'/>";
+            document.getElementById("contenedorDinamico").innerHTML = html;
         }
     );
 }
 
-
 function DirigirSucursalesCentral(){
-    fetch("modulos/SICEFACentral/AdmSucursales/vistaSucursal.html").then(
+    fetch("../AdmSucursales/vistaSucursal.html").then(
         function (data) {
             return data.text();
         }
     ).then(
         function (html) {
-            document.getElementById("contenedorPrincipal").innerHTML = html;
-            document.getElementById("style1").innerHTML = "<link href='modulos/SICEFACentral/AdmSucursales/AdmSucursalesStyle.css' rel='stylesheet' type='text/css' id='style1'/>";
+            document.getElementById("contenedorDinamico").innerHTML = html;
+                mostrarRegistrosSucursal();
         }
     );
 }
 
 
 function DirigirProductosCentral(){
-    fetch("modulos/SICEFACentral/AdmProductos/AdmProductos.html").then(
+    fetch("../AdmProductos/vistaProductos.html").then(
         function (data) {
             return data.text();
         }
     ).then(
         function (html) {
-            document.getElementById("contenedorPrincipal").innerHTML = html;
-            document.getElementById("style1").innerHTML = "<link href='modulos/SICEFACentral/AdmProductos/AdmProductos.css' rel='stylesheet' type='text/css' id='style1'/>";
+            document.getElementById("contenedorDinamico").innerHTML = html;
+            mostrarRegistrosProductos();
         }
     );
 }
@@ -55,43 +54,42 @@ function DirigirPedidosCentral(){
 
 
 function DirigirInicioSucursal(){
-    fetch("modulos/SICEFASucursal/InicioSucursal/InicioSucursal.html").then(
+ fetch("../DashboardSucursal/vistaDashboardSucursal.html").then(
         function (data) {
             return data.text();
         }
     ).then(
         function (html) {
-            document.getElementById("contenedorPrincipal").innerHTML = html;
-            document.getElementById("style1").innerHTML = "<link href='modulos/SICEFASucursal/InicioSucursal/InicioSucursal.css' rel='stylesheet' type='text/css' id='style1'/>";
+            document.getElementById("contenedorDinamico").innerHTML = html;
         }
     );
 }
 
 
 function DirigirClientesSucursal(){
-    fetch("modulos/SICEFASucursal/AdmClientes/vistaCliente.html").then(
+    fetch("../AdmClientes/vistaCliente.html").then(
         function (data) {
             return data.text();
         }
     ).then(
         function (html) {
-            document.getElementById("contenedorPrincipal").innerHTML = html;
-            document.getElementById("style1").innerHTML = "<link href='modulos/SICEFASucursal/AdmClientes/AdmClientesStyle.css' type='text/css' rel='stylesheet'  id='style1'/>";
+            document.getElementById("contenedorDinamico").innerHTML = html;
+                mostrarRegistrosCliente();
         }
     );
 }
 
 
 function DirigirEmpleadosSucursal(){
-    fetch("modulos/SICEFASucursal/AdmEmpleados/vistaEmpleado.html").then(
+    fetch("../AdmEmpleados/vistaEmpleado.html").then(
         function (data) {
             return data.text();
         }
     ).then(
         function (html) {
-            document.getElementById("contenedorPrincipal").innerHTML = html;
-            document.getElementById("style1").innerHTML = "<link href='modulos/SICEFASucursal/AdmEmpleados/AdmEmpleados.css' rel='stylesheet' type='text/css' id='style1'/>";
-        }
+            document.getElementById("contenedorDinamico").innerHTML = html;
+           mostrarRegistrosEmpleado();        
+}
     );
 }
 
@@ -136,3 +134,7 @@ function DirigirVentasSucursal(){
         }
     );
 }
+
+DirigirInicioCentral();
+
+

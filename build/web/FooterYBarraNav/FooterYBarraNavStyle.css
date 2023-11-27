@@ -38,16 +38,17 @@ img{
 }
 .barra{
     width: 100%;
-    height: 100%;
+    height: auto;
     background: #1C1C1C;
+    padding-top: 0.9%;
     display: flex;
     justify-content: center;
 }
 .menu{
-    width: 1000px;
+    width: 80%;
     display: flex;
     flex-wrap: wrap;
-    height: 3em;
+    height: 2em;
 }
 .menu li{
     flex-basis: 0;
@@ -101,7 +102,7 @@ img{
 }
 .menu li:hover .BarraBaja, .menu li:hover .textoBarra{
     top: 100%;
-    height: 100%;
+    height: 150%;
 }
 .menu li:hover .imagenBarra{
     width: 100%;
@@ -112,7 +113,6 @@ img{
 .menu li .BarraBaja1{
     position: absolute;
     width: 100%;
-    height: 100%;
     background: #1C1C1C;
     top: 0%;
     padding-left: 0;
@@ -121,7 +121,7 @@ img{
 }
 .menu li:hover .BarraBaja1{
     top: 200%;
-    height: 200%;
+    height: 280%;
 }
 .menu li:hover .boton{
     display: flex;

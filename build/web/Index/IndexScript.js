@@ -9,30 +9,19 @@ function ocultarOpciones() {
 }
 // Fin de funciones para mostrar/ocultar la barra de navegación
 
-let moduloLogin;
 function cargarLoginCentral() {
-    fetch("modulos/Login/IniciarSesion.html").then(
-            function (data){
-                return data.text();
-            }
-    ).then(
-        function (html) {
-            document.getElementById("barraNavegacion").innerHTML = "";
-            document.getElementById("style").innerHTML = "<link href='modulos/Login/IniciarSesionStyle.css' rel='stylesheet' type='text/css'/>";
-            document.getElementById("contenedorPrincipal").innerHTML = html;
-        }
-    );
+  let boton = document.getElementById('central');
+  boton.addEventListener('click', function() {
+    window.location.href = 'modulos/Login/IniciarSesion.html';
+  });
 }
+
 function cargarLoginSucursal() {
-    fetch("modulos/Login/IniciarSesionSucursal.html").then(
-            function (data){
-                return data.text();
-            }
-    ).then(
-        function (html) {
-            document.getElementById("barraNavegacion").innerHTML = "";
-            document.getElementById("style").innerHTML = "<link href='modulos/Login/IniciarSesionStyle.css' rel='stylesheet' type='text/css'/>";
-            document.getElementById("contenedorPrincipal").innerHTML = html; 
-        }
-    );
+  let boton = document.getElementById('sucursal');
+  boton.addEventListener('click', function() {
+    window.location.href = 'modulos/Login/IniciarSesionSucursal.html';
+  });
 }
+
+cargarLoginCentral();
+cargarLoginSucursal();

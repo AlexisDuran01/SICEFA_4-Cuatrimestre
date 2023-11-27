@@ -21,9 +21,9 @@
                     style="width: 90px; height: 100%;" />
             </div>
             <div class="col-md-8 d-flex align-content-md-center justify-content-md-center pt-md-3">
-                <p class="mx-md-1 text-center" onclick="cargarLoginCentral();"><a href="#"
+                <p class="mx-md-1 text-center"><a href="modulos/Login/IniciarSesion.html"
                         class="p-md-2 alterarTexto">SICEFA Central</a></p>
-                <p class="mx-md-1 text-center" onclick="cargarLoginSucursal();"><a href="#"
+                        <p class="mx-md-1 text-center"><a href="modulos/Login/IniciarSesionSucursal.html"
                         class="p-md-2 alterarTexto">SICEFA Sucursal</a></p>
             </div>
             <div class="col-md-2 d-flex align-items-md-end align-content-end justify-content-end mb-md-3">
@@ -52,7 +52,7 @@
                 <P class="titulo">SICEFA SUCURSAL</P>
                 <p class="subtitulo">Sistema para la gestión y organización de la(s) sucursales.</p>
                 <div class="d-flex align-content-center align-items-center justify-content-center">
-                    <button class="botonInicio" onclick="cargarLoginSucursal();">Iniciar sesión</button>
+                    <button  id="sucursal" class="botonInicio" onclick="cargarLoginSucursal();">Iniciar sesión</button>
                 </div>
             </div>
         </div>
@@ -68,15 +68,6 @@
     <!-- Inicio de seccion de scripts -->
     <script src="Index/IndexScript.js"></script>
     <script src="FooterYBarraNav/BarraNavegacion.js"></script>
-    <script src="modulos/Login/IniciarSesionScript.js"></script>
-    <script src="modulos/SICEFACentral/AdmSucursales/AdmSucursalesScript.js"></script>
-    <script src="modulos/SICEFACentral/AdmProductos/AdmProductos.js"></script>
-    <script src="modulos/SICEFACentral/AdmPedidos/AdmPedidos.js"></script>
-    <script src="modulos/SICEFASucursal/AdmClientes/AdmClientesScript.js"></script>
-    <script src="modulos/SICEFASucursal/AdmEmpleados/AdmEmpleados.js"></script>
-    <script src="modulos/SICEFASucursal/AdmPedidos/AdmPedidos.js"></script>
-    <script src="modulos/SICEFASucursal/AdmVentas/AdmVentas.js"></script>
-    <script src="modulos/SICEFASucursal/ConsultaProductos/ConsultaProductos..js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
     <!-- Fin de seccion de scripts -->
 </body>

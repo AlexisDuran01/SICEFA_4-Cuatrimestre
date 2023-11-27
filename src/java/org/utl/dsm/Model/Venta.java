@@ -10,13 +10,13 @@ public class Venta
 {
     private Integer idVenta;
     private String horaYFechaVenta;
-    private Boolean estatus;
+    private int estatus;
     private Cliente clienteVenta;
     private Empleado empleadoVenta;
 
     public Venta(){}
 
-    public Venta(Integer idVenta, String horaYFechaVenta, Boolean estatus, Cliente clienteVenta, Empleado empleadoVenta) {
+    public Venta(Integer idVenta, String horaYFechaVenta, int estatus, Cliente clienteVenta, Empleado empleadoVenta) {
         this.idVenta = idVenta;
         this.horaYFechaVenta = horaYFechaVenta;
         this.estatus = estatus;
@@ -48,11 +48,11 @@ public class Venta
         this.horaYFechaVenta = horaYFechaVenta;
     }
 
-    public Boolean getEstatus() {
+    public int getEstatus() {
         return estatus;
     }
 
-    public void setEstatus(Boolean estatus) {
+    public void setEstatus(int estatus) {
         this.estatus = estatus;
     }
 

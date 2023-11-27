@@ -2,7 +2,7 @@ let empleados = [];
 function validarLoginCentral() {
     let user = document.getElementById("txtUser").value;
     let password = document.getElementById("txtPassword").value;
-    fetch('modulos/SICEFASucursal/AdmEmpleados/Empleados.json').then(
+    fetch('../SICEFASucursal/AdmEmpleados/Empleados.json').then(
         function (jsonText) {
             return jsonText.json();
         }
@@ -14,9 +14,7 @@ function validarLoginCentral() {
                 if (empleados[i].usuario === user) {
                     if (empleados[i].contrasena === password) {
                         if ((empleados[i].puesto).toLowerCase() === "admin") {
-                            Llamar1();
-                            Llamar2();
-                            Llamar3();
+                            window.location.href = '../SICEFACentral/InicioCentral/InicioCentral.html';
                             break;
                         } else {
                             alert("Lo sentimos, no cuentas con el rol de administrador");
@@ -36,7 +34,7 @@ function validarLoginCentral() {
 function validarLoginSucursal() {
     let user = document.getElementById("txtUser").value;
     let password = document.getElementById("txtPassword").value;
-    fetch('modulos/SICEFASucursal/AdmEmpleados/Empleados.json').then(
+    fetch('../SICEFASucursal/AdmEmpleados/Empleados.json').then(
         function (jsonText) {
             return jsonText.json();
         }
@@ -47,9 +45,7 @@ function validarLoginSucursal() {
             for (let i = 0; i < empleados.length; i++) {
                 if (empleados[i].usuario === user) {
                     if (empleados[i].contrasena === password) {
-                        Llamar1_1();
-                        Llamar2_1();
-                        Llamar3_1();
+                            window.location.href = '../SICEFASucursal/InicioSucursal/InicioSucursal.html';
                         break;
                     } else {
                         alert("El usuario y/o contraseña son incorrectos");

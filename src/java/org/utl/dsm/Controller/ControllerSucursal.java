@@ -87,7 +87,7 @@ public class ControllerSucursal
         s.setTelefonoSucursal(rs.getString("telefono"));
         s.setLatitulSucursal(rs.getString("latitud"));
         s.setLongitudSucursal(rs.getString("longitud"));
-        s.setEstatusSucursal(rs.getBoolean("estatus"));
+        s.setEstatusSucursal(rs.getInt("estatus"));
         return s;
     }
 }

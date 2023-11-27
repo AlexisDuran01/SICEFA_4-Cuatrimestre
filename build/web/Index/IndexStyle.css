@@ -9,7 +9,6 @@ a{
 .alterarTexto{
     text-decoration: none;
     color: black;
-    font-family: "Bodoni MT";
     font-size: 20px;
 }
 .alterarTexto:hover {
@@ -54,7 +53,6 @@ a{
     text-align: center;
 }
 .subtitulo{
-    font-family: 'serif';
     font-size: 1em;
     text-align: justify;
     padding: 1em;

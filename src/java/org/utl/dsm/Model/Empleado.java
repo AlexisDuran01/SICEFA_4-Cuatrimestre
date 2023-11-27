@@ -13,7 +13,7 @@ public class Empleado
     private String fechaIngresoEmpleado;
     private String puestoEmpleado;
     private Float salarioBrutoEmpleado;
-    private Boolean activoEmpleado;
+    private int activoEmpleado;
     private Persona personaEmpleado;
     private Usuario usuarioEmpleado;
     private Sucursal sucursalEmpleado;
@@ -29,7 +29,7 @@ public class Empleado
     }
     
 
-    public Empleado(Integer idEmpleado, String codigoEmpleado, String fechaIngresoEmpleado, String puestoEmpleado, Float salarioBrutoEmpleado, Boolean activoEmpleado, Persona personaEmpleado, Usuario usuarioEmpleado, Sucursal sucursalEmpleado) {
+    public Empleado(Integer idEmpleado, String codigoEmpleado, String fechaIngresoEmpleado, String puestoEmpleado, Float salarioBrutoEmpleado, int activoEmpleado, Persona personaEmpleado, Usuario usuarioEmpleado, Sucursal sucursalEmpleado) {
         this.idEmpleado = idEmpleado;
         this.codigoEmpleado = codigoEmpleado;
         this.fechaIngresoEmpleado = fechaIngresoEmpleado;
@@ -89,11 +89,11 @@ public class Empleado
         this.salarioBrutoEmpleado = salarioBrutoEmpleado;
     }
 
-    public Boolean getActivoEmpleado() {
+    public int getActivoEmpleado() {
         return activoEmpleado;
     }
 
-    public void setActivoEmpleado(Boolean activoEmpleado) {
+    public void setActivoEmpleado(int activoEmpleado) {
         this.activoEmpleado = activoEmpleado;
     }
 

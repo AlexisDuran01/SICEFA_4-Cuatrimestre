@@ -20,7 +20,7 @@ public class Sucursal
     private String telefonoSucursal;
     private String latitulSucursal;
     private String longitudSucursal;
-    private Boolean estatusSucursal;
+    private int estatusSucursal;
 
     public Sucursal() {}
 
@@ -28,7 +28,7 @@ public class Sucursal
         this.idSucursal = idSucursal;
     }
 
-    public Sucursal(Integer idSucursal, String nombreSucursal, String titularSucursal, String rfcSucursal, String domicilioSucursal, String coloniaSucursal, String codigoPostalSucursal, String ciudadSucursal, String estadoSucursal, String telefonoSucursal, String latitulSucursal, String longitudSucursal, Boolean estatusSucursal) {
+    public Sucursal(Integer idSucursal, String nombreSucursal, String titularSucursal, String rfcSucursal, String domicilioSucursal, String coloniaSucursal, String codigoPostalSucursal, String ciudadSucursal, String estadoSucursal, String telefonoSucursal, String latitulSucursal, String longitudSucursal, int estatusSucursal) {
         this.idSucursal = idSucursal;
         this.nombreSucursal = nombreSucursal;
         this.titularSucursal = titularSucursal;
@@ -59,11 +59,11 @@ public class Sucursal
     }
     
 
-    public Boolean getEstatusSucursal() {
+    public int getEstatusSucursal() {
         return estatusSucursal;
     }
 
-    public void setEstatusSucursal(Boolean estatusSucursal) {
+    public void setEstatusSucursal(int estatusSucursal) {
         this.estatusSucursal = estatusSucursal;
     }
 

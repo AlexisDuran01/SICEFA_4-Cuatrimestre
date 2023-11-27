@@ -7,6 +7,7 @@
 
 package org.utl.dsm.Controller;
 
+import com.mysql.cj.jdbc.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,63 +22,116 @@ public class ControllerProducto
 //  ~~~~~~~~~~~~~~~~~~~~~~~ METODO PARA INSERTAR UN PRODUCTO ~~~~~~~~~~~~~~~~~~~~~~~  //
     
     public Producto insertProducto(Producto p){
-        String query = "{CALL sp_insertProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
-        try{
+    String query = "CALL sp_insertarProducto(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";      
+try{
             ConexionMysql connMySQL = new ConexionMysql();
+
+            //Abrimos la conexion con la base de datos
             Connection conn = connMySQL.open();
-            PreparedStatement pstm = conn.prepareStatement(query);
-            pstm.setString(1, p.getNombreProducto());
-            pstm.setString(2, p.getNombreGenericoProducto());
-            pstm.setString(3, p.getFormaFarmaceuticaProducto());
-            pstm.setString(4, p.getUnidadMedidaProducto());
-            pstm.setString(5, p.getPresentacionProducto());
-            pstm.setString(6, p.getPrincipalIndicacionProducto());
-            pstm.setString(7, p.getContraindicacionesProducto());
-            pstm.setString(8, p.getConcentracionProducto());
-            pstm.setInt(9, p.getUnidadEnvaseProducto());
-            pstm.setFloat(10, p.getPrecioCompraProducto());
-            pstm.setFloat(11, p.getPrecioVentaProducto());
-            pstm.setString(12, p.getFotoProducto());
-            pstm.setString(13, p.getRutaFotoProducto());
-            pstm.setString(14, p.getCodigoBarrasProducto());
-            pstm.execute();
-            pstm.close();
-            conn.close();
+
+            //Con este objeto invocaremos al asistente para llenar el query
+            CallableStatement cstmt = (CallableStatement) conn.prepareCall(query);  // El objeto de tipo CallableStatement: se utiliza para ejecutar procedimientos almacenados
+
+            // Pasar los parametros al query
+            cstmt.setString(1, p.getNombre());
+            cstmt.setString(2, p.getNombreGenerico());
+            cstmt.setString(3, p.getFormaFarmaceutica());
+            cstmt.setString(4, p.getUnidadMedida());
+            cstmt.setString(5, p.getPresentacion());
+            cstmt.setString(6, p.getPrincipalIndicacion());
+            cstmt.setString(7, p.getContraindicaciones());
+            cstmt.setString(8, p.getConcentracion());
+            cstmt.setInt(9, p.getUnidadesEnvase());
+            cstmt.setFloat(10, p.getPrecioCompra());
+            cstmt.setFloat(11, p.getPrecioVenta());
+            cstmt.setString(12, p.getCodigoBarras());
+            cstmt.execute();
+               
+            
+            // Cerrar todas las instancias abiertas hacia la base de datos (bd)
+            cstmt.close();
+            conn.close(); // Cerrar la conexion (despues de alguna accion, es recomendable cerrar la conexion)
             connMySQL.close();
             return p;
         }catch(Exception e){
-            e.printStackTrace();
-            return p;
+            System.out.println(e.getMessage());
+            return null;
         }
     }
     
+        //  ~~~~~~~~~~~~~~~~~~~~~~~ METODO PARA  OBTENER TODOS LOS REGISTROS ~~~~~~~~~~~~~~~~~~~~~~~  //
+
+        public ArrayList<Producto> obtenerRegistros() {
+
+        //Consulta que le pasaremos al metodo executeQuery
+        String query = "SELECT*FROM (SELECT *FROM producto ORDER BY idProducto DESC  LIMIT 7) AS subConsulta ORDER BY idProducto ASC; ";
+        ArrayList<Producto> registrosBaseDeDatos = new ArrayList<>();
+
+        try {
+            ConexionMysql connMySQL = new ConexionMysql();
+            //Abrimos la conexion con la base de datos
+            Connection conexion = connMySQL.open();
+
+            //  Para ejecutar consultas  SQL debemos crear un objeto tipo Statment o PreparedStatment 
+        PreparedStatement ejecutorConsulta =conexion.prepareStatement(query);
+        
+            //Para las intrucciones de tipo SELECT empleamos el método Resulset  executeQuery(String sql).
+            ResultSet resultadoConsulta = ejecutorConsulta.executeQuery(query); // Se puede escribir directamente la consulta, pero nosotros lo hacemos con una variable
+
+                  //El metodo next() desplaza el cursor del Resulset una posición hacia delante cada vez que se invoca
+            while (resultadoConsulta.next()) {   //Regresa un valor booleano verdadero cuando hay un registro en la siguiente posicion 
+                
+                //Accedemos a los registros mediante los  metodos "get" Indicando el nombre de la columna, para despues meter el objeto a la lista
+                registrosBaseDeDatos.add(fillProducto(resultadoConsulta));
+          
+            }
+            
+                // Cerrar todas las instancias abiertas hacia la base de datos (bd)
+            ejecutorConsulta.close();
+            resultadoConsulta.close();
+            conexion.close(); // Cerrar la conexion (despues de alguna accion, es recomendable cerrar la conexion)
+            connMySQL.close();
+            return registrosBaseDeDatos;
+            
+        } catch (Exception error) {
+            System.out.println(error.getMessage());
+             return  null;
+        }
+
+    }
     //  ~~~~~~~~~~~~~~~~~~~~~~~ METODO PARA EDITAR UN PRODUCTO ~~~~~~~~~~~~~~~~~~~~~~~  //
     
     public Producto updateProducto(Producto p){
-        String query = "{CALL sp_updateProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String query = "{CALL sp_updateProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         try{
-            ConexionMysql connMySQL = new ConexionMysql();
+                  ConexionMysql connMySQL = new ConexionMysql();
+
+              //Abrimos la conexion con la base de datos
             Connection conn = connMySQL.open();
-            PreparedStatement pstm = conn.prepareStatement(query);
-            pstm.setInt(1, p.getIdProducto());
-            pstm.setString(2, p.getNombreProducto());
-            pstm.setString(3, p.getNombreGenericoProducto());
-            pstm.setString(4, p.getFormaFarmaceuticaProducto());
-            pstm.setString(5, p.getUnidadMedidaProducto());
-            pstm.setString(6, p.getPresentacionProducto());
-            pstm.setString(7, p.getPrincipalIndicacionProducto());
-            pstm.setString(8, p.getContraindicacionesProducto());
-            pstm.setString(9, p.getConcentracionProducto());
-            pstm.setInt(10, p.getUnidadEnvaseProducto());
-            pstm.setFloat(11, p.getPrecioCompraProducto());
-            pstm.setFloat(12, p.getPrecioVentaProducto());
-            pstm.setString(13, p.getFotoProducto());
-            pstm.setString(14, p.getRutaFotoProducto());
-            pstm.setString(15, p.getCodigoBarrasProducto());
-            pstm.setBoolean(16, p.getEstatusProducto());
-            pstm.execute();
-            pstm.close();
-            conn.close();
+
+            //Con este objeto invocaremos al asistente para llenar el query
+            CallableStatement cstmt = (CallableStatement) conn.prepareCall(query);  // El objeto de tipo CallableStatement: se utiliza para ejecutar procedimientos almacenados
+
+            // Pasar los parametros al query
+            cstmt.setString(1, p.getNombre());
+            cstmt.setString(2, p.getNombreGenerico());
+            cstmt.setString(3, p.getFormaFarmaceutica());
+            cstmt.setString(4, p.getUnidadMedida());
+            cstmt.setString(5, p.getPresentacion());
+            cstmt.setString(6, p.getPrincipalIndicacion());
+            cstmt.setString(7, p.getContraindicaciones());
+            cstmt.setString(8, p.getConcentracion());
+            cstmt.setInt(9, p.getUnidadesEnvase());
+            cstmt.setFloat(10, p.getPrecioCompra());
+            cstmt.setFloat(11, p.getPrecioVenta());
+            cstmt.setString(12, p.getCodigoBarras());
+            cstmt.setInt(13, p.getEstatus());
+
+            cstmt.execute();
+
+            // Cerrar todas las instancias abiertas hacia la base de datos (bd)
+            cstmt.close();
+            conn.close(); // Cerrar la conexion (despues de alguna accion, es recomendable cerrar la conexion)
             connMySQL.close();
             return p;
         }catch(Exception e){
@@ -103,6 +157,10 @@ public class ControllerProducto
             e.printStackTrace();
         }
     }
+    
+    
+    
+    
     
     //  ~~~~~~~~~~~~~~~~~~~~~~~ METODO PARA BUSCAR UN PRODUCTO POR ID ~~~~~~~~~~~~~~~~~~~~~~~  //
     
@@ -131,24 +189,24 @@ public class ControllerProducto
                 String v_fotoProducto = rs.getString(13);
                 String v_rutaFotoProducto = rs.getString(14);
                 String v_codigoBarrasProducto = rs.getString(15);
-                boolean v_estatusProducto = rs.getBoolean(16);
+                int v_estatusProducto = rs.getInt(16);
                 
                 p.setIdProducto(v_idProducto);
-                p.setNombreProducto(v_nombreProducto);
-                p.setNombreGenericoProducto(v_nombreGenericoProducto);
-                p.setFormaFarmaceuticaProducto(v_formaFarmaceuticaProducto);
-                p.setUnidadMedidaProducto(v_unidadMedidaProducto);
-                p.setPresentacionProducto(v_presentacionProducto);
-                p.setPrincipalIndicacionProducto(v_principalIndicacionProducto);
-                p.setContraindicacionesProducto(v_contraindicacionesProducto);
-                p.setConcentracionProducto(v_concentracionProducto);
-                p.setUnidadEnvaseProducto(v_unidadEnvaseProducto);
-                p.setPrecioCompraProducto(v_precioCompraProducto);
-                p.setPrecioVentaProducto(v_precioVentaProducto);
-                p.setFotoProducto(v_fotoProducto);
-                p.setRutaFotoProducto(v_rutaFotoProducto);
-                p.setCodigoBarrasProducto(v_codigoBarrasProducto);
-                p.setEstatusProducto(v_estatusProducto);
+                p.setNombre(v_nombreProducto);
+                p.setNombreGenerico(v_nombreGenericoProducto);
+                p.setFormaFarmaceutica(v_formaFarmaceuticaProducto);
+                p.setUnidadMedida(v_unidadMedidaProducto);
+                p.setPresentacion(v_presentacionProducto);
+                p.setPrincipalIndicacion(v_principalIndicacionProducto);
+                p.setContraindicaciones(v_contraindicacionesProducto);
+                p.setConcentracion(v_concentracionProducto);
+                p.setUnidadesEnvase(v_unidadEnvaseProducto);
+                p.setPrecioCompra(v_precioCompraProducto);
+                p.setPrecioVenta(v_precioVentaProducto);
+                p.setFoto(v_fotoProducto);
+                p.setRutaFoto(v_rutaFotoProducto);
+                p.setCodigoBarras(v_codigoBarrasProducto);
+                p.setEstatus(v_estatusProducto);
             }
             pstm.close();
             conn.close();
@@ -191,23 +249,23 @@ public class ControllerProducto
     //  ~~~~~~~~~~~~~~~~~~~~~~~ METODO PARA LLENAR UNA LISTA DE OBJETOS TIPO PRODUCTO ~~~~~~~~~~~~~~~~~~~~~~~  //
     
     public Producto fillProducto(ResultSet rs) throws SQLException{
-        Producto p = new Producto();
-        p.setIdProducto(rs.getInt("idProducto"));
-        p.setNombreProducto(rs.getString("nombre"));
-        p.setNombreGenericoProducto(rs.getString("nombreGenerico"));
-        p.setFormaFarmaceuticaProducto(rs.getString("formaFarmaceutica"));
-        p.setUnidadMedidaProducto(rs.getString("unidadMedida"));
-        p.setPresentacionProducto(rs.getString("presentacion"));
-        p.setPrincipalIndicacionProducto(rs.getString("principalIndicacion"));
-        p.setContraindicacionesProducto(rs.getString("contraindicaciones"));
-        p.setConcentracionProducto(rs.getString("concentracion"));
-        p.setUnidadEnvaseProducto(rs.getInt("unidadesEnvase"));
-        p.setPrecioCompraProducto(rs.getFloat("precioCompra"));
-        p.setPrecioVentaProducto(rs.getFloat("precioVenta"));
-        p.setFotoProducto(rs.getString("foto"));
-        p.setRutaFotoProducto(rs.getString("rutaFoto"));
-        p.setCodigoBarrasProducto(rs.getString("codigoBarras"));
-        p.setEstatusProducto(rs.getBoolean("estatus"));
+   Producto p = new Producto();
+    p.setIdProducto(rs.getInt("idProducto"));
+    p.setNombre(rs.getString("nombre"));
+    p.setNombreGenerico(rs.getString("nombreGenerico"));
+    p.setFormaFarmaceutica(rs.getString("formaFarmaceutica"));
+    p.setUnidadMedida(rs.getString("unidadMedida"));
+    p.setPresentacion(rs.getString("presentacion"));
+    p.setPrincipalIndicacion(rs.getString("principalIndicacion"));
+    p.setContraindicaciones(rs.getString("contraindicaciones"));
+    p.setConcentracion(rs.getString("concentracion"));
+    p.setUnidadesEnvase(rs.getInt("unidadesEnvase"));
+    p.setPrecioCompra(rs.getFloat("precioCompra"));
+    p.setPrecioVenta(rs.getFloat("precioVenta"));
+    p.setFoto(rs.getString("foto"));
+    p.setRutaFoto(rs.getString("rutaFoto"));
+    p.setCodigoBarras(rs.getString("codigoBarras"));
+    p.setEstatus(rs.getInt("estatus"));
         return p;
     }
    
