@@ -12,11 +12,10 @@
 DROP DATABASE IF EXISTS sicefa;
 CREATE DATABASE sicefa;
 USE sicefa ;
-SELECT*FROM (SELECT *FROM producto ORDER BY idProducto DESC LIMIT 7) AS subConsulta ORDER BY idProducto  ;
-
 -- -----------------------------------------------------
 -- Table persona
 -- -----------------------------------------------------
+
 CREATE TABLE persona 
 (
   idPersona         INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -47,7 +46,6 @@ CREATE TABLE usuario
                                             -- ADMS: Administrador de Sucursal
                                             -- EMPS: Empleado de Sucursal
 );
-
 -- -----------------------------------------------------
 -- Table sucursal
 -- -----------------------------------------------------
