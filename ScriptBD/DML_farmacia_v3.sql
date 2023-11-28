@@ -18,7 +18,6 @@
 -- -----------------------------------------------------
 
 USE sicefa;
-SELECT*FROM producto ORDER BY i;
 
 /* Agregamos la Sucursal Central */
 INSERT INTO sucursal (idSucursal, nombre, titular, rfc, domicilio, colonia, codigoPostal,

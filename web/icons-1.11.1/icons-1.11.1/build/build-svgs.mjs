@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url'
 import picocolors from 'picocolors'
 import { loadConfig, optimize } from 'svgo'
 
-const __filename = fileURLToPath(import.meta.url)
+const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const iconsDir = path.join(__dirname, '../icons/');
