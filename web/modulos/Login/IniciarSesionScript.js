@@ -85,7 +85,8 @@ function validarLoginSucursal() {
                         title: "Oops...",
                         text: "Usuario o contraseña incorrectos!"
                     });
-                } else if ( (('ADMS') !== data.rolUsuario) || (('EMPS') !== data.rolUsuario)) {
+                } else if ( (('ADMS') !== data.rolUsuario) && (('EMPS') !== data.rolUsuario)) {
+                    console.log(data.rolUsuario);
                     Swal.fire({
                         icon: "error",
                         title: "Oops...",
