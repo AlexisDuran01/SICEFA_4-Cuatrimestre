@@ -135,6 +135,22 @@ function DirigirVentasSucursal(){
     );
 }
 
+function redirigirAIndex() {
+    Swal.fire({
+  title: "¿Estás seguro de cerrar sesión?",
+  text: "Saldrás de tu usuario",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Aceptar"
+}).then((result) => {
+  if (result.isConfirmed) {
+     window.location.href = "../../../index.html"; 
+  }
+}); 
+}
+
 DirigirInicioCentral();
 
 
