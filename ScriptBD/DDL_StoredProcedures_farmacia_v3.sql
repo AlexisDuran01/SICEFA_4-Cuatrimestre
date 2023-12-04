@@ -422,7 +422,7 @@ CREATE PROCEDURE sp_insertEmpleado(  /* Datos Personales */
 $$
 DELIMITER ;
 
-CALL sp_insertEmpleado('Carlos','Padilla','Torres','H','05/12/2004','KDS5G1F7D5TFD6','KDS5G1F7D5TFD65GF3','Colina del fresno, #210. Colinas de Santa Julia','37530','León','Guanajuato','4771644321','',1,'Admin','Desarrollador',15000.00);
+CALL sp_insertEmpleado('Carlos','Padilla','Torres','H','05/12/2004','KDS5G1F7D5TFD6','KDS5G1F7D5TFD65GF3','Colina del fresno, #210. Colinas de Santa Julia','37530','León','Guanajuato','4771644321','',1,'EMPS','Desarrollador',15000.00);
 SELECT * FROM empleado;
 SELECT * FROM persona;
 SELECT * FROM usuario;
