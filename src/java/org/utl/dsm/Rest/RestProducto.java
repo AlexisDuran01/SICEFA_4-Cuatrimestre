@@ -90,43 +90,40 @@ public class RestProducto extends Application
     }
     
     
+   @Path("obtenerProductoPorId")
+    @Produces(MediaType.APPLICATION_JSON)   // Para definir el tipo de dato que va a regresar
+    @GET
+    public Response obtenerRegistroEspecifco(@QueryParam ("idProducto")@DefaultValue("0") int idProducto) {
+        
+    try {
+        ControllerProducto controlador = new ControllerProducto();
+        Producto registro = controlador.obtenerRegistroEspecifico(idProducto);
+
+        Gson gson = new Gson();
+        String salida="";
+
+        
+        if (registro.getIdProducto()==0) {
+            salida="""
+                    {"result":"Producto no encontrado"}
+                  """;
+        }else{
+            salida= gson.toJson(registro);
+        }
+       
+        return Response.status(Response.Status.OK).entity(salida).build();
+        
+    } catch (Exception e) {
+        // Manejo de la excepción
+        return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+    }
+
+    }  
     
     
+  
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+ 
     @Path("updateProducto")
     @POST
     @Produces(MediaType.APPLICATION_JSON)

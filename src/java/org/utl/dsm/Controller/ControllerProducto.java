@@ -99,6 +99,45 @@ try{
         }
 
     }
+        
+        
+            //  ~~~~~~~~~~~~~~~~~~~~~~~ METODO PARA  OBTENER UN REGISTRO ESPECIFICO ~~~~~~~~~~~~~~~~~~~~~~~  //
+   public Producto obtenerRegistroEspecifico(int idProducto) {
+    Producto registroEspecifico = new Producto(); // Objeto para almacenar el registro específico
+    
+    String query = "SELECT * FROM producto WHERE idProducto=?"; // Consulta SQL con un parámetro
+    
+    try {
+        ConexionMysql connMySQL = new ConexionMysql(); // Objeto para manejar la conexión a MySQL
+        Connection conexion = connMySQL.open(); // Establecer conexión con la base de datos
+        
+        // Preparar la consulta SQL con un parámetro utilizando PreparedStatement
+        // La interfaz PreparedStatement se utiliza para ejecutar consultas SQL parametrizadas dinámicas.
+        // Creamos un objeto PreparedStatement llamado "ejecutorConsulta" para manejar la consulta SQL
+        // En esta línea, le indica a MySQL que compile, optimice y prepare la consulta SQL para su ejecución.
+        PreparedStatement ejecutorConsulta = conexion.prepareStatement(query);
+        
+        ejecutorConsulta.setInt(1, idProducto); // Establece el valor del parámetro en la consulta
+        
+        // Ejecutar la consulta SQL para obtener resultados
+        ResultSet resultadoConsulta = ejecutorConsulta.executeQuery(); /* ResulSet es una interfaz en Java que proporciona métodos para recuperar y manipular 
+        datos obtenidos como resultado de una consulta SQL.  Esta linea en especifico se utiliza para ejecutar la consulta SQL preparada
+        y almacenar los resultados obtenidos en un objeto ResultSet*/
+        
+        // Iterar a través de los resultados obtenidos
+        while (resultadoConsulta.next()) {
+            // Llenar el objeto Producto con los datos obtenidos de la consulta
+            registroEspecifico = fillProducto(resultadoConsulta);
+        }
+        return registroEspecifico; // Devolver el registro específico obtenido
+        
+    } catch (Exception error) {
+        System.out.println(error.getMessage()); // Mostrar un mensaje en caso de error
+        return null; // Devolver nulo si hay una excepción
+    }
+}
+        
+        
     //  ~~~~~~~~~~~~~~~~~~~~~~~ METODO PARA EDITAR UN PRODUCTO ~~~~~~~~~~~~~~~~~~~~~~~  //
     
     public Producto updateProducto(Producto p){

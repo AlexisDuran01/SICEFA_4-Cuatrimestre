@@ -8,7 +8,8 @@ function agregarProductoFocus() {
         primerCampo.focus();
     });
 
-};
+}
+;
 
 function cerrarModal() {
     let modal = document.getElementById('registroProductos');
@@ -19,8 +20,82 @@ function cerrarModal() {
 }
 
 
-function verProducto() {
+function verProducto(event) {
     console.log("Hola desde ver productos");
+
+    let id = recuperarId(event);
+
+    obtenerProductoPorId(id).then(
+            (producto) => {
+
+                console.log(producto);
+        let tablaVerProducto = document.getElementById('registroVerProducto');
+
+        let estatus = '';
+
+        if (producto.estatus === 1) {
+            estatus = 'Activo';
+        } else {
+            estatus = 'Inactivo';
+        }
+
+             let registro=`<tr>
+                                    <td class="fw-bold registro">Nombre:</td>
+                                    <td class ="registro">${producto.nombre}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold registro">Nombre Genérico:</td>
+                                    <td class ="registro">${producto.nombreGenerico}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold registro">Forma Farmacéutica:</td>
+                                    <td class ="registro">${producto.formaFarmaceutica}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold registro">Unidad de Medida:</td>
+                                    <td class ="registro">${producto.unidadMedida}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold registro">Presentación:</td>
+                                    <td class ="registro">${producto.presentacion}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold registro">Indicación Principal:</td>
+                                    <td class ="registro">${producto.principalIndicacion}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold registro">Contraindicaciones:</td>
+                                    <td class ="registro">${producto.contraindicaciones}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold registro">Concentración:</td>
+                                    <td class ="registro">${producto.concentracion}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold registro">Unidades por Envase:</td>
+                                    <td  class ="registro">${producto.unidadesEnvase}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold registro">Precio de Compra:</td>
+                                    <td  class ="registro">${producto.precioCompra}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold registro">Precio de Venta:</td>
+                                    <td class ="registro">${producto.precioVenta}</td>
+                                </tr>
+                                 <tr>
+                                    <td class="fw-bold registro">codigoBarras:</td>
+                                    <td class ="registro">${producto.codigoBarras}</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold registro">Estatus:</td>
+                                    <td  class ="registro">${estatus}</td>
+                                </tr>`;
+        
+        tablaVerProducto.innerHTML=registro;
+                            
+    });
+
 
 }
 
@@ -32,6 +107,27 @@ function editarProducto() {
 function eliminarProducto() {
     console.log("Hola desde eliminar productos");
 
+}
+
+function recuperarId(event) {
+    // Obtener el botón que desencadenó el evento
+    let boton = event.currentTarget; //es una propiedad que se utiliza en eventos de JavaScript para referirse al elemento al que se le ha asignado un event listener.
+
+    // Obtener la fila más cercana (padre) al botón clickeado
+    let fila = boton.closest('tr');
+
+    // Usar querySelector para seleccionar el primer hijo de la fila (primera celda)
+    const primeraCelda = fila.querySelector(':first-child');/*querySelector es un método en JavaScript que se usa para seleccionar un elemento html
+     *  utilizando selectores CSS. Este método busca y devuelve el primer elemento que coincida con el selector CSS especificado.*/
+
+    // Obtener el contenido de texto de la primera celda
+    const idProducto = primeraCelda.textContent;
+
+    // Mostrar en la consola el contenido de la primera celda (idProducto)
+    console.log(idProducto);
+
+    // Devolver el contenido de la primera celda (idProducto)
+    return idProducto;
 }
 
 
@@ -61,8 +157,8 @@ function recuperarDatos() {
         concentracion: v_concentracion,
         unidadesEnvase: v_unidadesEnvase,
         precioCompra: v_precioCompra,
-        foto:"null",
-        rutaFoto:"null",
+        foto: "null",
+        rutaFoto: "null",
         precioVenta: v_precioVenta,
         codigoBarras: v_codigoBarras
     };
@@ -70,83 +166,78 @@ function recuperarDatos() {
 }
 
 
-   function obtenerValorRadio() {
-            // Obtener todos los elementos de radio con el nombre "estatus" y  almacenar en la variable radios. 
-            let  radios = document.getElementsByName('agregarEstatus');
-        /*  La colección de elementos de radio se almacena en un (NodeList) devuelto por el método getElementsByName.
-            Esta variable es de tipo NodeList, que es una colección de nodos DOM. Puedes acceder a los elementos individuales de esta colección utilizando índices, 
-            similar a un arreglo.
-          */
-             
-            
-            // Variable para almacenar el valor seleccionado
-            let valorSeleccionado = null;
-
-            // Iterar sobre los radios
-            for (var i = 0; i < radios.length; i++) {
-                if (radios[i].checked) {
-                    // Si el radio está marcado, almacenar el valor y salir del bucle
-                    valorSeleccionado = radios[i].value;
-                    break;
-                }
-            }
-            console.log(valorSeleccionado);
-            return valorSeleccionado;
-   }
 
 // Esta es una variable bandera que nos indica si la alerta ya se mostro, ya que se tardan en mostrar los registros cuando se inicia la pagina, 
 // pero despues no, por eso no siempre se muestrara la alerta
 let alertaMostradaProducto = false;
 
- function mostrarRegistrosProductos() {
+function mostrarRegistrosProductos() {
 
     if (!alertaMostradaProducto) {
-   Swal.fire({
-    title: 'Cargando Registros',
-    html: 'Un momento por favor',
-    timer: 2800,
-    timerProgressBar: true,
-    allowOutsideClick: false, 
-    didOpen: () => {
-        Swal.showLoading();
-        const b = Swal.getHtmlContainer().querySelector('b');
-        timerInterval = setInterval(() => {
-        }, 100);
-    },
-    willClose: () => {
-        clearInterval(timerInterval);
-    }
-});
+        Swal.fire({
+            title: 'Cargando Registros',
+            html: 'Un momento por favor',
+            timer: 2800,
+            timerProgressBar: true,
+            allowOutsideClick: true,
+            didOpen: () => {
+                Swal.showLoading();
+                const b = Swal.getHtmlContainer().querySelector('b');
+                timerInterval = setInterval(() => {
+                }, 100);
+            },
+            willClose: () => {
+                clearInterval(timerInterval);
+            }
+        });
 
         // Marcamos la alerta como mostrada 
         alertaMostradaProducto = true;
     }
-  
+
     // Resto del código para obtener los registros y generar la tabla
     let url = 'http://localhost:8080/sicefa/api/producto/registros';
     console.log("Haciendo peticion al servidor");
     fetch(url)
-        .then(function(respuesta) {
-            console.log("Estado de la respuesta del servicio obtenerRegistros:", respuesta.status);
-            return respuesta.json();
-        })
-        .then(function(cuerpo) {
-            console.log(cuerpo);
-            generarTabla (cuerpo);
-        })
-        .catch(error => {
-            console.log("Error al obtener datos " + error);
-        });
+            .then(function (respuesta) {
+                console.log("Estado de la respuesta del servicio obtenerRegistros:", respuesta.status);
+                return respuesta.json();
+            })
+            .then(function (cuerpo) {
+                console.log(cuerpo);
+                generarTabla(cuerpo);
+            })
+            .catch(error => {
+                console.log("Error al obtener datos " + error);
+            });
 }
 
 
- function generarTabla(arreglo) {
+function obtenerProductoPorId(idProducto) {
+    let url = 'http://localhost:8080/sicefa/api/producto/obtenerProductoPorId?idProducto=' + idProducto;
+    console.log("Haciendo petición al servidor");
+
+    // Realización de la solicitud al servidor utilizando fetch y devolución de una promesa
+    return fetch(url)
+            .then(function (respuesta) {
+                console.log("Estado de la respuesta del servicio ObtenerProductoPorId:", respuesta.status);
+                return respuesta.json();  /* Devuelve una promesa que contiene los datos del producto en formato JSON. 
+                 * Debe manejarse al usar esta función para acceder a los datos del producto.*/
+            })
+            .catch(error => {
+                console.log("Error al obtener datos " + error);
+            });
+}
+
+
+
+function generarTabla(arreglo) {
     let tablaProductosBody = document.getElementById('registrosProductos');
     let html = ''; // Crea una cadena HTML
-    
+
     console.log("Generando tabla");
     arreglo.forEach(function (producto) {
-        let estado = '';
+        let estatus = '';
 
         if (producto.estatus === 1) {
             estatus = 'Activo';
@@ -172,47 +263,47 @@ let alertaMostradaProducto = false;
 function opcionesSolicitudHTTP() {
 
     let producto = recuperarDatos();
-  
+
 // Configurar las opciones para una solicitud HTTP
     const requestOptions = {
         method: 'POST', // Utilizar el método POST para enviar datos al servidor
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}, // Establecer el tipo de contenido como datos de formulario
-       body: new URLSearchParams({ Producto: JSON.stringify(producto) }) // Enviar la cadena de consulta como el cuerpo de la solicitud
+        body: new URLSearchParams({Producto: JSON.stringify(producto)}) // Enviar la cadena de consulta como el cuerpo de la solicitud
     };
 
     return requestOptions;
 }
 
 function consumirServicioRegistrar() {
-    
+
 
     const requestOptions = opcionesSolicitudHTTP();
 
     let url = 'http://localhost:8080/sicefa/api/producto/insertarProducto';
 
-fetch(url, requestOptions) //    // La función fetch siempre nos devuelve una promesa que hay que manejar
+    fetch(url, requestOptions) //    // La función fetch siempre nos devuelve una promesa que hay que manejar
 
-    .then(  function (respuesta) {    // Aquí, obtenemos  la promesa devuelta por la funcion fetch  y la almacenamos en la variable "respuesta" que contiene información sobre la respuesta del servidor
-     
-     /*
-      Una respuesta consta de tres partes clave:
-        
-        Línea de estado (Status Line): Esto incluye el código de estado HTTP (como 200 OK, 404 Not Found, 500 Internal Server Error) 
-        Encabezados de respuesta (Response Headers): Son metadatos que proporcionan información sobre la respuesta, como el tipo de contenido, fecha de respuesta, etc
-        Cuerpo de la respuesta (Response Body): Esta es la parte de la respuesta que contiene los datos reales que el servidor envía al cliente o proporciona como respuesta a la solicitud. Puede ser HTML, XML, JSON etc.
-        
-      */
+            .then(function (respuesta) {    // Aquí, obtenemos  la promesa devuelta por la funcion fetch  y la almacenamos en la variable "respuesta" que contiene información sobre la respuesta del servidor
+
+                /*
+                 Una respuesta consta de tres partes clave:
+                 
+                 Línea de estado (Status Line): Esto incluye el código de estado HTTP (como 200 OK, 404 Not Found, 500 Internal Server Error) 
+                 Encabezados de respuesta (Response Headers): Son metadatos que proporcionan información sobre la respuesta, como el tipo de contenido, fecha de respuesta, etc
+                 Cuerpo de la respuesta (Response Body): Esta es la parte de la respuesta que contiene los datos reales que el servidor envía al cliente o proporciona como respuesta a la solicitud. Puede ser HTML, XML, JSON etc.
+                 
+                 */
                 console.log("Estado de la respuesta del servicio insertarRegistro:", respuesta.status); // Ejemplo: 201
 
 
                 //Borrar para entender mejor el funcionamiento de fetch
-                if (respuesta.status===201 ) {
+                if (respuesta.status === 201) {
                     Swal.fire({
                         title: 'Guardando registro',
                         html: 'No cierre la venta porfavor',
                         timer: 1200,
                         timerProgressBar: true,
-                         allowOutsideClick: false, // Evita que la alerta se cierre al hacer clic fuera de ella
+                        allowOutsideClick: false, // Evita que la alerta se cierre al hacer clic fuera de ella
                         didOpen: () => {
                             Swal.showLoading();
                             const b = Swal.getHtmlContainer().querySelector('b');
@@ -233,91 +324,115 @@ fetch(url, requestOptions) //    // La función fetch siempre nos devuelve una p
                                 icon: 'success',
                                 title: 'Registro agregado correctamente',
                                 showConfirmButton: false,
-                                    allowOutsideClick: false, 
+                                allowOutsideClick: false,
                                 timer: 1500
                             });
-                            
+
                             mostrarRegistrosProductos();   //Despues de mostrar el mensaje de que se inserto correctamente el registro, volvemos a llamar a la funcion
                             // para cargar el nuevo registro sin necesidad de recargar la pagina
                         }
                     });
-                    
+
                 } else {
-                    
+
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
                         text: 'Algo salió mal! Intentalo más tarde',
-                            allowOutsideClick: false
+                        allowOutsideClick: false
                     });
                 }
 
-        return respuesta.json(); //  Accedemos al cuerpo de la respuesta como JSON y devolvemos la promesa 
-    })
-    .then(function(data) {     // Aquí obtenemos la promesa devuelta por respuesta.json() y la almacenamos en la variable data
+                return respuesta.json(); //  Accedemos al cuerpo de la respuesta como JSON y devolvemos la promesa 
+            })
+            .then(function (data) {     // Aquí obtenemos la promesa devuelta por respuesta.json() y la almacenamos en la variable data
 
-        // Aquí, data contendrá el cuerpo de la respuesta  como JSON
-        console.log(data);
-        
-    }
+                // Aquí, data contendrá el cuerpo de la respuesta  como JSON
+                console.log(data);
+            }
             );
-    
-    
-};
+
+
+}
+;
 
 function agregarProducto() {
-   consumirServicioRegistrar();
-   limpiarFormulario();
+    consumirServicioRegistrar();
+    limpiarFormulario();
 }
 
 
 
 
 
- function recargarPagina() {
+function recargarPagina() {
     location.reload(true); // El parámetro 'true' fuerza la recarga completa, evitando la caché.
-  }
+}
 
 function limpiarFormulario() {
-    document.getElementById('agregarNombre').value= '';
-    document.getElementById('agregarNombreGenerico').value= '';
-    document.getElementById('agregarFormaFarmaceutica').value= '';
-    document.getElementById('agregarUnidadMedida').value= '';
-    document.getElementById('agregarPresentacion').value= '';
-    document.getElementById('agregarIndicacion').value= '';
-    document.getElementById('agregarContraIndicaciones').value= '';
-    document.getElementById('agregarConcentracion').value= '';
-    document.getElementById('agregarUnidadesEnvase').value= '';
-    document.getElementById('agregarPrecioCompra').value= '';
-    document.getElementById('agregarPrecioVenta').value= '';
-    document.getElementById('agregarCodigoBarras').value= '';
+    document.getElementById('agregarNombre').value = '';
+    document.getElementById('agregarNombreGenerico').value = '';
+    document.getElementById('agregarFormaFarmaceutica').value = '';
+    document.getElementById('agregarUnidadMedida').value = '';
+    document.getElementById('agregarPresentacion').value = '';
+    document.getElementById('agregarIndicacion').value = '';
+    document.getElementById('agregarContraIndicaciones').value = '';
+    document.getElementById('agregarConcentracion').value = '';
+    document.getElementById('agregarUnidadesEnvase').value = '';
+    document.getElementById('agregarPrecioCompra').value = '';
+    document.getElementById('agregarPrecioVenta').value = '';
+    document.getElementById('agregarCodigoBarras').value = '';
 }
 
-function switchEstatus(){
-    
-const switchEstatus= document.getElementById('flexSwitchCheckChecked');
+function switchEstatus() {
 
- if (switchEstatus.checked) {
+    const switchEstatus = document.getElementById('flexSwitchCheckChecked');
+
+    if (switchEstatus.checked) {
         console.log('Registros activos');
     } else {
         console.log('Registros Inactivos');
     }
-    
+
 }
 
 
-function cargarBotones(){
-    
-   let botones =     `<div class="d-flex justify-content-center flex-wrap align-content-center">
+function obtenerValorRadio() {
+    // Obtener todos los elementos de radio con el nombre "estatus" y  almacenar en la variable radios. 
+    let  radios = document.getElementsByName('agregarEstatus');
+    /*  La colección de elementos de radio se almacena en un (NodeList) devuelto por el método getElementsByName.
+     Esta variable es de tipo NodeList, que es una colección de nodos DOM. Puedes acceder a los elementos individuales de esta colección utilizando índices, 
+     similar a un arreglo.
+     */
+
+
+    // Variable para almacenar el valor seleccionado
+    let valorSeleccionado = null;
+
+    // Iterar sobre los radios
+    for (var i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+            // Si el radio está marcado, almacenar el valor y salir del bucle
+            valorSeleccionado = radios[i].value;
+            break;
+        }
+    }
+    console.log(valorSeleccionado);
+    return valorSeleccionado;
+}
+
+function cargarBotones() {
+
+    let botones = `<div class="d-flex justify-content-center flex-wrap align-content-center">
                                         <!-- Button trigger modal -->
-                                        <button class="btn btn-icon btn-lg" onclick="verProducto()"
+                                        <button class="btn btn-icon btn-lg" onclick="verProducto(event)"
                                                 data-bs-toggle="modal" data-bs-target="#verProducto"><i
                                                 class="bi bi-eye"></i></button>
 
                                         <!-- Modal -->
                                         <div class="modal fade" id="verProducto" tabindex="-1"
                                              aria-labelledby="tituloProductos" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-scrollable">
+                                            <div class="modal-dialog  modal-lg modal-dialog-scrollable">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h1 class="modal-title fs-5 fw-bold" id="tituloProductos">Detalles
@@ -327,19 +442,13 @@ function cargarBotones(){
                                                     </div>
                                                     <div class="modal-body p-lg-4">
 
-                                                        <table class="table table-borderless   tablaRegistros">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td class="fw-bold" >Nombre:</td>
-                                                                    <td class=" registroVerProducto"></td>
-                                                                </tr>
-                                                                  <tr>
-                                                                    <td class="fw-bold">Nombre Generico:</td>
-                                                                    <td class=" registroVerProducto"></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                            <table class="table table-borderless tablaRegistros">
+                                            <tbody  id="registroVerProducto">
+                                      
+                                             </tbody>
+                                             </table>
+
+                                                        </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                                 data-bs-dismiss="modal">Cerrar</button>
@@ -355,7 +464,7 @@ function cargarBotones(){
 
                                             <div class="modal fade" id="EditarProducto" tabindex="-1" aria-labelledby="tituloProductos"
                                                  aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-scrollable">
+                                                <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h1 class="modal-title fs-5 fw-bold" id="tituloProductos">Editar Producto</h1>
@@ -363,71 +472,95 @@ function cargarBotones(){
                                                                     aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body fondoModal p-lg-4">
-                                                            <div class="mb-3">
-                                                                <label for="nombre" class="form-label">Nombre</label>
-                                                                <input type="text" class="form-control" id="nombre">
-                                                            </div>
+                                                                 <div class="container">
+                                                        <div class="row">
+                                                            <!-- Primera Columna -->
+                                                            <div  class= "col-6" >  
 
-                                                            <div class="mb-3">
-                                                                <label for="nombreGenerico" class="form-label">Nombre genérico</label>
-                                                                <input type="text" class="form-control" id="nombreGenerico">
-                                                            </div>
+                                                                <div class="mb-3">
+                                                                    <label for="agregarNombre" class="form-label">Nombre</label>
+                                                                    <input type="text" class="form-control" id="agregarNombre"
+                                                                           placeholder="Ejemplo: Paracetamol">
+                                                                </div>
 
-                                                            <div class="mb-3">
-                                                                <label for="formaFarmaceutica" class="form-label">Forma farmacéutica</label>
-                                                                <input type="text" class="form-control" id="formaFarmaceutica">
-                                                            </div>
+                                                                <div class="mb-3">
+                                                                    <label for="agregarFormaFarmaceutica" class="form-label">Forma farmacéutica</label>
+                                                                    <input type="text" class="form-control" id="agregarFormaFarmaceutica"
+                                                                           placeholder="Ejemplo: Tableta">
+                                                                </div>
 
-                                                            <div class="mb-3">
-                                                                <label for="unidadMedida" class="form-label">Unidad de medida</label>
-                                                                <input type="text" class="form-control" id="unidadMedida">
-                                                            </div>
+                                                                <div class="mb-3">
+                                                                    <label for="agregarPresentacion" class="form-label">Presentación</label>
+                                                                    <input type="text" class="form-control" id="agregarPresentacion"
+                                                                           placeholder="Ejemplo: Caja de 20 tabletas">
+                                                                </div>
 
-                                                            <div class="mb-3">
-                                                                <label for="presentacion" class="form-label">Presentación</label>
-                                                                <input type="text" class="form-control" id="presentacion">
-                                                            </div>
+                                                                <div class="mb-3">
+                                                                    <label for="agregarContraIndicaciones" class="form-label">Contraindicaciones</label>
+                                                                    <input type="text" class="form-control" id="agregarContraIndicaciones"
+                                                                           placeholder="Ejemplo: Para mayores de 3 años">
+                                                                </div>
 
-                                                            <div class="mb-3">
-                                                                <label for="indicacion" class="form-label">Principal indicación</label>
-                                                                <input type="text" class="form-control" id="indicacion">
-                                                            </div>
+                                                                <div class="mb-3">
+                                                                    <label for="agregarUnidadesEnvase" class="form-label">Unidades en envase</label>
+                                                                    <input type="number" class="form-control" id="agregarUnidadesEnvase"
+                                                                           placeholder="Ejemplo: 30">
+                                                                </div> 
 
-                                                            <div class="mb-3">
-                                                                <label for="contraIndicaciones" class="form-label">Contraindicaciones</label>
-                                                                <input type="text" class="form-control" id="contraIndicaciones">
-                                                            </div>
+                                                                <div class="mb-3">
+                                                                    <label for="agregarPrecioVenta" class="form-label">Precio Venta</label>
+                                                                    <input type="number" class="form-control" id="agregarPrecioVenta"
+                                                                           placeholder="Ejemplo: 5.99">
+                                                                </div>
 
-                                                            <div class="mb-3">
-                                                                <label for="concentracion" class="form-label">Concentración</label>
-                                                                <input type="text" class="form-control" id="concentracion">
-                                                            </div>
+                                                                <div class="mb-3">
+                                                                    <label for="agregarCodigoBarras" class="form-label">Código de barras</label>
+                                                                    <input type="text" class="form-control" id="agregarCodigoBarras"
+                                                                           placeholder="Ejemplo: 7508203003178">
+                                                                </div>
+                                                            </div> 
 
-                                                            <div class="mb-3">
-                                                                <label for="unidadesEnvase" class="form-label">Unidades en envase</label>
-                                                                <input type="number" class="form-control" id="unidadesEnvase">
-                                                            </div>
+                                                            <!-- Segunda Columna -->
+                                                            <div  class= "col-6" > 
 
-                                                            <div class="mb-3">
-                                                                <label for="precioCompra" class="form-label">Precio Compra</label>
-                                                                <input type="number" class="form-control" id="precioCompra">
-                                                            </div>
+                                                                <div class="mb-3">
+                                                                    <label for="agregarNombreGenerico" class="form-label">Nombre genérico</label>
+                                                                    <input type="text" class="form-control" id="agregarNombreGenerico"
+                                                                           placeholder="Ejemplo: Acetaminofén">
+                                                                </div>
 
+                                                                <div class="mb-3">
+                                                                    <label for="agregarUnidadMedida" class="form-label">Unidad de medida</label>
+                                                                    <input type="text" class="form-control" id="agregarUnidadMedida"
+                                                                           placeholder="Ejemplo: Miligramos">
+                                                                </div>
 
-                                                            <div class="mb-3">
-                                                                <label for="precioCompra" class="form-label">Precio Venta</label>
-                                                                <input type="number" class="form-control" id="precioCompra">
-                                                            </div>
+                                                                <div class="mb-3">
+                                                                    <label for="agregarIndicacion" class="form-label">Principal indicación</label>
+                                                                    <input type="text" class="form-control" id="agregarIndicacion"
+                                                                           placeholder="Ejemplo: Alivio del dolor">
+                                                                </div>
 
-                                                            <div class="mb-3">
-                                                                <label for="formFile" class="form-label">Foto</label>
-                                                                <input class="form-control" id="formFileSm" type="file">
-                                                            </div>
+                                                                <div class="mb-3">
+                                                                    <label for="agregarConcentracion" class="form-label">Concentración</label>
+                                                                    <input type="text" class="form-control" id="agregarConcentracion"
+                                                                           placeholder="Ejemplo: 500 mg">
+                                                                </div>
 
-                                                            <div class="mb-3">
-                                                                <label for="codigoBarras" class="form-label">Código de barras</label>
-                                                                <input type="text" class="form-control" id="codigoBarras">
-                                                            </div>
+                                                                <div class="mb-3">
+                                                                    <label for="agregarPrecioCompra" class="form-label">Precio Compra</label>
+                                                                    <input type="number" class="form-control" id="agregarPrecioCompra"
+                                                                           placeholder="Ejemplo: 2.99">
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <label for="agregarFoto" class="form-label">Foto</label>
+                                                                    <input class="form-control" id="agregarFoto" type="file">
+                                                                </div>
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
@@ -441,7 +574,7 @@ function cargarBotones(){
                                         </div>
 
                                         <button class="btn btn-icon btn-lg"><i class="bi bi bi-trash"></i></button>
-                                    </div>  ` ;
+                                    </div>  `;
     return botones;
 }
 

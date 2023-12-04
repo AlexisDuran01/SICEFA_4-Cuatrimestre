@@ -1,159 +1,172 @@
-        <div class="container"  style="margin-bottom: 200px ">
+<div class="container"  style="margin-bottom: 200px ">
 
-            <div class="row justify-content-center mt-4">
-                <div class="col-md-12">
-                    <p class="h2 fw-bold text-center">Gestión de Productos</p>
-                </div>
-            </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-12">
+            <p class="h2 fw-bold text-center">Gestión de Productos</p>
+        </div>
+    </div>
 
-            <div class="row mt-4">
+    <div class="row mt-4">
 
-                <div class="col-12 d-flex justify-content-between">
+        <div class="col-12 d-flex justify-content-between">
 
-                    <div>
-                        <!-- Button trigger modal -->
-                        <button class="estiloBotones" data-bs-toggle="modal"
-                                data-bs-target="#registroProductos">
-                            <i class="bi bi-plus-lg quitarCursiva" onclick="agregarProductoFocus()"> Agregar</i>
-                        </button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="registroProductos" tabindex="-1" aria-labelledby="tituloAgregarProducto"
-                             aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-scrollable">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5 fw-bold" id="tituloAgregarProducto">Registro Productos</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body fondoModal p-lg-4">
-                                        <div class="mb-3">
-                                            <label for="agregarNombre" class="form-label">Nombre</label>
-                                            <input type="text" class="form-control" id="agregarNombre"
-                                                   placeholder="Ejemplo: Paracetamol">
-                                        </div>
+            <div>
+                <!-- Button trigger modal -->
+                <button class="estiloBotones" data-bs-toggle="modal"
+                        data-bs-target="#registroProductos">
+                    <i class="bi bi-plus-lg quitarCursiva" onclick="agregarProductoFocus()"> Agregar</i>
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="registroProductos" tabindex="-1" aria-labelledby="tituloAgregarProducto"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5 fw-bold" id="tituloAgregarProducto">Registro Productos</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body fondoModal p-lg-4">
 
-                                        <div class="mb-3">
-                                            <label for="agregarNombreGenerico" class="form-label">Nombre genérico</label>
-                                            <input type="text" class="form-control" id="agregarNombreGenerico"
-                                                   placeholder="Ejemplo: Acetaminofén">
-                                        </div>
+                                <div class="container">
+                                    <div class="row">
+                                        <!-- Primera Columna -->
+                                        <div  class= "col-6" >  
 
-                                        <div class="mb-3">
-                                            <label for="agregarFormaFarmaceutica" class="form-label">Forma farmacéutica</label>
-                                            <input type="text" class="form-control" id="agregarFormaFarmaceutica"
-                                                   placeholder="Ejemplo: Tableta">
-                                        </div>
+                                            <div class="mb-3">
+                                                <label for="agregarNombre" class="form-label">Nombre</label>
+                                                <input type="text" class="form-control" id="agregarNombre"
+                                                       placeholder="Ejemplo: Paracetamol">
+                                            </div>
 
-                                        <div class="mb-3">
-                                            <label for="agregarUnidadMedida" class="form-label">Unidad de medida</label>
-                                            <input type="text" class="form-control" id="agregarUnidadMedida"
-                                                   placeholder="Ejemplo: Miligramos">
-                                        </div>
+                                            <div class="mb-3">
+                                                <label for="agregarFormaFarmaceutica" class="form-label">Forma farmacéutica</label>
+                                                <input type="text" class="form-control" id="agregarFormaFarmaceutica"
+                                                       placeholder="Ejemplo: Tableta">
+                                            </div>
 
-                                        <div class="mb-3">
-                                            <label for="agregarPresentacion" class="form-label">Presentación</label>
-                                            <input type="text" class="form-control" id="agregarPresentacion"
-                                                   placeholder="Ejemplo: Caja de 20 tabletas">
-                                        </div>
+                                            <div class="mb-3">
+                                                <label for="agregarPresentacion" class="form-label">Presentación</label>
+                                                <input type="text" class="form-control" id="agregarPresentacion"
+                                                       placeholder="Ejemplo: Caja de 20 tabletas">
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="agregarContraIndicaciones" class="form-label">Contraindicaciones</label>
+                                                <input type="text" class="form-control" id="agregarContraIndicaciones"
+                                                       placeholder="Ejemplo: Para mayores de 3 años">
+                                            </div>
 
-                                        <div class="mb-3">
-                                            <label for="agregarIndicacion" class="form-label">Principal indicación</label>
-                                            <input type="text" class="form-control" id="agregarIndicacion"
-                                                   placeholder="Ejemplo: Alivio del dolor">
-                                        </div>
+                                            <div class="mb-3">
+                                                <label for="agregarUnidadesEnvase" class="form-label">Unidades en envase</label>
+                                                <input type="number" class="form-control" id="agregarUnidadesEnvase"
+                                                       placeholder="Ejemplo: 30">
+                                            </div> 
 
-                                        <div class="mb-3">
-                                            <label for="agregarContraIndicaciones" class="form-label">Contraindicaciones</label>
-                                            <input type="text" class="form-control" id="agregarContraIndicaciones"
-                                                   placeholder="Ejemplo: Para mayores de 3 años">
-                                        </div>
+                                            <div class="mb-3">
+                                                <label for="agregarPrecioVenta" class="form-label">Precio Venta</label>
+                                                <input type="number" class="form-control" id="agregarPrecioVenta"
+                                                       placeholder="Ejemplo: 5.99">
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="agregarCodigoBarras" class="form-label">Código de barras</label>
+                                                <input type="text" class="form-control" id="agregarCodigoBarras"
+                                                       placeholder="Ejemplo: 7508203003178">
+                                            </div>
+                                        </div> 
 
-                                        <div class="mb-3">
-                                            <label for="agregarConcentracion" class="form-label">Concentración</label>
-                                            <input type="text" class="form-control" id="agregarConcentracion"
-                                                   placeholder="Ejemplo: 500 mg">
-                                        </div>
+                                        <!-- Segunda Columna -->
+                                        <div  class= "col-6" > 
 
-                                        <div class="mb-3">
-                                            <label for="agregarUnidadesEnvase" class="form-label">Unidades en envase</label>
-                                            <input type="number" class="form-control" id="agregarUnidadesEnvase"
-                                                   placeholder="Ejemplo: 30">
-                                        </div>
+                                            <div class="mb-3">
+                                                <label for="agregarNombreGenerico" class="form-label">Nombre genérico</label>
+                                                <input type="text" class="form-control" id="agregarNombreGenerico"
+                                                       placeholder="Ejemplo: Acetaminofén">
+                                            </div>
 
-                                        <div class="mb-3">
-                                            <label for="agregarPrecioCompra" class="form-label">Precio Compra</label>
-                                            <input type="number" class="form-control" id="agregarPrecioCompra"
-                                                   placeholder="Ejemplo: 2.99">
-                                        </div>
+                                            <div class="mb-3">
+                                                <label for="agregarUnidadMedida" class="form-label">Unidad de medida</label>
+                                                <input type="text" class="form-control" id="agregarUnidadMedida"
+                                                       placeholder="Ejemplo: Miligramos">
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="agregarIndicacion" class="form-label">Principal indicación</label>
+                                                <input type="text" class="form-control" id="agregarIndicacion"
+                                                       placeholder="Ejemplo: Alivio del dolor">
+                                            </div>
 
+                                            <div class="mb-3">
+                                                <label for="agregarConcentracion" class="form-label">Concentración</label>
+                                                <input type="text" class="form-control" id="agregarConcentracion"
+                                                       placeholder="Ejemplo: 500 mg">
+                                            </div>
 
-                                        <div class="mb-3">
-                                            <label for="agregarPrecioVenta" class="form-label">Precio Venta</label>
-                                            <input type="number" class="form-control" id="agregarPrecioVenta"
-                                                   placeholder="Ejemplo: 5.99">
-                                        </div>
+                                            <div class="mb-3">
+                                                <label for="agregarPrecioCompra" class="form-label">Precio Compra</label>
+                                                <input type="number" class="form-control" id="agregarPrecioCompra"
+                                                       placeholder="Ejemplo: 2.99">
+                                            </div>
 
-                                        <div class="mb-3">
-                                            <label for="agregarFoto" class="form-label">Foto</label>
-                                            <input class="form-control" id="agregarFoto" type="file">
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="agregarCodigoBarras" class="form-label">Código de barras</label>
-                                            <input type="text" class="form-control" id="agregarCodigoBarras"
-                                                   placeholder="Ejemplo: 7508203003178">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Cerrar</button>
-                                        <button id="botonGuardarModal" type="submit" class="btn btn-primary" onclick="agregarProducto()" data-bs-dismiss="modal">Guardar</button>
+                                            <div class="mb-3">
+                                                <label for="agregarFoto" class="form-label">Foto</label>
+                                                <input class="form-control" id="agregarFoto" type="file">
+                                            </div>
+                                        </div> 
                                     </div>
                                 </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                                <button id="botonGuardarModal" type="submit" class="btn btn-primary" onclick="agregarProducto()" data-bs-dismiss="modal">Guardar</button>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <div class="d-flex g-1 gap-md-4 gap-3 ">
-                        
-                        <div class="contenedorBusqueda">
-                            <input id="buscadorProductos" class="estiloBotones buscador" type="search" placeholder="Buscar Registro">
-                            <i class="bi bi-search inputIcon ms-1"></i>
-                        </div>
+            <div class="d-flex g-1 gap-md-4 gap-3 ">
 
-                        
-                        <div class="form-check form-switch mt-2 " >
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                            <label class="form-check-label" for="flexSwitchCheckChecked" id="txtEstatus">Activos</label>
-                        </div>
-
-                    </div>
+                <div class="contenedorBusqueda">
+                    <input id="buscadorProductos" class="estiloBotones buscador" type="search" placeholder="Buscar Registro">
+                    <i class="bi bi-search inputIcon ms-1"></i>
+                </div>
 
 
+                <div class="form-check form-switch mt-2 " >
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                    <label class="form-check-label" for="flexSwitchCheckChecked" id="txtEstatus">Activos</label>
                 </div>
 
             </div>
 
-
-            <div class="row mt-2">
-                <div class="col-12  table-responsive-SM  table-responsive-lg table-responsive-md mt-4">
-                    <table class="table table-hover tablaRegistros">
-                        <thead>
-                            <tr>
-                                <th scope="col">Id</th>
-                                <th scope="col">Nombre Generico</th>
-                                <th scope="col">Precio Venta</th>
-                                <th scope="col">Forma Farmaceutica</th>
-                                <th scope="col">Estatus</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="registrosProductos">
-                            <!-- Se insertan los datos automaticamente -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
 
         </div>
+
+    </div>
+
+
+    <div class="row mt-2">
+        <div class="col-12  table-responsive-SM  table-responsive-lg table-responsive-md mt-4">
+            <table class="table table-hover tablaRegistros">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre Generico</th>
+                        <th scope="col">Precio Venta</th>
+                        <th scope="col">Forma Farmaceutica</th>
+                        <th scope="col">Estatus</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="registrosProductos">
+                    <!-- Se insertan los datos automaticamente -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
