@@ -270,6 +270,75 @@ BEGIN
 END;
 $$ DELIMITER ;
 
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS sp_updateCliente;
+CREATE PROCEDURE sp_updateCliente(
+    IN var_idCliente INT,
+    IN var_nombre VARCHAR(45),
+    IN var_apellidoPaterno VARCHAR(45),
+    IN var_apellidoMaterno VARCHAR(45),
+    IN var_genero VARCHAR(2),
+    IN var_fechaNacimiento DATE,
+    IN var_rfc VARCHAR(15),
+    IN var_curp VARCHAR(19),
+    IN var_domicilio VARCHAR(129),
+    IN var_codigoPostal VARCHAR(11),
+    IN var_ciudad VARCHAR(46),
+    IN var_estado VARCHAR(40),
+    IN var_telefono VARCHAR(20),
+    IN var_foto LONGTEXT,
+    IN var_email VARCHAR(45)
+)
+BEGIN
+    -- Actualizamos los datos de la persona:
+    UPDATE persona
+    SET nombre = var_nombre,
+        apellidoPaterno = var_apellidoPaterno,
+        apellidoMaterno = var_apellidoMaterno,
+        genero = var_genero,
+        fechaNacimiento = var_fechaNacimiento,
+        rfc = var_rfc,
+        curp = var_curp,
+        domicilio = var_domicilio,
+        codigoPostal = var_codigoPostal,
+        ciudad = var_ciudad,
+        estado = var_estado,
+        telefono = var_telefono,
+        foto = var_foto
+    WHERE idPersona = (
+        SELECT idPersona
+        FROM cliente
+        WHERE idCliente = var_idCliente
+    );
+
+    -- Actualizamos los datos del cliente:
+    UPDATE cliente
+    SET email = var_email
+    WHERE idCliente = var_idCliente;
+END $$
+
+DELIMITER ;
+
+CALL sp_updateCliente(
+    1,
+    'Luis',         -- Nuevo valor para el nombre
+    'Garcia',
+    'Ramirez',
+    'H',
+    '2003-02-10',
+    'GARL030210LOS5F',
+    'GARL030210HGTRMSA5',
+    'Colina del fresno, #210. Colinas de Santa Julia',
+    '37530',
+    'León',
+    'Guanajuato',
+    '4771644321',
+    '',
+    'luisrgr81@gmail.com'
+);
+
+
 SELECT * FROM persona;
 SELECT * FROM cliente;
 CALL sp_insertCliente('Luis','Garcia','Ramirez','H','2003-02-10','GARL030210LOS5F','GARL030210HGTRMSA5','Colina del fresno, #210. Colinas de Santa Julia','37530','León','Guanajuato','4771644321','','luisrgr81@gmail.com');
