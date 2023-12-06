@@ -96,7 +96,7 @@ public class ControllerEmpleado {
     //  ~~~~~~~~~~~~~~~~~~~~~~~ METODO DELETE ~~~~~~~~~~~~~~~~~~~~~~~  //
     public Empleado eliminarRegistroEspecifico(int idEmpleado) {
         Empleado registroEspecifico = new Empleado();
-        String query = "{CALL sp_eliminarEmpleado(?)}";
+        String query = "{CALL sp_desactivarEmpleado(?)}";
         try {
             ConexionMysql connMySQL = new ConexionMysql();
             Connection conexion = connMySQL.open();
