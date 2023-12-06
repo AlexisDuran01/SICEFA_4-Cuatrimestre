@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.utl.dsm.Model.Cliente;
 import org.utl.dsm.Model.Persona;
-import org.utl.dsm.Model.Producto;
 import org.utl.dsm.db.ConexionMysql;
 
 public class ControllerCliente {
@@ -50,9 +49,57 @@ public class ControllerCliente {
             return c;
         }
     }
+    
+    // Metodo para obtener un registro unico 
+    
+    public Cliente obtenerRegistroEspecifico(int idCliente){
+        Cliente registroEspecifico = new Cliente();
+    String query = "SELECT * FROM viewClientes WHERE idCliente = ?";    
+    try {
+        ConexionMysql connMySQL = new ConexionMysql();
+        Connection conexion = connMySQL.open();
+        PreparedStatement ejecutorConsulta = conexion.prepareStatement(query);
+        ejecutorConsulta.setInt(1, idCliente);
+
+        ResultSet resultadoConsulta = ejecutorConsulta.executeQuery();
+            System.out.println(resultadoConsulta);
+            
+        while (resultadoConsulta.next()) 
+        {
+            registroEspecifico = fillCliente(resultadoConsulta);
+        }
+        return registroEspecifico;
+    } catch (Exception error) {
+        System.out.println(error.getMessage());
+        return null;
+    }
+    }
+    
+    public Cliente eliminarRegistroEspecifico(int idCliente){
+        Cliente registroEspecifico = new Cliente();
+    String query = "{CALL sp_eliminarCliente(?)}";    
+    try {
+        ConexionMysql connMySQL = new ConexionMysql();
+        Connection conexion = connMySQL.open();
+        PreparedStatement ejecutorConsulta = conexion.prepareStatement(query);
+        ejecutorConsulta.setInt(1, idCliente);
+
+        ResultSet resultadoConsulta = ejecutorConsulta.executeQuery();
+            System.out.println(resultadoConsulta);
+            
+        while (resultadoConsulta.next()) 
+        {
+            registroEspecifico = fillCliente(resultadoConsulta);
+        }
+        return registroEspecifico;
+    } catch (Exception error) {
+        System.out.println(error.getMessage());
+        return null;
+    }
+    }
 
     //  ~~~~~~~~~~~~~~~~~~~~~~~ METODO PARA BUSCAR UN PRODUCTO POR ID ~~~~~~~~~~~~~~~~~~~~~~~  //
-    public Cliente searchClienteId(int idCliente) {
+    public Cliente searchClienteId(int idCliente){
         String query = "SELECT * FROM viewClientes WHERE idCliente = ?";
         try {
             ConexionMysql connMySQL = new ConexionMysql();
@@ -104,7 +151,7 @@ public class ControllerCliente {
             ResultSet rs = pstm.executeQuery();
             List<Cliente> clientes = new ArrayList<>();
             while (rs.next()) {
-                clientes.add(fillProducto(rs));
+                clientes.add(fillCliente(rs));
             }
             pstm.close();
             conn.close();
@@ -118,8 +165,9 @@ public class ControllerCliente {
     }
 
     //  ~~~~~~~~~~~~~~~~~~~~~~~ METODO PARA LLENAR UNA LISTA DE OBJETOS TIPO PRODUCTO ~~~~~~~~~~~~~~~~~~~~~~~  //
-    public Cliente fillProducto(ResultSet rs) throws SQLException {
+    public Cliente fillCliente(ResultSet rs) throws SQLException {
         Cliente c = new Cliente();
+        System.out.println(rs.getString("nombre"));
         String v_nombre = rs.getString("nombre");
         String v_apellidoP = rs.getString("apellidoPaterno");
         String v_apellidoM = rs.getString("apellidoMaterno");
@@ -159,7 +207,7 @@ public class ControllerCliente {
         List<Cliente> clientes = new ArrayList<>(); 
         while (rs.next()) 
         { 
-            clientes.add(fillProducto(rs)); 
+            clientes.add(fillCliente(rs)); 
         } 
         rs.close(); 
         pstmt.close(); 

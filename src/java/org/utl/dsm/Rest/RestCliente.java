@@ -19,7 +19,9 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.List;
 import org.utl.dsm.Controller.ControllerCliente;
+import org.utl.dsm.Controller.ControllerProducto;
 import org.utl.dsm.Model.Cliente;
+import org.utl.dsm.Model.Producto;
 
 @Path("cliente")
 public class RestCliente extends Application {
@@ -82,6 +84,66 @@ public class RestCliente extends Application {
                   """;
         }
         return Response.ok(out).build();
+    }
+    
+    @Path("obtenerClientePorId")
+    @Produces(MediaType.APPLICATION_JSON)   // Para definir el tipo de dato que va a regresar
+    @GET
+    public Response obtenerRegistroEspecifco(@QueryParam("idCliente")@DefaultValue("0") int idCliente) {
+        
+    try {
+        ControllerCliente controlador = new ControllerCliente();
+        Cliente registro = controlador.obtenerRegistroEspecifico(idCliente);
+        
+        Gson gson = new Gson();
+        String salida="";
+
+        
+        if (registro.getIdCliente()==0) {
+            salida="""
+                    {"result":"Cliente no encontrado"}
+                  """;
+        }else{
+            salida= gson.toJson(registro);
+        }
+       
+        return Response.status(Response.Status.OK).entity(salida).build();
+        
+    } catch (Exception e) {
+        // Manejo de la excepción
+        return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+    }
+
+    }
+    
+    @Path("eliminarCliente")
+    @Produces(MediaType.APPLICATION_JSON)   // Para definir el tipo de dato que va a regresar
+    @POST
+    public Response RegistroEspecifco(@FormParam("idCliente")@DefaultValue("0") int idCliente) {
+        
+    try {
+        ControllerCliente controlador = new ControllerCliente();
+        Cliente registro = controlador.obtenerRegistroEspecifico(idCliente);
+        
+        Gson gson = new Gson();
+        String salida="";
+
+        
+        if (registro.getIdCliente()==0) {
+            salida="""
+                    {"result":"Cliente no encontrado"}
+                  """;
+        }else{
+            salida= gson.toJson(registro);
+        }
+       
+        return Response.status(Response.Status.OK).entity(salida).build();
+        
+    } catch (Exception e) {
+        // Manejo de la excepción
+        return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+    }
+
     }
 
     @Path("getAll")
