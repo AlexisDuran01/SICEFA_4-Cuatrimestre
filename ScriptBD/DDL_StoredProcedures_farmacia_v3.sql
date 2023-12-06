@@ -8,7 +8,7 @@
 -- Comments:    Se agregaron procedimientos almacenados
 --              para insertar sucursales y empleados.
 -- -----------------------------------------------------
-USE sicefa;
+-- USE sicefa;
 
 
 -- ----------------------------------------------------------------- Inicio de la seccion Sucursal -----------------------------------------------------------------
@@ -150,7 +150,7 @@ DROP PROCEDURE IF EXISTS sp_updateProducto;
 DELIMITER $$
 CREATE PROCEDURE sp_updateProducto 
 	(
-		IN v_idProducto INT, 
+		IN v_idProducto INT,
 		IN v_nombre VARCHAR(180),
 		IN v_nombreGenerico VARCHAR(200),
 		IN v_formaFarmaceutica VARCHAR(100),
@@ -203,9 +203,24 @@ CREATE PROCEDURE sp_deleteProducto
 	END;
 $$ DELIMITER ;
 
+DROP PROCEDURE IF EXISTS sp_activarProducto;
+DELIMITER $$
+CREATE PROCEDURE sp_activarProducto
+	(
+		IN v_idProducto INT
+	)
+	BEGIN
+		UPDATE producto SET estatus = 1
+		WHERE idProducto = v_idProducto;
+	END;
+$$ DELIMITER ;
+
 
 SELECT COUNT(idProducto) FROM producto;
-SELECT * FROM producto WHERE idProducto = 1800;
+SELECT * FROM producto WHERE estatus=0;
+UPDATE producto
+SET estatus = 1
+WHERE idProducto;
 
 -- ----------------------------------------------------------------- Fin de la seccion producto -----------------------------------------------------------------
 
@@ -480,6 +495,78 @@ SELECT * FROM persona;
 SELECT * FROM usuario;
 SELECT * FROM sucursal;
 
+-- Procedure para actualizar empleado
+DELIMITER $$
+
+CREATE PROCEDURE sp_updateEmpleado(
+    IN var_idEmpleado INT,
+    IN var_nombre VARCHAR(64),
+    IN var_apellidoPaterno VARCHAR(64),
+    IN var_apellidoMaterno VARCHAR(64),
+    IN var_genero VARCHAR(2),
+    IN var_fechaNacimiento VARCHAR(11),
+    IN var_rfc VARCHAR(14),
+    IN var_curp VARCHAR(19),
+    IN var_domicilio VARCHAR(129),
+    IN var_cp VARCHAR(11),
+    IN var_ciudad VARCHAR(46),
+    IN var_estado VARCHAR(40),
+    IN var_telefono VARCHAR(20),
+    IN var_foto LONGTEXT,
+    IN var_puesto VARCHAR(25),   
+    IN var_salarioBruto FLOAT
+)
+BEGIN
+    UPDATE persona
+    SET nombre = var_nombre,
+        apellidoPaterno = var_apellidoPaterno,
+        apellidoMaterno = var_apellidoMaterno,
+        genero = var_genero,
+        fechaNacimiento = STR_TO_DATE(var_fechaNacimiento, '%d/%m/%Y'),
+        rfc = var_rfc,
+        curp = var_curp,
+        domicilio = var_domicilio,
+        codigoPostal = var_cp,
+        ciudad = var_ciudad,
+        estado = var_estado,
+        telefono = var_telefono,
+        foto = var_foto
+    WHERE idPersona = (
+        SELECT idPersona
+        FROM empleado
+        WHERE idEmpleado = var_idEmpleado
+    );
+
+    -- Actualizamos los datos del empleado:
+    UPDATE empleado
+    SET puesto = var_puesto,
+        salarioBruto = var_salarioBruto
+    WHERE idEmpleado = var_idEmpleado;
+END
+$$
+
+DELIMITER ;
+CALL sp_updateEmpleado(1,'Juan','Gomez','Perez','M','15/03/1985','XHGF1234567','CURP123456789','Calle 123','12345','Ciudad A','Estado B','123-456-7890','','Desarrollador',50.00);
+
+-- Procedimiento para eliminar de forma logica
+
+DROP PROCEDURE IF EXISTS sp_desactivarEmpleado;
+DELIMITER $$
+
+CREATE PROCEDURE sp_desactivarEmpleado(
+    IN var_idEmpleado INT
+)
+BEGIN
+    -- Actualizamos el estado del empleado a inactivo:
+    UPDATE empleado
+    SET activo = 0
+    WHERE idEmpleado = var_idEmpleado;
+END
+$$
+
+DELIMITER ;
+
+CALL sp_desactivarEmpleado(2);
 
  /*Vista de las tablas empleado, persona y usuario*/
 
@@ -585,10 +672,68 @@ CREATE VIEW viewSucursal AS
 SELECT idSucursal, nombre, titular, rfc, domicilio, colonia, codigoPostal, ciudad, estado, 
 	   telefono, latitud, longitud, estatus
 FROM sucursal;
-SELECT * FROM viewSucursal;
+SELECT * FROM viewSucursal WHERE idSucursal = 1;
+
+
+-- ~~~~~~~~~~~~ Procedimiento almacenado para modificar una sucursal  ~~~~~~~~~~~~ --
+DROP PROCEDURE IF EXISTS sp_updateSucursal;
+DELIMITER $$
+CREATE PROCEDURE sp_updateSucursal(/* Datos Sucursal */
+									IN  var_idSucursal		INT,			--  1
+                                    IN	var_nombre          VARCHAR(49),    --  2
+                                    IN	var_titular         VARCHAR(49),    --  3
+                                    IN  var_rfc             VARCHAR(15),    --  4                                    
+                                    IN	var_domicilio       VARCHAR(129),   --  5
+                                    IN  var_colonia         VARCHAR(65),    --  6
+                                    IN  var_codigoPostal    VARCHAR(11),    --  7
+                                    IN  var_ciudad          VARCHAR(65),    --  8
+                                    IN  var_estado          VARCHAR(49),    --  9                                    
+                                    IN	var_telefono        VARCHAR(20),    --  10
+                                    IN	var_latitud         VARCHAR(65),    --  11
+                                    IN	var_longitud        VARCHAR(65)     --  12
+                                 )
+    BEGIN
+        UPDATE sucursal SET
+			nombre = var_nombre, 
+            titular = var_titular,
+            rfc = var_rfc, 
+            domicilio = var_domicilio, 
+            colonia = var_colonia, 
+            codigoPostal = var_codigoPostal,
+            ciudad = var_ciudad, 
+            estado = var_estado, 
+            telefono = var_telefono, 
+            latitud = var_latitud, 
+            longitud = var_longitud
+		WHERE idSucursal = var_idSucursal;
+    END
+$$
+DELIMITER ;
+
+-- CALL sp_updateSucursal(14, 'Sucursal San Pedro', 'Medicamos tu vida', 'KGO542GDL2', 'Blvd San Pedro #214', 'San Pedro', '37596', 'Leon', 'Guanajuato', '4778596323', '3.156421235', '-12.25657456');
+SELECT * FROM sucursal;
+
+-- ~~~~~~~~~~~~ Procedimiento almacenado para eliminar logicamente una sucursal  ~~~~~~~~~~~~ --
+
+DROP PROCEDURE IF EXISTS sp_deleteSucursal;
+DELIMITER $$
+CREATE PROCEDURE sp_deleteSucursal
+	(
+		IN v_idSucursal INT
+	)
+	BEGIN 
+		UPDATE sucursal SET estatus = 0
+		WHERE idSucursal = v_idSucursal;
+	END;
+$$ DELIMITER ;
+
+CALL sp_deleteSucursal(5);
+SELECT * FROM sucursal;
 -- ----------------------------------------------------------------- Fin de la seccion sucursal -----------------------------------------------------------------
 
 SELECT * FROM persona;
 SELECT * FROM cliente;
 SELECT * FROM empleado;
 SELECT * FROM sucursal;
+SELECT * FROM usuario;
+UPDATE sucursal SET estatus = 1;

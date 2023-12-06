@@ -17,7 +17,7 @@
 --              inicial de productos.                
 -- -----------------------------------------------------
 
-USE sicefa;
+-- USE sicefa;
 
 /* Agregamos la Sucursal Central */
 INSERT INTO sucursal (idSucursal, nombre, titular, rfc, domicilio, colonia, codigoPostal,

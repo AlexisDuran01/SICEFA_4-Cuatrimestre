@@ -246,3 +246,7 @@ CREATE TABLE detalleCompra
     ON UPDATE CASCADE
 );
 
+Select *from sucursal;
+SELECT * FROM producto WHERE idProducto=1888;
+SELECT * FROM usuario;
+
