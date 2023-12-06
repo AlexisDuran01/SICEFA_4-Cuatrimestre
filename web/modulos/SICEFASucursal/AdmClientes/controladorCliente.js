@@ -206,8 +206,6 @@ function verClienteSeleccionado(event) {
         verCliente.innerHTML = registro;
 
     });
-
-
 }
 
 function eliminarCliente(event){
@@ -257,13 +255,10 @@ function eliminarClienteLogicamente(idCliente) {
                         timer: 1500
                     });
                     mostrarRegistrosCliente();
-                };
-})
-
-    
-    
-
-
+                }
+            });
+        });
+}
 
 
 function generarTablaCliente(arreglo) {
@@ -335,9 +330,9 @@ function mostrarRegistrosCliente() {
 
 }
 
-function cargarBotonesCliente() {
 
-    let botones = `<div class="d-flex justify-content-center flex-wrap align-content-center">
+function cargarBotonesCliente() {
+        let botones = `<div class="d-flex justify-content-center flex-wrap align-content-center">
                                         <!-- Button trigger modal -->
                                         <button class="btn btn-icon btn-lg" onclick="verClienteSeleccionado(event)"
                                                 data-bs-toggle="modal" data-bs-target="#verProducto"><i
@@ -476,3 +471,5 @@ function cargarBotonesCliente() {
                                     </div>  `;
     return botones;
 }
+
+
