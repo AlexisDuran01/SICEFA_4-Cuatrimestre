@@ -13,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import org.utl.dsm.Model.Cliente;
 import org.utl.dsm.Model.Empleado;
 import org.utl.dsm.Model.Persona;
 import org.utl.dsm.Model.Usuario;
@@ -97,7 +96,7 @@ public class ControllerEmpleado {
     //  ~~~~~~~~~~~~~~~~~~~~~~~ METODO DELETE ~~~~~~~~~~~~~~~~~~~~~~~  //
     public Empleado eliminarRegistroEspecifico(int idEmpleado) {
         Empleado registroEspecifico = new Empleado();
-        String query = "{CALL sp_eliminarCliente(?)}";
+        String query = "{CALL sp_eliminarEmpleado(?)}";
         try {
             ConexionMysql connMySQL = new ConexionMysql();
             Connection conexion = connMySQL.open();

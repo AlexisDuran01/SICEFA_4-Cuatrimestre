@@ -75,7 +75,7 @@ public class RestEmpleado extends Application {
     @Path("deleteEmpleado")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response eliminarEmpleado(@FormParam("idEmpleado") int idEmpleado) {
+    public Response eliminarIdEmpleado(@FormParam("idEmpleado") int idEmpleado) {
         String out = null;
         ControllerEmpleado ce = null;
         Gson gson = new Gson();

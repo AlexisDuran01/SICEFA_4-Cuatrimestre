@@ -98,19 +98,8 @@ function agregarEmpleado() {
     );
 }
 
-function eliminarIdEmpleado(idEmpleado) {
-    let url = `http://localhost:8080/sicefa/api/empleado/deleteEmpleado?idEmpleado=` + idEmpleado;
-    console.log("Haciendo petición al servidor");
-    // Realización de la solicitud al servidor utilizando fetch y devolución de una promesa
-    return fetch(url)
-            .then(function (respuesta) {
-                console.log("Estado de la respuesta del servicio eliminarIdEmpleado:", respuesta.status);
-                return respuesta.json();  /* Devuelve una promesa que contiene los datos del producto en formato JSON. 
-                 * Debe manejarse al usar esta función para acceder a los datos del producto.*/
-            })
-            .catch(error => {
-                console.log("Error al obtener datos " + error);
-            });
+function eliminarRegistroEspecifico(){
+    
 }
 
 function recuperarIdEmpleadoSeleccionado(event) {
