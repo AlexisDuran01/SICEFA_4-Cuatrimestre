@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/adria/OneDrive/Documentos/Sicefa-Git/SICEFA-4-Cuatrimestre-/web/modulos/SICEFASucursal/AdmClientes/controladorCliente.js</file>
             <file>file:/C:/Users/adria/OneDrive/Documentos/Sicefa-Git/SICEFA-4-Cuatrimestre-/src/java/org/utl/dsm/Controller/ControllerProducto.java</file>
             <file>file:/C:/Users/adria/OneDrive/Documentos/Sicefa-Git/SICEFA-4-Cuatrimestre-/web/modulos/SICEFASucursal/AdmClientes/vistaCliente.html</file>
@@ -12,6 +13,9 @@
             <file>file:/C:/Users/adria/OneDrive/Documentos/Sicefa-Git/SICEFA-4-Cuatrimestre-/src/java/org/utl/dsm/Model/Persona.java</file>
             <file>file:/C:/Users/adria/OneDrive/Documentos/Sicefa-Git/SICEFA-4-Cuatrimestre-/web/modulos/SICEFACentral/AdmSucursales/controladorSucursal.js</file>
             <file>file:/C:/Users/adria/OneDrive/Documentos/Sicefa-Git/SICEFA-4-Cuatrimestre-/web/modulos/SICEFACentral/AdmProductos/vistaProductos.html</file>
+=======
+
+>>>>>>> e26e367f8585fe6c3811e7215c6f35bbcfabb697
         </group>
     </open-files>
 </project-private>

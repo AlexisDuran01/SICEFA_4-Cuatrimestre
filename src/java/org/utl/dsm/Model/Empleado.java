@@ -14,6 +14,7 @@ public class Empleado
     private String puestoEmpleado;
     private Float salarioBrutoEmpleado;
     private int activoEmpleado;
+    private String email;
     private Persona personaEmpleado;
     private Usuario usuarioEmpleado;
     private Sucursal sucursalEmpleado;
@@ -39,6 +40,8 @@ public class Empleado
         this.personaEmpleado = personaEmpleado;
         this.usuarioEmpleado = usuarioEmpleado;
         this.sucursalEmpleado = sucursalEmpleado;
+        this.email = email;
+        
     }
 
     public Sucursal getSucursalEmpleado() {
@@ -112,5 +115,14 @@ public class Empleado
     public void setUsuarioEmpleado(Usuario usuarioEmpleado) {
         this.usuarioEmpleado = usuarioEmpleado;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
     
 }
