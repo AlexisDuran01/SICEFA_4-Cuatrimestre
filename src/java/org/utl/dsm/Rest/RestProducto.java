@@ -151,28 +151,60 @@ public class RestProducto extends Application
     
     }
     
-    @Path("deleteProducto")
+    @Path("eliminarProducto")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response delete(@FormParam("datosProducto") @DefaultValue("{}") String datosProducto)
+    public Response delete(@FormParam("idProducto")@DefaultValue("0") int idProducto)
     {
+        System.out.println("Producto a eliminar "+idProducto);
         String out;
         ControllerProducto ce = new ControllerProducto();
         Gson gson = new Gson();
         try {
-            Producto producto = gson.fromJson(datosProducto, Producto.class);
-            ce.deleteProducto(producto.getIdProducto());
+            ce.deleteProducto(idProducto);
             out = """
                     {"result":"Producto eliminado exitosamente"}
                   """;
+                return Response.status(Response.Status.OK).entity(out).build();   
         } catch (Exception ex) {
             ex.printStackTrace();
             out = """
                     {"result":"Error en el servidor, favor de intentarlo de nuevo mas tarde"}
                   """;
+            
+              return Response.status(Response.Status.BAD_REQUEST).entity(ex.getMessage()).build();
         }
-        return Response.ok(out).build();
+     
     }
+    
+    
+   @Path("activarProducto")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response activar(@FormParam("idProducto")@DefaultValue("0") int idProducto)
+    {
+        System.out.println("Producto a activar "+idProducto);
+        String out;
+        ControllerProducto ce = new ControllerProducto();
+        Gson gson = new Gson();
+        try {
+            ce.activarProducto(idProducto);
+            out = """
+                    {"result":"Producto activado exitosamente"}
+                  """;
+                return Response.status(Response.Status.OK).entity(out).build();   
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            out = """
+                    {"result":"Error en el servidor, favor de intentarlo de nuevo mas tarde"}
+                  """;
+            
+              return Response.status(Response.Status.BAD_REQUEST).entity(ex.getMessage()).build();
+        }
+     
+    }
+    
+    
     
     @Path("searchProducto")
     @GET

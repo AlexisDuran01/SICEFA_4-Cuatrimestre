@@ -1,4 +1,4 @@
-function agregarProductoFocus() {
+ function agregarProductoFocus() {
 
     let registroProductos = document.getElementById('registroProductos');
     let primerCampo = document.getElementById('txtNombreSucursal');

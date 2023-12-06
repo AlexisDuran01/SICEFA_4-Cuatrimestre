@@ -203,9 +203,24 @@ CREATE PROCEDURE sp_deleteProducto
 	END;
 $$ DELIMITER ;
 
+DROP PROCEDURE IF EXISTS sp_activarProducto;
+DELIMITER $$
+CREATE PROCEDURE sp_activarProducto
+	(
+		IN v_idProducto INT
+	)
+	BEGIN
+		UPDATE producto SET estatus = 1
+		WHERE idProducto = v_idProducto;
+	END;
+$$ DELIMITER ;
+
 
 SELECT COUNT(idProducto) FROM producto;
-SELECT * FROM producto WHERE idProducto = 1800;
+SELECT * FROM producto WHERE estatus=0;
+UPDATE producto
+SET estatus = 1
+WHERE idProducto;
 
 -- ----------------------------------------------------------------- Fin de la seccion producto -----------------------------------------------------------------
 

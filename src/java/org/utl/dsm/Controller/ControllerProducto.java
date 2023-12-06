@@ -198,7 +198,23 @@ public Producto updateProducto(Producto p) {
         }
     }
     
+        //  ~~~~~~~~~~~~~~~~~~~~~~~ METODO PARA ACTIVAR LOGICAMENTE UN PRODUCTO ~~~~~~~~~~~~~~~~~~~~~~~  //
     
+    public void activarProducto(int idProducto){
+        String query = "{CALL sp_activarProducto(?)}";
+        try{
+            ConexionMysql connMySQL = new ConexionMysql();
+            Connection conn = connMySQL.open();
+            PreparedStatement pstm = conn.prepareStatement(query);
+            pstm.setInt(1, idProducto);
+            pstm.execute();
+            pstm.close();
+            conn.close();
+            connMySQL.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
     
     
     

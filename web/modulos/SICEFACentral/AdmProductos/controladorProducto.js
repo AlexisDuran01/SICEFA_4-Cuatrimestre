@@ -245,15 +245,186 @@ function eliminarProducto(event) {
     console.log("Hola desde eliminar productos");
     
         let idProducto = recuperarId(event);
-    
         const requestOptions = {
         method: 'POST', // Utilizar el método POST para enviar datos al servidor
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}, // Establecer el tipo de contenido como datos de formulario
-        body: new URLSearchParams({datosProducto: JSON.stringify()}) // Enviar la cadena de consulta como el cuerpo de la solicitud
+        body: new URLSearchParams({idProducto: idProducto}) // Enviar la cadena de consulta como el cuerpo de la solicitud
     };
   
+    Swal.fire({
+        title: '¿Estas seguro de eliminar este registro?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Aceptar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+         let url = 'http://localhost:8080/sicefa/api/producto/eliminarProducto';
+     
+      fetch(url, requestOptions).then(       // La función fetch siempre nos devuelve una promesa que hay que manejar
+              
+            function (respuesta) { 
+                         
+                         console.log("Estado de la respuesta del servicio editarRegistro:", respuesta.status); // Ejemplo: 201
 
+
+               if (respuesta.status === 200) {
+                    Swal.fire({
+                        title: 'Eliminado registro',
+                        html: 'No cierre la venta porfavor',
+                        timer: 1200,
+                        timerProgressBar: true,
+                        allowOutsideClick: true, // Evita que la alerta se cierre al hacer clic fuera de ella
+                        didOpen: () => {
+                            Swal.showLoading();
+                            const b = Swal.getHtmlContainer().querySelector('b');
+                            timerInterval = setInterval(() => {
+                            }, 100);
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval);
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {   /* Esta condición se cumple solo cuando el mensaje emergente se cierra 
+                         automáticamente debido al temporizador */
+
+                            console.log('I was closed by the timer');
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Registro eliminado correctamente',
+                                showConfirmButton: false,
+                                allowOutsideClick: false,
+                                timer: 1500
+                            });
+
+                            mostrarRegistrosProductos();   //Despues de mostrar el mensaje de que se inserto correctamente el registro, volvemos a llamar a la funcion
+                            // para cargar el nuevo registro sin necesidad de recargar la pagina
+                        }
+                    });
+
+                } else {
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Algo salió mal! Intentalo más tarde',
+                        allowOutsideClick: false
+                    });
+                }
+
+                return respuesta.json(); //  Accedemos al cuerpo de la respuesta como JSON y devolvemos la promesa                                    
+                }
+            ).then(
+                  function (data){ // Aquí obtenemos la promesa devuelta por respuesta.json() y la almacenamos en la variable data
+                // Aquí, data contendrá el cuerpo de la respuesta  como JSON
+                console.log(data);
+                    }
+            );
+       
+        } else if (result.isDismissed) {
+            Swal.fire('Acción Cancelada', '', 'error')
+          }
+      })
 }
+
+function activarProducto (event) {
+       console.log("Hola desde activar productos");
+    
+        let idProducto = recuperarId(event);
+        const requestOptions = {
+        method: 'POST', // Utilizar el método POST para enviar datos al servidor
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}, // Establecer el tipo de contenido como datos de formulario
+        body: new URLSearchParams({idProducto: idProducto}) // Enviar la cadena de consulta como el cuerpo de la solicitud
+    };
+  
+    Swal.fire({
+        title: '¿Estas seguro de restaurar este registro?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Aceptar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+         let url = 'http://localhost:8080/sicefa/api/producto/activarProducto';
+     
+      fetch(url, requestOptions).then(       // La función fetch siempre nos devuelve una promesa que hay que manejar
+              
+            function (respuesta) { 
+                         
+                         console.log("Estado de la respuesta del servicio editarRegistro:", respuesta.status); // Ejemplo: 201
+
+
+               if (respuesta.status === 200) {
+                    Swal.fire({
+                        title: 'Restaurando registro',
+                        html: 'No cierre la venta porfavor',
+                        timer: 1200,
+                        timerProgressBar: true,
+                        allowOutsideClick: false, // Evita que la alerta se cierre al hacer clic fuera de ella
+                        didOpen: () => {
+                            Swal.showLoading();
+                            const b = Swal.getHtmlContainer().querySelector('b');
+                            timerInterval = setInterval(() => {
+                            }, 100);
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval);
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {   /* Esta condición se cumple solo cuando el mensaje emergente se cierra 
+                         automáticamente debido al temporizador */
+
+                            console.log('I was closed by the timer');
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Registro restaurado correctamente',
+                                showConfirmButton: false,
+                                allowOutsideClick: false,
+                                timer: 1500
+                            });
+
+                                            mostrarRegistrosProductosInactivos();   //Despues de mostrar el mensaje de que se inserto correctamente el registro, volvemos a llamar a la funcion
+                            // para cargar el nuevo registro sin necesidad de recargar la pagina
+                        }
+                    });
+
+                } else {
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Algo salió mal! Intentalo más tarde',
+                        allowOutsideClick: false
+                    });
+                }
+
+                return respuesta.json(); //  Accedemos al cuerpo de la respuesta como JSON y devolvemos la promesa                                    
+                }
+            ).then(
+                  function (data){ // Aquí obtenemos la promesa devuelta por respuesta.json() y la almacenamos en la variable data
+                // Aquí, data contendrá el cuerpo de la respuesta  como JSON
+                console.log(data);
+                    }
+            );
+       
+        } else if (result.isDismissed) {
+            Swal.fire('Acción Cancelada', '', 'error')
+          }
+      })
+}
+
+
+
+
+
 
 function recuperarId(event) {
     // Obtener el botón que desencadenó el evento
@@ -360,6 +531,47 @@ function mostrarRegistrosProductos() {
 }
 
 
+function mostrarRegistrosProductosInactivos() {
+
+    if (!alertaMostradaProducto) {
+        Swal.fire({
+            title: 'Cargando Registros',
+            html: 'Un momento por favor',
+            timer: 2800,
+            timerProgressBar: true,
+            allowOutsideClick: true,
+            didOpen: () => {
+                Swal.showLoading();
+                const b = Swal.getHtmlContainer().querySelector('b');
+                timerInterval = setInterval(() => {
+                }, 100);
+            },
+            willClose: () => {
+                clearInterval(timerInterval);
+            }
+        });
+
+        // Marcamos la alerta como mostrada 
+        alertaMostradaProducto = true;
+    }
+
+    // Resto del código para obtener los registros y generar la tabla
+    let url = 'http://localhost:8080/sicefa/api/producto/registros';
+    console.log("Haciendo peticion al servidor");
+    fetch(url)
+            .then(function (respuesta) {
+                console.log("Estado de la respuesta del servicio obtenerRegistros:", respuesta.status);
+                return respuesta.json();
+            })
+            .then(function (cuerpo) {
+                console.log(cuerpo);
+                generarTablaInactivos(cuerpo);
+            })
+            .catch(error => {
+                console.log("Error al obtener datos " + error);
+            });
+}
+
 function obtenerProductoPorId(idProducto) {
     let url = 'http://localhost:8080/sicefa/api/producto/obtenerProductoPorId?idProducto=' + idProducto;
     console.log("Haciendo petición al servidor");
@@ -388,11 +600,7 @@ function generarTabla(arreglo) {
 
         if (producto.estatus === 1) {
             estatus = 'Activo';
-        } else {
-            estatus = 'Inactivo';
-        }
-
-        html += `<tr>
+             html += `<tr>
             <td class='registro alinearTexto'>${producto.idProducto}</td>
             <td class='registro alinearTexto'>${producto.nombreGenerico}</td>
             <td class='registro alinearTexto'>${producto.precioVenta}</td>
@@ -400,11 +608,37 @@ function generarTabla(arreglo) {
             <td class='registro alinearTexto'>${estatus}</td>
             <td class='registro'>${cargarBotones()}</td>
         </tr>`;
+        }
+       
     });
 
     tablaProductosBody.innerHTML = html; // Inserta el HTML en la tabla
 }
 
+function generarTablaInactivos(arreglo) {
+    let tablaProductosBody = document.getElementById('registrosProductos');
+    let html = ''; // Crea una cadena HTML
+
+    console.log("Generando tabla");
+    arreglo.forEach(function (producto) {
+        let estatus = '';
+
+        if (producto.estatus === 0) {
+            estatus = 'Inactivos';
+             html += `<tr>
+            <td class='registro alinearTexto'>${producto.idProducto}</td>
+            <td class='registro alinearTexto'>${producto.nombreGenerico}</td>
+            <td class='registro alinearTexto'>${producto.precioVenta}</td>
+            <td class='registro alinearTexto'>${producto.formaFarmaceutica}</td>
+            <td class='registro alinearTexto'>${estatus}</td>
+            <td class='registro'>${cargarBotonRegresar()}</td>
+        </tr>`;
+        }
+       
+    });
+
+    tablaProductosBody.innerHTML = html; // Inserta el HTML en la tabla
+}
 
 
 function opcionesSolicitudHTTP() {
@@ -531,15 +765,16 @@ function limpiarFormulario() {
 }
 
 function switchEstatus() {
-
     const switchEstatus = document.getElementById('flexSwitchCheckChecked');
-
+    
     if (switchEstatus.checked) {
         console.log('Registros activos');
+         mostrarRegistrosProductos() ;
+        
     } else {
-        console.log('Registros Inactivos');
+        console.log('Registros inactivos');
+         mostrarRegistrosProductosInactivos(); 
     }
-
 }
 
 
@@ -566,6 +801,17 @@ function obtenerValorRadio() {
     console.log(valorSeleccionado);
     return valorSeleccionado;
 }
+
+function cargarBotonRegresar() {
+
+    let botones = `
+    <div class="d-flex justify-content-center flex-wrap align-content-center mx-4">
+        <button onclick="activarProducto(event)" class="btn btn-icon btn-lg "><i class="bi bi-arrow-90deg-left"></i></button>
+    </div>
+`;
+    return botones;
+}
+
 
 function cargarBotones() {
 
@@ -720,8 +966,10 @@ function cargarBotones() {
 
                                         </div>
 
-                                        <button class="btn btn-icon btn-lg"><i class="bi bi bi-trash" onclick="eliminarProducto(event)"></i></button>
+                                        <button onclick="eliminarProducto(event)" class="btn btn-icon btn-lg"><i class="bi bi bi-trash"></i></button>
                                     </div>  `;
     return botones;
 }
+
+
 
