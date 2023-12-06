@@ -20,6 +20,7 @@ public class Empleado
     private Sucursal sucursalEmpleado;
 
     public Empleado() {}
+    
 
     public Empleado(String codigoEmpleado, Float salarioBrutoEmpleado, Persona personaEmpleado, Usuario usuarioEmpleado, Sucursal sucursalEmpleado) {
         this.codigoEmpleado = codigoEmpleado;

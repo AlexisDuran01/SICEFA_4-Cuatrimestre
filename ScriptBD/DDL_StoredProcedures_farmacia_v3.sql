@@ -546,7 +546,7 @@ END
 $$
 
 DELIMITER ;
-CALL sp_updateEmpleado(1,'Juan','Gomez','Perez','M','15/03/1985','XHGF1234567','CURP123456789','Calle 123','12345','Ciudad A','Estado B','123-456-7890','','Desarrollador',50.00);
+CALL sp_updateEmpleado(2,'Juan','Gomez','Perez','M','15/03/1985','XHGF1234567','CURP123456789','Calle 123','12345','Ciudad A','Estado B','123-456-7890','','Desarrollador',50.00);
 
 -- Procedimiento para eliminar de forma logica
 
@@ -737,3 +737,5 @@ SELECT * FROM empleado;
 SELECT * FROM sucursal;
 SELECT * FROM usuario;
 UPDATE sucursal SET estatus = 1;
+UPDATE empleado SET activo = 1;
+

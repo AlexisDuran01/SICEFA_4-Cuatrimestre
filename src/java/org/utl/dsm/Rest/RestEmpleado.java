@@ -52,24 +52,24 @@ public class RestEmpleado extends Application {
     @Path("updateEmpleado")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateEmpleado(@FormParam("datosEmpleado") @DefaultValue("{}") String datosPersona) {
-        String out = null;
-        ControllerEmpleado ce = null;
+    public Response updateEmpleado(@FormParam("datosEmpleado")@DefaultValue("{}") String datosEmpleado) {
+        System.out.println("empleado: " + datosEmpleado);
+        String out;
+        ControllerEmpleado ce = new ControllerEmpleado();
         Gson gson = new Gson();
-
         try {
-            //Convertir el json de string a objeto de tipo Persona.
-            Empleado empleado = gson.fromJson(datosPersona, Empleado.class);
-            ce = new ControllerEmpleado();
+            Empleado empleado = gson.fromJson(datosEmpleado, Empleado.class);
             ce.updateEmpleado(empleado);
-            out = gson.toJson(empleado);
-        } catch (Exception e) {
             out = """
-                  {"error" : "Error interno del servidor, intente mas tarde."}
+                    {"result":"Empleado modificado exitosamente"}
                   """;
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            out = """
+                    {"result":"Error en el servidor, favor de intentarlo de nuevo mas tarde"}
+                  """;
         }
-        return Response.status(Response.Status.OK).entity(out).build();
+        return Response.ok(out).build();
     }
 
     @Path("deleteEmpleado")
