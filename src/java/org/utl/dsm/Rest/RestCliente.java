@@ -19,9 +19,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.List;
 import org.utl.dsm.Controller.ControllerCliente;
-import org.utl.dsm.Controller.ControllerProducto;
 import org.utl.dsm.Model.Cliente;
-import org.utl.dsm.Model.Producto;
 
 @Path("cliente")
 public class RestCliente extends Application {
@@ -163,6 +161,31 @@ public class RestCliente extends Application {
                   """;
         }
         return Response.status(Response.Status.OK).entity(out).build();
+    }
+    
+    @Path("updateCliente")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response update(@FormParam("datosCliente") @DefaultValue("{}") String datosCliente) {
+        String out;
+        System.out.println("Datos cliente: "+datosCliente);
+        
+        ControllerCliente cc = new ControllerCliente();
+        Gson gson = new Gson();
+        try {
+            Cliente cliente = gson.fromJson(datosCliente, Cliente.class);
+            System.out.println("Nombre:"+cliente.getPersonaCliente().getNombrePersona());
+            cc.updateCliente(cliente);
+            out = """
+                    {"result":"Cliente modificado exitosamente"}
+                  """;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            out = """
+                    {"result":"Error en el servidor, favor de intentarlo de nuevo mas tarde"}
+                  """;
+        }
+        return Response.ok(out).build();
     }
 }
 /*

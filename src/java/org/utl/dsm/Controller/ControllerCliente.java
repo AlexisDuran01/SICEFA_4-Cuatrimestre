@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.utl.dsm.Model.Cliente;
 import org.utl.dsm.Model.Persona;
+import org.utl.dsm.Model.Sucursal;
 import org.utl.dsm.db.ConexionMysql;
 
 public class ControllerCliente {
@@ -215,5 +216,36 @@ public class ControllerCliente {
         pstmt.close(); 
         connMySQL.close(); 
         return clientes; 
+    }
+    
+    public Cliente updateCliente(Cliente c) {
+        String query = "{CALL sp_updateCliente(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        try {
+            ConexionMysql connMySQL = new ConexionMysql();
+            Connection conn = connMySQL.open();
+            PreparedStatement pstm = conn.prepareStatement(query);
+            pstm.setInt(1, c.getIdCliente());
+            pstm.setString(2, c.getPersonaCliente().getNombrePersona());
+            pstm.setString(3, c.getPersonaCliente().getApellidoPaternoPersona());
+            pstm.setString(4, c.getPersonaCliente().getApellidoMaternoPersona());
+            pstm.setString(5, c.getPersonaCliente().getGeneroPersona());
+            pstm.setString(6, c.getPersonaCliente().getFechaNacimientoPersona());
+            pstm.setString(7, c.getPersonaCliente().getRfcPersona());
+            pstm.setString(8, c.getPersonaCliente().getDomicilioPersona());
+            pstm.setString(9, c.getPersonaCliente().getCodigoPostalPersona());
+            pstm.setString(10, c.getPersonaCliente().getCiudadPersona());
+            pstm.setString(11, c.getPersonaCliente().getEstadoPersona());
+            pstm.setString(12, c.getPersonaCliente().getTelefonoPersona());
+            pstm.setString(13, c.getPersonaCliente().getFotoPersona());
+            pstm.setString(14, c.getEmailCliente());
+            pstm.execute();
+            pstm.close();
+            conn.close();
+            connMySQL.close();
+            return c;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return c;
+        }
     }
 }

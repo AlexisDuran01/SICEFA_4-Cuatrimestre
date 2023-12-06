@@ -206,9 +206,9 @@ function verClienteSeleccionado(event) {
         verCliente.innerHTML = registro;
 
     });
-
-
 }
+
+
 
 function eliminarCliente(event){
     console.log("Hola desde eliminar cliente");
@@ -257,13 +257,106 @@ function eliminarClienteLogicamente(idCliente) {
                         timer: 1500
                     });
                     mostrarRegistrosCliente();
-                };
-})
+                }
+            });
+        });
+}
 
+let idCliente;
+function recuperarIdCliente2(event){
+    idCliente = recuperarIdClienteSeleccionado(event);
+}
+
+function editarCliente(event){
+    url = "http://localhost:8080/sicefa/api/cliente/updateCliente";
+    console.log("Hola desde editar Cliente");
+    console.log (recuperarIdCliente2);
+   let v_nombre = document.getElementById("txtEditarNombrePersona").value;
+    let v_apellidoPaterno = document.getElementById("agregarApellidoPaternoPersona").value;
+    let v_apellidoMaterno = document.getElementById("agregarApellidoMaternoPersona").value;
+    let v_genero = document.getElementById("txtAgregarGeneroPersona").value;
+    let v_rfc = document.getElementById("txtAgregarRFCPersona").value;
+    let v_fechaNacimiento = document.getElementById("txtAgregarFechaNacimientoPersona").value;
+    let v_curp = document.getElementById("txtAgregarCURPPersona").value;
+    let v_foto = document.getElementById("txtAgregarFotoPersona").value;
+    let v_domicilio = document.getElementById("txtAgregarDomicilioPersona").value;
+    let v_codigoPostal = document.getElementById("txtAgregarCodigoPostalPersona").value;
+    let v_ciudad = document.getElementById("txtAgregarCiudadPersona").value;
+    let v_estado = document.getElementById("txtAgregarEstadoPersona").value;
+    let v_telefono = document.getElementById("txtAgregarTelefonoPersona").value;
+    let v_email = document.getElementById("txtAgregarEmailPersona").value;
+    let v_fechaRegistro = document.getElementById("txtAgregarFechaRegistroPersona").value; 
     
-    
+    let datosCliente = {
+        
+        "idCliente": idCliente,
+        "txtAgregarNombrePersona": v_nombre,
+        "agregarApellidoPaternoPersona" : v_apellidoPaterno,
+        "agregarApellidoMaternoPersona":  v_apellidoMaterno,
+        "txtAgregarGeneroPersona" : v_genero,
+        "txtAgregarRFCPersona" : v_rfc,
+        "txtAgregarFechaNacimientoPersona" : v_fechaNacimiento,
+        "txtAgregarCURPPersona" : v_curp, 
+        "txtAgregarFotoPersona" : v_foto,
+        "txtAgregarDomicilioPersona" : v_domicilio,
+        "txtAgregarCodigoPostalPersona" : v_codigoPostal, 
+        "txtAgregarCiudadPersona" : v_ciudad,
+        "editarEstadoCliente" : v_estado,
+        "txtAgregarEstadoPersona" : v_telefono,
+        "txtAgregarEmailPersona" : v_email,
+        "txtAgregarFechaRegistroPersona" : v_fechaRegistro
+                    };
+        console.log(datosCliente);
+        
+        const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({datosCliente:JSON.stringify(datosCliente)})
+    };
+    fetch(url, requestOptions).then(
+            function (data) {
+                return data.json();
+            }
+    ).then(
+            function (json) {
+                console.log(json);
+                Swal.fire({
+                    title: 'Guardando registro',
+                    html: 'No cierre la venta porfavor',
+                    timer: 2800,
+                    timerProgressBar: true,
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                        const b = Swal.getHtmlContainer().querySelector('b');
+                        timerInterval = setInterval(() => {
+                        }, 100);
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval);
+                    }
+                }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {   /* Esta condición se cumple solo cuando el mensaje emergente se cierra 
+                         automáticamente debido al temporizador */
 
-
+                            console.log('I was closed by the timer');
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Cliente modificado correctamente',
+                                showConfirmButton: false,
+                                allowOutsideClick: false, 
+                                timer: 1500
+                            });
+                            
+                            mostrarRegistrosCliente();   //Despues de mostrar el mensaje de que se inserto correctamente el registro, volvemos a llamar a la funcion
+                            // para cargar el nuevo registro sin necesidad de recargar la pagina
+                        }
+                    });
+            }
+    );
+}
 
 
 function generarTablaCliente(arreglo) {
@@ -335,9 +428,9 @@ function mostrarRegistrosCliente() {
 
 }
 
-function cargarBotonesCliente() {
 
-    let botones = `<div class="d-flex justify-content-center flex-wrap align-content-center">
+function cargarBotonesCliente() {
+        let botones = `<div class="d-flex justify-content-center flex-wrap align-content-center">
                                         <!-- Button trigger modal -->
                                         <button class="btn btn-icon btn-lg" onclick="verClienteSeleccionado(event)"
                                                 data-bs-toggle="modal" data-bs-target="#verProducto"><i
@@ -372,22 +465,22 @@ function cargarBotonesCliente() {
 
 
                                         <div>
-                                            <button  class="btn btn-icon btn-lg" onclick="editarProducto()"
-                                                     data-bs-toggle="modal" data-bs-target="#EditarProducto"><i class="bi bi-pencil-square"></i></button>
+                                            <button  class="btn btn-icon btn-lg"
+                                             onclick="recuperarIdCliente2(event)"        data-bs-toggle="modal" data-bs-target="#EditarProducto"><i class="bi bi-pencil-square"></i></button>
 
                                             <div class="modal fade" id="EditarProducto" tabindex="-1" aria-labelledby="tituloProductos"
                                                  aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-scrollable">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5 fw-bold" id="tituloProductos">Editar Producto</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            <h1 class="modal-title fs-5 fw-bold" id="tituloProductos">Editar Cliente</h1>
+                                                            <button onclick= type="button" class="btn-close" data-bs-dismiss="modal"
                                                                     aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body fondoModal p-lg-4">
                                                             <div class="mb-3">
                                                                 <label for="txtAgregarNombrePersona" class="form-label">Nombre</label>
-                                                                <input type="text" class="form-control" id="txtAgregarNombrePersona">
+                                                                <input type="text" class="form-control" id="txtEditarNombrePersona">
                                                             </div>
 
                                                             <div class="mb-3">
@@ -464,7 +557,7 @@ function cargarBotonesCliente() {
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Cerrar</button>
-                                                            <button type="button" class="btn btn-primary">Guardar</button>
+                                                            <button type="button" class="btn btn-primary"  onclick="editarCliente()" data-bs-dismiss="modal">Guardar</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -476,3 +569,5 @@ function cargarBotonesCliente() {
                                     </div>  `;
     return botones;
 }
+
+
