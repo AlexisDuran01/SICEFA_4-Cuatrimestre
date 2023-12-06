@@ -140,44 +140,45 @@ try{
         
     //  ~~~~~~~~~~~~~~~~~~~~~~~ METODO PARA EDITAR UN PRODUCTO ~~~~~~~~~~~~~~~~~~~~~~~  //
     
-    public Producto updateProducto(Producto p){
-        String query = "{CALL sp_updateProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
-        try{
-                  ConexionMysql connMySQL = new ConexionMysql();
+public Producto updateProducto(Producto p) {
+    String query = "CALL sp_updateProducto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    
+    try {
+        ConexionMysql connMySQL = new ConexionMysql();
+        Connection conn = connMySQL.open();
+        CallableStatement cstmt = (CallableStatement) conn.prepareCall(query);
 
-              //Abrimos la conexion con la base de datos
-            Connection conn = connMySQL.open();
+        cstmt.setInt(1, p.getIdProducto());
+        cstmt.setString(2, p.getNombre());
+        cstmt.setString(3, p.getNombreGenerico());
+        cstmt.setString(4, p.getFormaFarmaceutica());
+        cstmt.setString(5, p.getUnidadMedida());
+        cstmt.setString(6, p.getPresentacion());
+        cstmt.setString(7, p.getPrincipalIndicacion());
+        cstmt.setString(8, p.getContraindicaciones());
+        cstmt.setString(9, p.getConcentracion());
+        cstmt.setInt(10, p.getUnidadesEnvase());
+        cstmt.setFloat(11, p.getPrecioCompra());
+        cstmt.setFloat(12, p.getPrecioVenta());
+        cstmt.setString(13, p.getFoto()); // Asegúrate de usar el método correcto para obtener la foto
+        cstmt.setString(14, p.getRutaFoto());
+        cstmt.setString(15, p.getCodigoBarras());
+        cstmt.setInt(16, p.getEstatus());
 
-            //Con este objeto invocaremos al asistente para llenar el query
-            CallableStatement cstmt = (CallableStatement) conn.prepareCall(query);  // El objeto de tipo CallableStatement: se utiliza para ejecutar procedimientos almacenados
+        cstmt.execute();
 
-            // Pasar los parametros al query
-            cstmt.setString(1, p.getNombre());
-            cstmt.setString(2, p.getNombreGenerico());
-            cstmt.setString(3, p.getFormaFarmaceutica());
-            cstmt.setString(4, p.getUnidadMedida());
-            cstmt.setString(5, p.getPresentacion());
-            cstmt.setString(6, p.getPrincipalIndicacion());
-            cstmt.setString(7, p.getContraindicaciones());
-            cstmt.setString(8, p.getConcentracion());
-            cstmt.setInt(9, p.getUnidadesEnvase());
-            cstmt.setFloat(10, p.getPrecioCompra());
-            cstmt.setFloat(11, p.getPrecioVenta());
-            cstmt.setString(12, p.getCodigoBarras());
-            cstmt.setInt(13, p.getEstatus());
-
-            cstmt.execute();
-
-            // Cerrar todas las instancias abiertas hacia la base de datos (bd)
-            cstmt.close();
-            conn.close(); // Cerrar la conexion (despues de alguna accion, es recomendable cerrar la conexion)
-            connMySQL.close();
-            return p;
-        }catch(Exception e){
-            e.printStackTrace();
-            return p;
-        }
+        cstmt.close();
+        conn.close();
+        connMySQL.close();
+        return p;
+    } catch (Exception e) {
+        System.out.println(e.getMessage()); 
+        return null;
     }
+}
+
+    
+    
     
     //  ~~~~~~~~~~~~~~~~~~~~~~~ METODO PARA ELIMINAR LOGICAMENTE UN PRODUCTO ~~~~~~~~~~~~~~~~~~~~~~~  //
     
