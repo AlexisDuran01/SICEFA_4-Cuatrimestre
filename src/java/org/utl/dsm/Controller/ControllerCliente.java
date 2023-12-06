@@ -77,6 +77,8 @@ public class ControllerCliente {
     
     public Cliente eliminarRegistroEspecifico(int idCliente){
         Cliente registroEspecifico = new Cliente();
+        System.out.println(idCliente);
+        System.out.println("Entrando a la funcion eliminar cliente");
     String query = "{CALL sp_eliminarCliente(?)}";    
     try {
         ConexionMysql connMySQL = new ConexionMysql();

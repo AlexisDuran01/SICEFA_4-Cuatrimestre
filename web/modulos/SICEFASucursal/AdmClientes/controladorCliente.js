@@ -210,20 +210,34 @@ console.log(cliente);
 
 }
 
-function eliminarIdCliente(idCliente) {
-    let url = `http://localhost:8080/sicefa/api/cliente/eliminarCliente?idCliente=`+idCliente;
-    console.log("Haciendo petición al servidor");
-    // Realización de la solicitud al servidor utilizando fetch y devolución de una promesa
-    return fetch(url)
-            .then(function (respuesta) {
-                console.log("Estado de la respuesta del servicio eliminarIdCliente:", respuesta.status);
-                return respuesta.json();  /* Devuelve una promesa que contiene los datos del producto en formato JSON. 
-                 * Debe manejarse al usar esta función para acceder a los datos del producto.*/
-            })
-            .catch(error => {
-                console.log("Error al obtener datos " + error);
-            });
+function eliminarCliente(event){
+    console.log("Hola desde eliminar cliente");
+    let idCliente = recuperarIdClienteSeleccionado(event);
+    console.log(idCliente);
+    eliminarClienteLogicamente(idCliente);
 }
+
+function eliminarClienteLogicamente(idCliente) {
+    let url = "http://localhost:8080/sicefa/api/cliente/eliminarCliente?idCliente=";
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({idCliente:JSON.parse(idCliente)})
+    };
+    fetch(url, requestOptions).then(
+            function (json) {
+                console.log(json);
+                }).then((result) => {
+                        
+                            mostrarRegistrosCliente();   //Despues de mostrar el mensaje de que se inserto correctamente el registro, volvemos a llamar a la funcion
+                            // para cargar el nuevo registro sin necesidad de recargar la pagina
+                });
+    }
+    
+    
+
+
+
 
 function generarTablaCliente(arreglo) {
 
@@ -431,7 +445,7 @@ function cargarBotonesCliente() {
 
                                         </div>
 
-                                        <button class="btn btn-icon btn-lg"><i class="bi bi bi-trash"></i></button>
+                                        <button onclick="eliminarCliente(event)" class="btn btn-icon btn-lg"><i class="bi bi bi-trash"></i></button>
                                     </div>  `;
     return botones;
 }
