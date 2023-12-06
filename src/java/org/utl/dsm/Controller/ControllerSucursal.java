@@ -90,4 +90,71 @@ public class ControllerSucursal
         s.setEstatusSucursal(rs.getInt("estatus"));
         return s;
     }
+    
+    public Sucursal obtenerRegistroEspecifico(int idSucursal) {
+        Sucursal registroEspecifico = new Sucursal();
+        String query = "SELECT * FROM viewSucursal WHERE idSucursal = ?";
+        try {
+            ConexionMysql connMySQL = new ConexionMysql();
+            Connection conexion = connMySQL.open();
+            PreparedStatement ejecutorConsulta = conexion.prepareStatement(query);
+        
+            ejecutorConsulta.setInt(1, idSucursal);
+            ResultSet resultadoConsulta = ejecutorConsulta.executeQuery();
+            while (resultadoConsulta.next()) {
+                registroEspecifico = fill(resultadoConsulta);
+            }
+            return registroEspecifico;
+        } catch (Exception error) {
+            System.out.println(error.getMessage());
+            return null; 
+        }
+    }
+    
+    //  ~~~~~~~~~~~~~~~~~~~~~~~ METODO PARA ELIMINAR LOGICAMENTE UNA SUCURSAL ~~~~~~~~~~~~~~~~~~~~~~~  //
+    public void deleteSucursal(int id) {
+        String query = "{CALL sp_deleteSucursal(?)}";
+        try {
+            ConexionMysql connMySQL = new ConexionMysql();
+            Connection conn = connMySQL.open();
+            PreparedStatement pstm = conn.prepareStatement(query);
+            pstm.setInt(1, id);
+            pstm.execute();
+            pstm.close();
+            conn.close();
+            connMySQL.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    //  ~~~~~~~~~~~~~~~~~~~~~~~ METODO PARA MODIFICAR UNA SUCURSAL ~~~~~~~~~~~~~~~~~~~~~~~  //
+    public Sucursal updateSucursal(Sucursal s) {
+        String query = "{CALL sp_updateSucursal(?,?,?,?,?,?,?,?,?,?,?,?)}";
+        try {
+            ConexionMysql connMySQL = new ConexionMysql();
+            Connection conn = connMySQL.open();
+            PreparedStatement pstm = conn.prepareStatement(query);
+            pstm.setInt(1, s.getIdSucursal());
+            pstm.setString(2, s.getNombreSucursal());
+            pstm.setString(3, s.getTitularSucursal());
+            pstm.setString(4, s.getRfcSucursal());
+            pstm.setString(5, s.getDomicilioSucursal());
+            pstm.setString(6, s.getColoniaSucursal());
+            pstm.setString(7, s.getCodigoPostalSucursal());
+            pstm.setString(8, s.getCiudadSucursal());
+            pstm.setString(9, s.getEstadoSucursal());
+            pstm.setString(10, s.getTelefonoSucursal());
+            pstm.setString(11, s.getLatitulSucursal());
+            pstm.setString(12, s.getLongitudSucursal());
+            pstm.execute();
+            pstm.close();
+            conn.close();
+            connMySQL.close();
+            return s;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return s;
+        }
+    }
 }
