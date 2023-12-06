@@ -98,15 +98,72 @@ function agregarEmpleado() {
     );
 }
 
-function eliminarIdEmpleado(idEmpleado) {
-    let url = `http://localhost:8080/sicefa/api/empleado/deleteEmpleado?idEmpleado=` + idEmpleado;
+function eliminarRegistroEspecifico(event) {
+    console.log("Hola desde eliminar empleado");
+
+    let idEmpleado = recuperarIdEmpleadoSeleccionado(event);
+
+    console.log(idEmpleado);
+
+    eliminarEmpleado(idEmpleado);
+}
+
+function eliminarEmpleado(idEmpleado) {
+    let url = "http://localhost:8080/sicefa/api/empleado/deleteEmpleado";
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({idEmpleado: JSON.parse(idEmpleado)})
+    };
+    fetch(url, requestOptions).then(
+            function (json) {
+                console.log(json);
+                Swal.fire({
+                    title: 'Guardando registros',
+                    html: 'No cierre la venta porfavor',
+                    timer: 2800,
+                    timerProgressBar: true,
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                        const b = Swal.getHtmlContainer().querySelector('b');
+                        timerInterval = setInterval(() => {
+                        }, 100);
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval);
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {   /* Esta condición se cumple solo cuando el mensaje emergente se cierra 
+                     automáticamente debido al temporizador */
+
+                        console.log('I was closed by the timer');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Empleado eliminado exitosamente',
+                            showConfirmButton: false,
+                            allowOutsideClick: false,
+                            timer: 1500
+                        });
+
+                        mostrarRegistrosEmpleado();   //Despues de mostrar el mensaje de que se inserto correctamente el registro, volvemos a llamar a la funcion
+                        // para cargar el nuevo registro sin necesidad de recargar la pagina
+                    }
+                });
+            }
+    );
+}
+
+
+function obtenerEmpleadoPorId(idEmpleado) {
+    let url = 'http://localhost:8080/sicefa/api/empleado/obtenerEmpleadoPorId?idEmpleado=' + idEmpleado;
     console.log("Haciendo petición al servidor");
-    // Realización de la solicitud al servidor utilizando fetch y devolución de una promesa
     return fetch(url)
             .then(function (respuesta) {
-                console.log("Estado de la respuesta del servicio eliminarIdEmpleado:", respuesta.status);
-                return respuesta.json();  /* Devuelve una promesa que contiene los datos del producto en formato JSON. 
-                 * Debe manejarse al usar esta función para acceder a los datos del producto.*/
+                console.log("Estado de la respuesta del servicio ObtenerSucursalPorId:", respuesta.status);
+                return respuesta.json();
             })
             .catch(error => {
                 console.log("Error al obtener datos " + error);
@@ -137,6 +194,29 @@ function recuperarIdEmpleado(idEmpleado) {
             });
 }
 
+function mostrarRegistrosEmpleado() {
+
+    if (!alertaMostradaEmpleado) {
+        Swal.fire({
+            title: 'Cargando Registros',
+            html: 'Un momento porfavor',
+            timer: 1600,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading();
+                const b = Swal.getHtmlContainer().querySelector('b');
+                timerInterval = setInterval(() => {
+                }, 100);
+            },
+            willClose: () => {
+                clearInterval(timerInterval);
+            }
+        });
+
+        // Marcamos la alerta como mostrada 
+        alertaMostradaSucursal = true;
+    }
+}
 
 
 function verEmpleadoSeleccionado(event) {
@@ -444,7 +524,7 @@ function cargarBotonesEmpleado() {
                                             </div>
 
                                         </div>
-                                        <button class="btn btn-icon btn-lg"><i class="bi bi bi-trash"></i></button>
+                                        <button onclick="eliminarRegistroEspecifico(event)" class="btn btn-icon btn-lg"><i class="bi bi bi-trash"></i></button>
                                     </div>  `;
     return botones;
 }
