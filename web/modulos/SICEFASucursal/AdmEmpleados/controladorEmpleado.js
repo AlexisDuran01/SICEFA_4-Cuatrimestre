@@ -98,7 +98,7 @@ function agregarEmpleado() {
     );
 }
 
-function updateEmpleado() {
+function updateEmpleado(idEmpleado) {
     let url = "http://localhost:8080/sicefa/api/empleado/updateEmpleado";
     console.log("Hola desde actualizar empleado");
     console.log(idEmpleado);
@@ -326,7 +326,7 @@ function mostrarRegistrosEmpleado() {
     }
 }
 
-function recuperarIdEmpleado(event) {
+function recuperarIdEmpleado2(event) {
     let boton = event.currentTarget;
     let fila = boton.closest('tr');
     const primeraCelda = fila.querySelector(':first-child');

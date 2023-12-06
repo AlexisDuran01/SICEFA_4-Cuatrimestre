@@ -57,7 +57,8 @@ public class ControllerEmpleado {
 
     //  ~~~~~~~~~~~~~~~~~~~~~~~ METODO UPDATE ~~~~~~~~~~~~~~~~~~~~~~~  //
     public Empleado updateEmpleado(Empleado e) {
-        String query = "{CALL sp_updateEmpleado(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String query = "{CALL sp_updateEmpleado(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"
+                + "?)}";
 
         try {
             ConexionMysql connMySQL = new ConexionMysql();
