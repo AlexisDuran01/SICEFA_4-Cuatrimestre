@@ -120,10 +120,10 @@ public class RestCliente extends Application {
     @Produces(MediaType.APPLICATION_JSON)   // Para definir el tipo de dato que va a regresar
     @POST
     public Response RegistroEspecifco(@FormParam("idCliente")@DefaultValue("0") int idCliente) {
-        
+        System.out.println(idCliente);
     try {
         ControllerCliente controlador = new ControllerCliente();
-        Cliente registro = controlador.obtenerRegistroEspecifico(idCliente);
+        Cliente registro = controlador.eliminarRegistroEspecifico(idCliente);
         
         Gson gson = new Gson();
         String salida="";
@@ -131,7 +131,7 @@ public class RestCliente extends Application {
         
         if (registro.getIdCliente()==0) {
             salida="""
-                    {"result":"Cliente no encontrado"}
+                    {"result":"Cliente eliminado"}
                   """;
         }else{
             salida= gson.toJson(registro);

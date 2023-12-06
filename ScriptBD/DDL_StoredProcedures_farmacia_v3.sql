@@ -8,7 +8,7 @@
 -- Comments:    Se agregaron procedimientos almacenados
 --              para insertar sucursales y empleados.
 -- -----------------------------------------------------
-USE sicefa;
+-- USE sicefa;
 
 
 -- ----------------------------------------------------------------- Inicio de la seccion Sucursal -----------------------------------------------------------------
@@ -150,7 +150,7 @@ DROP PROCEDURE IF EXISTS sp_updateProducto;
 DELIMITER $$
 CREATE PROCEDURE sp_updateProducto 
 	(
-		IN v_idProducto INT, 
+		IN v_idProducto INT,
 		IN v_nombre VARCHAR(180),
 		IN v_nombreGenerico VARCHAR(200),
 		IN v_formaFarmaceutica VARCHAR(100),
@@ -203,9 +203,24 @@ CREATE PROCEDURE sp_deleteProducto
 	END;
 $$ DELIMITER ;
 
+DROP PROCEDURE IF EXISTS sp_activarProducto;
+DELIMITER $$
+CREATE PROCEDURE sp_activarProducto
+	(
+		IN v_idProducto INT
+	)
+	BEGIN
+		UPDATE producto SET estatus = 1
+		WHERE idProducto = v_idProducto;
+	END;
+$$ DELIMITER ;
+
 
 SELECT COUNT(idProducto) FROM producto;
-SELECT * FROM producto WHERE idProducto = 1800;
+SELECT * FROM producto WHERE estatus=0;
+UPDATE producto
+SET estatus = 1
+WHERE idProducto;
 
 -- ----------------------------------------------------------------- Fin de la seccion producto -----------------------------------------------------------------
 
@@ -258,6 +273,58 @@ $$ DELIMITER ;
 SELECT * FROM persona;
 SELECT * FROM cliente;
 CALL sp_insertCliente('Luis','Garcia','Ramirez','H','2003-02-10','GARL030210LOS5F','GARL030210HGTRMSA5','Colina del fresno, #210. Colinas de Santa Julia','37530','León','Guanajuato','4771644321','','luisrgr81@gmail.com');
+-- Registro 1
+CALL sp_insertCliente('Juan', 'Pérez', 'López', 'H', '1990-05-15', 'PERJ900515HDFXX', 'PERJ900515HGRXXX02', 'Calle 123, Colonia Centro', '12345', 'León', 'Guanajuato', '1234567890', '9876543210', 'juan.perez@example.com');
+
+-- Registro 2
+CALL sp_insertCliente('María', 'González', 'Martínez', 'M', '1985-08-20', 'GONM850820MDFXX', 'GONM850820MGRXXX04', 'Avenida 456, Colonia Norte', '54321', 'León', 'Guanajuato', '9876543210', '1234567890', 'maria.gonzalez@example.com');
+
+-- Registro 3
+CALL sp_insertCliente('Carlos', 'Rodríguez', 'Sánchez', 'H', '1982-03-10', 'RODC820310HDFXX', 'RODC820310HGRXXX06', 'Calle Principal, Colonia Sur', '67890', 'León', 'Guanajuato', '3456789012', '2109876543', 'carlos.rodriguez@example.com');
+
+-- Registro 4
+CALL sp_insertCliente('Ana', 'López', 'Díaz', 'M', '1995-11-25', 'LOPA951125MDFX', 'LOPA951125MGRXXX08', 'Avenida Secundaria, Colonia Este', '54321', 'León', 'Guanajuato', '6543210987', '7890123456', 'ana.lopez@example.com');
+
+-- Registro 5
+CALL sp_insertCliente('Pedro', 'Martínez', 'Hernández', 'H', '1988-07-18', 'MARP880718HDFXX', 'MARP880718HGRXXX10', 'Calle Tranquila, Colonia Oeste', '98765', 'León', 'Guanajuato', '2109876543', '3456789012', 'pedro.martinez@example.com');
+
+-- Registro 6
+CALL sp_insertCliente('Laura', 'Sánchez', 'Ramírez', 'M', '1993-01-30', 'SALR930130MDFXX', 'SALR930130MGRXXX12', 'Boulevard Principal, Colonia Poniente', '34567', 'León', 'Guanajuato', '7890123456', '6543210987', 'laura.sanchez@example.com');
+
+-- Registro 7
+CALL sp_insertCliente('Miguel', 'Díaz', 'Gómez', 'H', '1984-09-05', 'DIGM840905HDFXX', 'DIGM840905HGRXXX14', 'Calle de la Paz, Colonia Central', '87654', 'Ciudad7', 'Guanajuato', '3456789012', '2109876543', 'miguel.diaz@example.com');
+
+-- Registro 8
+CALL sp_insertCliente('Isabel', 'Hernández', 'Juárez', 'M', '1998-12-12', 'HEJI981212MDFXX', 'HEJI981212MGRXXX16', 'Avenida Principal, Colonia Noroeste', '23456', 'León', 'Guanajuato', '6543210987', '7890123456', 'isabel.hernandez@example.com');
+
+-- Registro 9
+CALL sp_insertCliente('Ricardo', 'Juárez', 'Ortiz', 'H', '1991-06-08', 'JUOR910608HDFXX', 'JUOR910608HGRXXX18', 'Calle de la Alegria, Colonia Suroeste', '76543', 'Ciudad9', 'Guanajuato', '2109876543', '3456789012', 'ricardo.juarez@example.com');
+
+
+/*-----------Para encender de nuevo cliente----------*/
+UPDATE cliente
+SET estatus = 1
+WHERE idCliente = 4;
+
+/* Procedimiento almacenado para eliminar un cliente */
+
+
+DROP PROCEDURE IF EXISTS sp_eliminarCliente;
+DELIMITER $$
+
+CREATE PROCEDURE sp_eliminarCliente
+    (
+        IN v_idCliente INT
+    )
+BEGIN
+    UPDATE cliente
+    SET estatus = 0 
+    WHERE idCliente = v_idCliente;
+END;
+
+$$ DELIMITER ;
+
+CALL sp_eliminarCliente(2);
 
 /* Vista para las tablas cliente y empleado */
 
@@ -605,10 +672,68 @@ CREATE VIEW viewSucursal AS
 SELECT idSucursal, nombre, titular, rfc, domicilio, colonia, codigoPostal, ciudad, estado, 
 	   telefono, latitud, longitud, estatus
 FROM sucursal;
-SELECT * FROM viewSucursal;
+SELECT * FROM viewSucursal WHERE idSucursal = 1;
+
+
+-- ~~~~~~~~~~~~ Procedimiento almacenado para modificar una sucursal  ~~~~~~~~~~~~ --
+DROP PROCEDURE IF EXISTS sp_updateSucursal;
+DELIMITER $$
+CREATE PROCEDURE sp_updateSucursal(/* Datos Sucursal */
+									IN  var_idSucursal		INT,			--  1
+                                    IN	var_nombre          VARCHAR(49),    --  2
+                                    IN	var_titular         VARCHAR(49),    --  3
+                                    IN  var_rfc             VARCHAR(15),    --  4                                    
+                                    IN	var_domicilio       VARCHAR(129),   --  5
+                                    IN  var_colonia         VARCHAR(65),    --  6
+                                    IN  var_codigoPostal    VARCHAR(11),    --  7
+                                    IN  var_ciudad          VARCHAR(65),    --  8
+                                    IN  var_estado          VARCHAR(49),    --  9                                    
+                                    IN	var_telefono        VARCHAR(20),    --  10
+                                    IN	var_latitud         VARCHAR(65),    --  11
+                                    IN	var_longitud        VARCHAR(65)     --  12
+                                 )
+    BEGIN
+        UPDATE sucursal SET
+			nombre = var_nombre, 
+            titular = var_titular,
+            rfc = var_rfc, 
+            domicilio = var_domicilio, 
+            colonia = var_colonia, 
+            codigoPostal = var_codigoPostal,
+            ciudad = var_ciudad, 
+            estado = var_estado, 
+            telefono = var_telefono, 
+            latitud = var_latitud, 
+            longitud = var_longitud
+		WHERE idSucursal = var_idSucursal;
+    END
+$$
+DELIMITER ;
+
+-- CALL sp_updateSucursal(14, 'Sucursal San Pedro', 'Medicamos tu vida', 'KGO542GDL2', 'Blvd San Pedro #214', 'San Pedro', '37596', 'Leon', 'Guanajuato', '4778596323', '3.156421235', '-12.25657456');
+SELECT * FROM sucursal;
+
+-- ~~~~~~~~~~~~ Procedimiento almacenado para eliminar logicamente una sucursal  ~~~~~~~~~~~~ --
+
+DROP PROCEDURE IF EXISTS sp_deleteSucursal;
+DELIMITER $$
+CREATE PROCEDURE sp_deleteSucursal
+	(
+		IN v_idSucursal INT
+	)
+	BEGIN 
+		UPDATE sucursal SET estatus = 0
+		WHERE idSucursal = v_idSucursal;
+	END;
+$$ DELIMITER ;
+
+CALL sp_deleteSucursal(5);
+SELECT * FROM sucursal;
 -- ----------------------------------------------------------------- Fin de la seccion sucursal -----------------------------------------------------------------
 
 SELECT * FROM persona;
 SELECT * FROM cliente;
 SELECT * FROM empleado;
 SELECT * FROM sucursal;
+SELECT * FROM usuario;
+UPDATE sucursal SET estatus = 1;

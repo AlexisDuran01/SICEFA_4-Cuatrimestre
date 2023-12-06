@@ -206,24 +206,60 @@ function verClienteSeleccionado(event) {
         verCliente.innerHTML = registro;
 
     });
-
-
 }
 
-function eliminarIdCliente(idCliente) {
-    let url = `http://localhost:8080/sicefa/api/cliente/eliminarCliente?idCliente=` + idCliente;
-    console.log("Haciendo petición al servidor");
-    // Realización de la solicitud al servidor utilizando fetch y devolución de una promesa
-    return fetch(url)
-            .then(function (respuesta) {
-                console.log("Estado de la respuesta del servicio eliminarIdCliente:", respuesta.status);
-                return respuesta.json();  /* Devuelve una promesa que contiene los datos del producto en formato JSON. 
-                 * Debe manejarse al usar esta función para acceder a los datos del producto.*/
-            })
-            .catch(error => {
-                console.log("Error al obtener datos " + error);
+function eliminarCliente(event){
+    console.log("Hola desde eliminar cliente");
+    let idCliente = recuperarIdClienteSeleccionado(event);
+    console.log(idCliente);
+    eliminarClienteLogicamente(idCliente);
+}
+
+function eliminarClienteLogicamente(idCliente) {
+    let url = "http://localhost:8080/sicefa/api/cliente/eliminarCliente?idCliente=";
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({idCliente: JSON.parse(idCliente)})
+    };
+
+    fetch(url, requestOptions)
+        .then(function (json) {
+            console.log(json);
+        })
+        .then((result) => {
+            Swal.fire({
+                title: 'Eliminando cliente',
+                html: 'No cierre la ventana por favor',
+                timer: 2800,
+                timerProgressBar: true,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                    const b = Swal.getHtmlContainer().querySelector('b');
+                    timerInterval = setInterval(() => {
+                        // Puedes hacer alguna tarea aquí mientras se muestra el mensaje
+                    }, 100);
+                },
+                willClose: () => {
+                    clearInterval(timerInterval);
+                }
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Cliente eliminado exitosamente',
+                        showConfirmButton: false,
+                        allowOutsideClick: false, 
+                        timer: 1500
+                    });
+                    mostrarRegistrosCliente();
+                }
             });
+        });
 }
+
 
 function generarTablaCliente(arreglo) {
 
@@ -294,9 +330,9 @@ function mostrarRegistrosCliente() {
 
 }
 
-function cargarBotonesCliente() {
 
-    let botones = `<div class="d-flex justify-content-center flex-wrap align-content-center">
+function cargarBotonesCliente() {
+        let botones = `<div class="d-flex justify-content-center flex-wrap align-content-center">
                                         <!-- Button trigger modal -->
                                         <button class="btn btn-icon btn-lg" onclick="verClienteSeleccionado(event)"
                                                 data-bs-toggle="modal" data-bs-target="#verProducto"><i
@@ -431,7 +467,9 @@ function cargarBotonesCliente() {
 
                                         </div>
 
-                                        <button class="btn btn-icon btn-lg"><i class="bi bi bi-trash"></i></button>
+                                        <button onclick="eliminarCliente(event)" class="btn btn-icon btn-lg"><i class="bi bi bi-trash"></i></button>
                                     </div>  `;
     return botones;
 }
+
+

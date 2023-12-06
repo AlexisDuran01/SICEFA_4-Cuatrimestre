@@ -28,6 +28,7 @@ public class RestSucursal extends Application {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response insert(@FormParam("datosSucursal") @DefaultValue("{}") String datosSucursal) {
+        System.out.println(datosSucursal);
         String out;
         ControllerSucursal cs = new ControllerSucursal();
         Gson gson = new Gson();
@@ -65,43 +66,10 @@ public class RestSucursal extends Application {
         return Response.status(Response.Status.OK).entity(out).build();
     }
 
-    @Path("insertSucursalDiap")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response insertDiap(@FormParam("nombreSucursal") @DefaultValue("") String nombre,
-            @FormParam("titularSucursal") @DefaultValue("") String titular,
-            @FormParam("rfcSucursal") @DefaultValue("") String rfc,
-            @FormParam("domicilioSucursal") @DefaultValue("") String domicilio,
-            @FormParam("coloniaSucursal") @DefaultValue("") String colonia,
-            @FormParam("codigoPostalSucursal") @DefaultValue("") String codigoPostal,
-            @FormParam("ciudadSucursal") @DefaultValue("") String ciudad,
-            @FormParam("estadoSucursal") @DefaultValue("") String estado,
-            @FormParam("telefonoSucursal") @DefaultValue("") String telefono,
-            @FormParam("latitudSucursal") @DefaultValue("") String latitud,
-            @FormParam("longitudSucursal") @DefaultValue("") String longitud) {
-        String out;
-        ControllerSucursal cs = new ControllerSucursal();
-        Gson gson = new Gson();
-        try {
-            Sucursal sucursal = new Sucursal(nombre, titular, rfc, domicilio, colonia, codigoPostal, ciudad, estado, telefono, latitud, longitud);
-            cs.insertSucursal(sucursal);
-            out = """
-                    {"result":"Sucursal ingresada exitosamente"}
-                  """;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            out = """
-                    {"result":"Error en el servidor, favor de intentarlo de nuevo mas tarde"}
-                  """;
-        }
-        return Response.ok(out).build();
-    }
-
     @Path("obtenerSucursalPorId")
     @Produces(MediaType.APPLICATION_JSON)   // Para definir el tipo de dato que va a regresar
     @GET
     public Response obtenerRegistroEspecifco(@QueryParam("idSucursal") @DefaultValue("0") int idSucursal) {
-
         try {
             ControllerSucursal controlador = new ControllerSucursal();
             Sucursal registro = controlador.obtenerRegistroEspecifico(idSucursal);
@@ -111,7 +79,7 @@ public class RestSucursal extends Application {
 
             if (registro.getIdSucursal() == 0) {
                 salida = """
-                    {"result":"Sucursal no encontrado"}
+                    {"result":"Sucursal no encontrada"}
                   """;
             } else {
                 salida = gson.toJson(registro);
