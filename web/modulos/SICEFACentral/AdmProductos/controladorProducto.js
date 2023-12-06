@@ -109,8 +109,8 @@ function editarProducto() {
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}, // Establecer el tipo de contenido como datos de formulario
         body: new URLSearchParams({datosProducto: JSON.stringify(productoEditar)}) // Enviar la cadena de consulta como el cuerpo de la solicitud
     };
-        console.log("Desde editar");
-    console.log(productoEditar);
+  
+  
     
      let url = 'http://localhost:8080/sicefa/api/producto/actualizarProducto';
      
@@ -241,8 +241,17 @@ function establecerValoresInput(event) {
 
 
 
-function eliminarProducto() {
+function eliminarProducto(event) {
     console.log("Hola desde eliminar productos");
+    
+        let idProducto = recuperarId(event);
+    
+        const requestOptions = {
+        method: 'POST', // Utilizar el método POST para enviar datos al servidor
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}, // Establecer el tipo de contenido como datos de formulario
+        body: new URLSearchParams({datosProducto: JSON.stringify()}) // Enviar la cadena de consulta como el cuerpo de la solicitud
+    };
+  
 
 }
 

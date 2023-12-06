@@ -110,8 +110,8 @@ function recuperarIdClienteSeleccionado(event) {
     return idCliente;
 }
 
-    function recuperarIdCliente(idCliente) {
-    let url = `http://localhost:8080/sicefa/api/cliente/obtenerClientePorId?idCliente=`+idCliente;
+function recuperarIdCliente(idCliente) {
+    let url = `http://localhost:8080/sicefa/api/cliente/obtenerClientePorId?idCliente=` + idCliente;
     console.log("Haciendo petición al servidor");
     // Realización de la solicitud al servidor utilizando fetch y devolución de una promesa
     return fetch(url)
@@ -129,14 +129,14 @@ function recuperarIdClienteSeleccionado(event) {
 
 function verClienteSeleccionado(event) {
     console.log("Hola desde ver clientes");
-    
+
     let id = recuperarIdClienteSeleccionado(event);
-    
+
     recuperarIdCliente(id).then(
             (cliente) => {
 
         let verCliente = document.getElementById('registroVerCliente');
-console.log(cliente);
+        console.log(cliente);
 
         let estatus = '';
 
@@ -146,7 +146,7 @@ console.log(cliente);
             estatus = 'Inactivo';
         }
 
-             let registro=`<tr>
+        let registro = `<tr>
                                 <td class="fw-bold registro">Nombre:</td>
                                 <td class ="registro">${cliente.personaCliente.nombrePersona}</td>
                             </tr>
@@ -202,16 +202,16 @@ console.log(cliente);
                                 <td class="fw-bold registro">Estatus:</td>
                                 <td class ="registro">${cliente.estatusCliente}</td>
                             </tr>`;
-        
-        verCliente.innerHTML=registro;
-                            
+
+        verCliente.innerHTML = registro;
+
     });
 
 
 }
 
 function eliminarIdCliente(idCliente) {
-    let url = `http://localhost:8080/sicefa/api/cliente/eliminarCliente?idCliente=`+idCliente;
+    let url = `http://localhost:8080/sicefa/api/cliente/eliminarCliente?idCliente=` + idCliente;
     console.log("Haciendo petición al servidor");
     // Realización de la solicitud al servidor utilizando fetch y devolución de una promesa
     return fetch(url)
@@ -278,7 +278,7 @@ function mostrarRegistrosCliente() {
         // Marcamos la alerta como mostrada 
         alertaMostradaCliente = true;
     }
-    
+
 
     let url = 'http://localhost:8080/sicefa/api/cliente/getAll';
 
