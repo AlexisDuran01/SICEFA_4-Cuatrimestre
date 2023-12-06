@@ -443,8 +443,62 @@ SELECT * FROM persona;
 SELECT * FROM usuario;
 SELECT * FROM sucursal;
 
+-- Procedure para actualizar empleado
+DELIMITER $$
+
+CREATE PROCEDURE sp_updateEmpleado(
+    IN var_idEmpleado INT,
+    IN var_nombre VARCHAR(64),
+    IN var_apellidoPaterno VARCHAR(64),
+    IN var_apellidoMaterno VARCHAR(64),
+    IN var_genero VARCHAR(2),
+    IN var_fechaNacimiento VARCHAR(11),
+    IN var_rfc VARCHAR(14),
+    IN var_curp VARCHAR(19),
+    IN var_domicilio VARCHAR(129),
+    IN var_cp VARCHAR(11),
+    IN var_ciudad VARCHAR(46),
+    IN var_estado VARCHAR(40),
+    IN var_telefono VARCHAR(20),
+    IN var_foto LONGTEXT,
+    IN var_puesto VARCHAR(25),   
+    IN var_salarioBruto FLOAT
+)
+BEGIN
+    UPDATE persona
+    SET nombre = var_nombre,
+        apellidoPaterno = var_apellidoPaterno,
+        apellidoMaterno = var_apellidoMaterno,
+        genero = var_genero,
+        fechaNacimiento = STR_TO_DATE(var_fechaNacimiento, '%d/%m/%Y'),
+        rfc = var_rfc,
+        curp = var_curp,
+        domicilio = var_domicilio,
+        codigoPostal = var_cp,
+        ciudad = var_ciudad,
+        estado = var_estado,
+        telefono = var_telefono,
+        foto = var_foto
+    WHERE idPersona = (
+        SELECT idPersona
+        FROM empleado
+        WHERE idEmpleado = var_idEmpleado
+    );
+
+    -- Actualizamos los datos del empleado:
+    UPDATE empleado
+    SET puesto = var_puesto,
+        salarioBruto = var_salarioBruto
+    WHERE idEmpleado = var_idEmpleado;
+END
+$$
+
+DELIMITER ;
+CALL sp_updateEmpleado(1,'Juan','Gomez','Perez','M','15/03/1985','XHGF1234567','CURP123456789','Calle 123','12345','Ciudad A','Estado B','123-456-7890','','Desarrollador',50.00);
 
 -- Procedimiento para eliminar de forma logica
+
+DROP PROCEDURE IF EXISTS sp_desactivarEmpleado;
 DELIMITER $$
 
 CREATE PROCEDURE sp_desactivarEmpleado(
@@ -453,16 +507,14 @@ CREATE PROCEDURE sp_desactivarEmpleado(
 BEGIN
     -- Actualizamos el estado del empleado a inactivo:
     UPDATE empleado
-    SET estado = 0
+    SET activo = 0
     WHERE idEmpleado = var_idEmpleado;
 END
 $$
 
 DELIMITER ;
 
-CALL sp_desactivarEmpleado(1);
-
-
+CALL sp_desactivarEmpleado(2);
 
  /*Vista de las tablas empleado, persona y usuario*/
 

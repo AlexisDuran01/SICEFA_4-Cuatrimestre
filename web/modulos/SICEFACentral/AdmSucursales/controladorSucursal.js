@@ -1,4 +1,9 @@
+<<<<<<< HEAD
  function agregarProductoFocus() {
+=======
+
+function agregarProductoFocus() {
+>>>>>>> d47db47c5c0bb99da5e3dfcd46f56938be76d76c
 
     let registroProductos = document.getElementById('registroProductos');
     let primerCampo = document.getElementById('txtNombreSucursal');
@@ -167,12 +172,14 @@ function verSucursal(event) {
 
 
 }
-
+let idSucursal;
+function recuperarIdSucursal2(event){
+    idSucursal = recuperarIdSucursal(event);
+}
 
 function editarSucursal(event){
     url = "http://localhost:8080/sicefa/api/sucursal/updateSucursal";
     console.log("Hola desde actualizar sucursal");
-    let idSucursal = recuperarIdSucursal(event);
     console.log(idSucursal);
     let v_nombre = document.getElementById("nombre").value;
     let v_titular = document.getElementById("nombreTitular").value;
@@ -458,7 +465,7 @@ function cargarBotonesSucursal(){
 
                                         <div>
                                             <button  class="btn btn-icon btn-lg" 
-                                                     data-bs-toggle="modal" data-bs-target="#EditarSucursal"><i class="bi bi-pencil-square"></i></button>
+                                                     data-bs-toggle="modal" data-bs-target="#EditarSucursal" onclick="recuperarIdSucursal2(event)"><i class="bi bi-pencil-square"></i></button>
 
                                             <div class="modal fade" id="EditarSucursal" tabindex="-1" aria-labelledby="tituloSucursales"
                                                  aria-hidden="true">
@@ -529,7 +536,7 @@ function cargarBotonesSucursal(){
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Cerrar</button>
-                                                            <button type="button" class="btn btn-primary" onclick="editarSucursal(event)">Guardar</button>
+                                                            <button type="button" class="btn btn-primary" onclick="editarSucursal(event)" data-bs-dismiss="modal">Guardar</button>
                                                         </div>
                                                     </div>
                                                 </div>
