@@ -90,7 +90,7 @@ public class RestProducto extends Application
     }
     
     
-   @Path("obtenerProductoPorId")
+    @Path("obtenerProductoPorId")
     @Produces(MediaType.APPLICATION_JSON)   // Para definir el tipo de dato que va a regresar
     @GET
     public Response obtenerRegistroEspecifco(@QueryParam ("idProducto")@DefaultValue("0") int idProducto) {
@@ -120,10 +120,6 @@ public class RestProducto extends Application
 
     }  
     
-    
-  
-    
- 
     @Path("updateProducto")
     @POST
     @Produces(MediaType.APPLICATION_JSON)

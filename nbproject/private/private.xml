@@ -3,20 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/D:/Universidad/4-Cuatrimestre/Proyecto%20SICEFA/sicefa/src/java/org/utl/dsm/Rest/RestProducto.java</file>
-            <file>file:/D:/Universidad/4-Cuatrimestre/Proyecto%20SICEFA/sicefa/web/modulos/SICEFACentral/AdmProductos/controladorProducto.js</file>
-=======
-            <file>file:/C:/Users/charl/OneDrive/Documents/UNI/APWE2/SICEFA-4-Cuatrimestre-/web/FooterYBarraNav/BarraNavegacion.js</file>
-            <file>file:/C:/Users/charl/OneDrive/Documents/UNI/APWE2/SICEFA-4-Cuatrimestre-/src/java/org/utl/dsm/Controller/ControllerSucursal.java</file>
-            <file>file:/C:/Users/charl/OneDrive/Documents/UNI/APWE2/SICEFA-4-Cuatrimestre-/src/java/org/utl/dsm/Rest/RestUsuario.java</file>
-            <file>file:/C:/Users/charl/OneDrive/Documents/UNI/APWE2/SICEFA-4-Cuatrimestre-/web/FooterYBarraNav/BarraNavegacionCentral.html</file>
-            <file>file:/C:/Users/charl/OneDrive/Documents/UNI/APWE2/SICEFA-4-Cuatrimestre-/web/modulos/Login/IniciarSesionSucursal.html</file>
-            <file>file:/C:/Users/charl/OneDrive/Documents/UNI/APWE2/SICEFA-4-Cuatrimestre-/src/java/org/utl/dsm/Controller/ControllerUsuario.java</file>
-            <file>file:/C:/Users/charl/OneDrive/Documents/UNI/APWE2/SICEFA-4-Cuatrimestre-/web/modulos/Login/IniciarSesion.html</file>
-            <file>file:/C:/Users/charl/OneDrive/Documents/UNI/APWE2/SICEFA-4-Cuatrimestre-/web/modulos/Login/IniciarSesionScript.js</file>
-            <file>file:/C:/Users/charl/OneDrive/Documents/UNI/APWE2/SICEFA-4-Cuatrimestre-/src/java/org/utl/dsm/Rest/RestSucursal.java</file>
->>>>>>> a0d46c337bd281858f4e5f41bdd1266a6b95caec
+            <file>file:/C:/Users/luis-/OneDrive/Documentos/sicefaGit/SICEFA-4-Cuatrimestre-/src/java/org/utl/dsm/Controller/ControllerSucursal.java</file>
+            <file>file:/C:/Users/luis-/OneDrive/Documentos/sicefaGit/SICEFA-4-Cuatrimestre-/src/java/org/utl/dsm/Rest/RestProducto.java</file>
+            <file>file:/C:/Users/luis-/OneDrive/Documentos/sicefaGit/SICEFA-4-Cuatrimestre-/web/modulos/SICEFACentral/AdmProductos/controladorProducto.js</file>
+            <file>file:/C:/Users/luis-/OneDrive/Documentos/sicefaGit/SICEFA-4-Cuatrimestre-/src/java/org/utl/dsm/Controller/ControllerProducto.java</file>
+            <file>file:/C:/Users/luis-/OneDrive/Documentos/sicefaGit/SICEFA-4-Cuatrimestre-/web/modulos/SICEFACentral/AdmSucursales/controladorSucursal.js</file>
+            <file>file:/C:/Users/luis-/OneDrive/Documentos/sicefaGit/SICEFA-4-Cuatrimestre-/src/java/org/utl/dsm/Rest/RestSucursal.java</file>
         </group>
     </open-files>
 </project-private>
