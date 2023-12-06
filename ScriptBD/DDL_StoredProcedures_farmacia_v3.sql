@@ -429,6 +429,26 @@ SELECT * FROM usuario;
 SELECT * FROM sucursal;
 
 
+-- Procedimiento para eliminar de forma logica
+DELIMITER $$
+
+CREATE PROCEDURE sp_desactivarEmpleado(
+    IN var_idEmpleado INT
+)
+BEGIN
+    -- Actualizamos el estado del empleado a inactivo:
+    UPDATE empleado
+    SET estado = 0
+    WHERE idEmpleado = var_idEmpleado;
+END
+$$
+
+DELIMITER ;
+
+CALL sp_desactivarEmpleado(1);
+
+
+
  /*Vista de las tablas empleado, persona y usuario*/
 
 DROP VIEW IF EXISTS viewEmpleado;
