@@ -98,6 +98,109 @@ function agregarEmpleado() {
     );
 }
 
+function updateEmpleado() {
+    let url = "http://localhost:8080/sicefa/api/empleado/updateEmpleado";
+    console.log("Hola desde actualizar empleado");
+    console.log(idEmpleado);
+    let v_nombre = document.getElementById("txtNombre").value;
+    let v_apellidoPaterno = document.getElementById("txtApellidoPaterno").value;
+    let v_apellidoMaterno = document.getElementById("txtApellidoMaterno").value;
+    let v_genero = document.getElementById("txtGenero").value;
+    let v_rfc = document.getElementById("txtRfc").value;
+    let v_fechaNacimiento = document.getElementById("txtFechaNacimiento").value;
+    let v_curp = document.getElementById("txtCurp").value;
+    let v_foto = document.getElementById("flFoto").value;
+    let v_domicilio = document.getElementById("txtDomicilio").value;
+    let v_codigoPostal = document.getElementById("txtCodigoPostal").value;
+    let v_ciudad = document.getElementById("txtCiudad").value;
+    let v_estado = document.getElementById("txtEstado").value;
+    let v_telefono = document.getElementById("txtTelefono").value;
+    let v_fechaIngreso = document.getElementById("txtFechaIngreso").value;
+    let v_puesto = document.getElementById("txtPuesto").value;
+    let v_salarioBruto = document.getElementById("txtSalarioBruto").value;
+    let v_email = document.getElementById("txtEmail").value;
+    let v_idSucursal = document.getElementById("txtSucursal").value;
+    let v_rol = document.getElementById("txtRol").value;
+
+
+    let datosEmpleado =
+            {
+                "puestoEmpleado": v_puesto,
+                "salarioBrutoEmpleado": v_salarioBruto,
+                "personaEmpleado": {
+                    "nombrePersona": v_nombre,
+                    "apellidoPaternoPersona": v_apellidoPaterno,
+                    "apellidoMaternoPersona": v_apellidoMaterno,
+                    "generoPersona": v_genero,
+                    "fechaNacimientoPersona": "10/10/2010",
+                    "rfcPersona": v_rfc,
+                    "curpPersona": v_curp,
+                    "domicilioPersona": v_domicilio,
+                    "codigoPostalPersona": v_codigoPostal,
+                    "ciudadPersona": v_ciudad,
+                    "estadoPersona": v_estado,
+                    "telefonoPersona": v_telefono,
+                    "fotoPersona": v_foto
+                },
+                "usuarioEmpleado": {
+                    "rolUsuario": v_rol
+                },
+                "sucursalEmpleado": {
+                    "idSucursal": v_idSucursal
+                }
+            };
+    console.log(datosEmpleado);
+
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({datosEmpleado: JSON.stringify(datosEmpleado)})
+    };
+    fetch(url, requestOptions).then(
+            function (data) {
+                return data.json();
+            }
+    ).then(
+            function (json) {
+                console.log(json);
+                Swal.fire({
+                    title: 'Guardando registro',
+                    html: 'No cierre la venta porfavor',
+                    timer: 1500,
+                    timerProgressBar: true,
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                        const b = Swal.getHtmlContainer().querySelector('b');
+                        timerInterval = setInterval(() => {
+                        }, 100);
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval);
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {   /* Esta condición se cumple solo cuando el mensaje emergente se cierra 
+                     automáticamente debido al temporizador */
+
+                        console.log('I was closed by the timer');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Registro agregado correctamente',
+                            showConfirmButton: false,
+                            allowOutsideClick: false,
+                            timer: 1500
+                        });
+
+                        mostrarRegistrosEmpleado();   //Despues de mostrar el mensaje de que se inserto correctamente el registro, volvemos a llamar a la funcion
+                        // para cargar el nuevo registro sin necesidad de recargar la pagina
+                    }
+                });
+            }
+    );
+}
+
 function eliminarRegistroEspecifico(event) {
     console.log("Hola desde eliminar empleado");
 
@@ -158,7 +261,7 @@ function eliminarEmpleado(idEmpleado) {
 
 
 function obtenerEmpleadoPorId(idEmpleado) {
-    let url = 'http://localhost:8080/sicefa/api/empleado/obtenerEmpleadoPorId?idEmpleado=' + idEmpleado;
+    let url = `http://localhost:8080/sicefa/api/empleado/obtenerEmpleadoPorId?idEmpleado=` + idEmpleado;
     console.log("Haciendo petición al servidor");
     return fetch(url)
             .then(function (respuesta) {
@@ -185,13 +288,18 @@ function recuperarIdEmpleado(idEmpleado) {
     // Realización de la solicitud al servidor utilizando fetch y devolución de una promesa
     return fetch(url)
             .then(function (respuesta) {
-                console.log("Estado de la respuesta del servicio ObtenerEmpleadoPorId:", respuesta.status);
+                console.log("Estado de la respuesta del servicio obtenerEmpleadoPorId:", respuesta.status);
                 return respuesta.json();  /* Devuelve una promesa que contiene los datos del producto en formato JSON. 
                  * Debe manejarse al usar esta función para acceder a los datos del producto.*/
             })
             .catch(error => {
                 console.log("Error al obtener datos " + error);
             });
+}
+
+
+function recuperarIdEmpleado2(event){
+    idEmpleado = recuperarIdEmpleado(event);
 }
 
 function mostrarRegistrosEmpleado() {
@@ -216,6 +324,15 @@ function mostrarRegistrosEmpleado() {
         // Marcamos la alerta como mostrada 
         alertaMostradaSucursal = true;
     }
+}
+
+function recuperarIdEmpleado(event) {
+    let boton = event.currentTarget;
+    let fila = boton.closest('tr');
+    const primeraCelda = fila.querySelector(':first-child');
+    const idEmpleado = primeraCelda.textContent;
+    console.log(idEmpleado);
+    return idEmpleado;
 }
 
 
@@ -407,10 +524,10 @@ function cargarBotonesEmpleado() {
 
 
                                         <div>
-                                            <button  class="btn btn-icon btn-lg" onclick="editarEmpleado()"
-                                                     data-bs-toggle="modal" data-bs-target="#editarEmpleado"><i class="bi bi-pencil-square"></i></button>
+                                            <button  class="btn btn-icon btn-lg" onclick="recuperarIdEmpleado2(event)"
+                                                     data-bs-toggle="modal" data-bs-target="#updateEmpleado"><i class="bi bi-pencil-square"></i></button>
 
-                                            <div class="modal fade" id="editarEmpleado" tabindex="-1" aria-labelledby="tituloEmpleados"
+                                            <div class="modal fade" id="updateEmpleado" tabindex="-1" aria-labelledby="tituloEmpleados"
                                                  aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-scrollable">
                                                     <div class="modal-content">
@@ -517,7 +634,7 @@ function cargarBotonesEmpleado() {
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Cerrar</button>
-                                                            <button type="button" class="btn btn-primary">Guardar</button>
+                                                            <button type="button" onclick="updateEmpleado(event)" class="btn btn-primary">Guardar</button>
                                                         </div>
                                                     </div>
                                                 </div>
