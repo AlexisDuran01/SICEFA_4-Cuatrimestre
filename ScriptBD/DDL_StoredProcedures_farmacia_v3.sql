@@ -150,7 +150,7 @@ DROP PROCEDURE IF EXISTS sp_updateProducto;
 DELIMITER $$
 CREATE PROCEDURE sp_updateProducto 
 	(
-		IN v_idProducto INT, 
+		IN v_idProducto INT,
 		IN v_nombre VARCHAR(180),
 		IN v_nombreGenerico VARCHAR(200),
 		IN v_formaFarmaceutica VARCHAR(100),
