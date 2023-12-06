@@ -222,17 +222,46 @@ function eliminarClienteLogicamente(idCliente) {
     const requestOptions = {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: new URLSearchParams({idCliente:JSON.parse(idCliente)})
+        body: new URLSearchParams({idCliente: JSON.parse(idCliente)})
     };
-    fetch(url, requestOptions).then(
-            function (json) {
-                console.log(json);
-                }).then((result) => {
-                        
-                            mostrarRegistrosCliente();   //Despues de mostrar el mensaje de que se inserto correctamente el registro, volvemos a llamar a la funcion
-                            // para cargar el nuevo registro sin necesidad de recargar la pagina
-                });
-    }
+
+    fetch(url, requestOptions)
+        .then(function (json) {
+            console.log(json);
+        })
+        .then((result) => {
+            Swal.fire({
+                title: 'Eliminando cliente',
+                html: 'No cierre la ventana por favor',
+                timer: 2800,
+                timerProgressBar: true,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                    const b = Swal.getHtmlContainer().querySelector('b');
+                    timerInterval = setInterval(() => {
+                        // Puedes hacer alguna tarea aquí mientras se muestra el mensaje
+                    }, 100);
+                },
+                willClose: () => {
+                    clearInterval(timerInterval);
+                }
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Cliente eliminado exitosamente',
+                        showConfirmButton: false,
+                        allowOutsideClick: false, 
+                        timer: 1500
+                    });
+                    mostrarRegistrosCliente();
+                }
+            });
+        });
+}
+
     
     
 
